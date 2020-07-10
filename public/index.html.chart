@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width,initial-scale=1'>
+
+    <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+    <link rel="stylesheet" type="text/css" href="/build/bundle.css" />
+
+    <script defer src="/build/bundle.js"></script>
+</head>
+
+<body>
+
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+
+    <div class="orbit">
+
+        <ul class="orbit-wrap">
+
+            <li class="orbit-center">
+                prime material plane
+            </li>
+
+            <li>
+                <ul class="ring-0">
+                    <li><i class="orbit-icon fa fa-git"></i></li>
+                    <li><i class="orbit-icon fa fa-free-code-camp"></i></li>
+                    <li><i class="orbit-icon fa fa-meetup"></i></li>
+                    <li><i class="orbit-icon fa fa-codepen"></i></li>
+                </ul>
+            </li>
+
+            <li>
+                <ul class="ring-1">
+                    <li><i class="orbit-icon fa fa-podcast"></i></li>
+                    <li><i class="orbit-icon fa fa-css3"></i></li>
+                    <li><i class="orbit-icon fa fa-html5"></i></li>
+                </ul>
+            </li>
+            <li>
+                <ul class="ring-2">
+                    <li><i class="orbit-icon fa fa-windows"></i></li>
+                    <li><i class="orbit-icon fa fa-safari"></i></li>
+                    <li><i class="orbit-icon fa fa-edge"></i></li>
+                    <li><i class="orbit-icon fa fa-linux"></i></li>
+                    <li><i class="orbit-icon fa fa-apple"></i></li>
+                    <li><i class="orbit-icon fa fa-chrome"></i></li>
+                    <li><i class="orbit-icon fa fa-android"></i></li>
+                    <li><i class="orbit-icon fa fa-firefox"></i></li>
+                </ul>
+            </li>
+            <li>
+                <ul class="ring-3">
+                    <li><i class="orbit-icon fa fa-coffee"></i></li>
+                    <li><i class="orbit-icon fa fa-terminal"></i></li>
+                    <li><i class="orbit-icon fa fa-heart-o"></i></li>
+                </ul>
+            </li>
+
+        </ul>
+
+    </div>
+</body>
+
+</html>
