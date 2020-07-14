@@ -23,6 +23,9 @@ namespace planar.server.Controllers {
       await _db.planes
         .ToArrayAsync();
 
+    [HttpGet("{id}")]
+    public async Task<Plane> GetPlane(int id) => await _db.planes.FirstOrDefaultAsync(x => x.id == id);
+
     [Route("add")]
     public async Task<ActionResult> AddPlane() {
       var plane = new Plane {

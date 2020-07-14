@@ -23,6 +23,7 @@
     "start": "sirv wwwroot"
   },
   "dependencies": {
-    "sirv-cli": "^1.0.3"
+    "sirv-cli": "^1.0.3",
+    "svelte-spa-router": "^2.2.0"
   }
 }
