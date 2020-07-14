@@ -1,6 +1,7 @@
 <script>
     export let plane;
-    export let className = 'orbit-icon fa';
+    export let planeid;
+    export let className = `orbit-icon fa plane-${planeid}`;
 
     import { createEventDispatcher } from 'svelte';
 
@@ -8,16 +9,24 @@
 
     const handleHover = () => {
         dispatch('message', {
-            text: plane.description
+            plane
         });
     };
+
+    let display = plane.locked
+        ? "L"
+        : plane.name.substring(0, 1).toUpperCase();
 </script>
 
 <li 
     class={className} 
     on:mouseover={handleHover} 
-    on:mouseout={() => dispatch('message', { text: ''})}
+    on:mouseout={() => dispatch('message', { })}
     on:click={() => dispatch('click', { plane })}
 >
-    {plane.name.substring(0, 1).toUpperCase()}
+    {#if plane.locked}
+    <i class="fa fa-lock"></i>
+    {:else}
+    {display}
+    {/if}
 </li>

@@ -13,8 +13,8 @@
   {#each rest as ring, i}
     <li>
       <ul class="ring-{i}">
-        {#each ring.planes as plane (plane.name)}
-          <Plane plane={plane} on:message on:click />
+        {#each ring.planes as plane, planeid (plane.id)}
+          <Plane plane={plane} on:message on:click {planeid} />
         {/each}
       </ul>
     </li>

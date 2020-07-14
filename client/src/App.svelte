@@ -9,7 +9,13 @@
   $: currentPlane = {};
 
   const handleHover = (event) => {
-    descriptionText = event.detail.text;
+    if (!event.detail.plane) {
+      descriptionText = '';
+    } else if (event.detail.plane && event.detail.plane.locked) {
+      descriptionText = 'Locked';
+    } else {
+      descriptionText = event.detail.plane.description;
+    }
   };
 
   const changeView = (event) => {
@@ -30,6 +36,7 @@
     border-radius: 4px;
     bottom: 50px;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     height: 200px;
     padding: 12px;
     position: absolute;
@@ -49,8 +56,9 @@
     background-color: #ececec;
     border-radius: 4px;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     height: 60vh;
-    padding: 16px;
+    padding: 24px;
     position: absolute;
     width: 40vw;
   }
@@ -68,10 +76,15 @@
   {:else}
     <div class="large-description-container">
       <div class="large-description" transition:fade>
-        <h2>{currentPlane.name}</h2>
-        <p>Locked? {currentPlane.locked}</p>
-        <p>{currentPlane.description}</p>
-        <button on:click={resetView}>Close</button>
+        {#if currentPlane.locked}
+          <i class="fa fa-lock"></i>
+        {:else}
+          <h2>{currentPlane.name}</h2>
+          <p>{currentPlane.description}</p>
+        {/if}
+        <p>
+          <button on:click={resetView}>Close</button>
+        </p>
       </div>
     </div>
   {/if}
