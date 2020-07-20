@@ -8,7 +8,7 @@
 
 <ul class="orbit-wrap">
 
-  <Plane plane={center} className="orbit-center" />
+  <Plane plane={center} className="orbit-center" center={true} />
 
   {#each rest as ring, i}
     <li>
