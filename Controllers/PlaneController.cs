@@ -20,11 +20,11 @@ namespace planar.server.Controllers {
     }
 
     public async Task<IEnumerable<Plane>> GetPlanes() =>
-      await _db.planes.ToArrayAsync();
+      await _db.planes.Include(x => x.buffs).ToArrayAsync();
 
     [HttpGet("{id}")]
     public async Task<Plane> GetPlane(int id) =>
-      await _db.planes.FirstOrDefaultAsync(x => x.id == id);
+      await _db.planes.Include(x => x.buffs).FirstOrDefaultAsync(x => x.id == id);
 
     [HttpPost("{id}")]
     public async Task<ActionResult> UpdatePlane(int id, [FromBody] Plane p) {
@@ -60,7 +60,7 @@ namespace planar.server.Controllers {
 
         await _db.SaveChangesAsync();
 
-        return RedirectToRoute(nameof(GetPlanes));
+        return Ok();
       } else {
         return BadRequest();
       }

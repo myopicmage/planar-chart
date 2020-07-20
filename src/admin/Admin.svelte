@@ -1,10 +1,12 @@
 <script>
   import StatusTable from './StatusTable.svelte';
   import Plane from './Plane.svelte';
+  import Buffs from './Buffs.svelte';
 
   import Router from 'svelte-spa-router';
 
   const routes = {
+    '/buffs/:id': Buffs,
     '/planes/:id?': Plane,
     '/': StatusTable,
   };

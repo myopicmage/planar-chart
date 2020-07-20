@@ -42,13 +42,19 @@
             </a>
           </td>
           <td>{@html marked(plane.description)}</td>
-          <td>{plane.buffs}</td>
+          <td>
+            <ul>
+              {#each plane.buffs as buff}
+                <li>{buff.name}</li>
+              {/each}
+            </ul>
+          </td>
           <td>{plane.locations}</td>
           <td>
             {#if plane.locked}
               <i class="fa fa-lock text-danger" />
             {:else}
-              <i class="fa fa-check text-success" />
+              <i class="fa fa-unlock text-success" />
             {/if}
           </td>
           <td>
