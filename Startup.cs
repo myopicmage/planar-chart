@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,7 +24,16 @@ namespace planar.server {
 
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services) {
-      services.AddDbContext<PlanarContext>();
+      services.AddDbContext<PlanarContext>(opt =>
+        opt.UseSqlite(Configuration.GetConnectionString("planes"))
+      );
+
+      services.AddDefaultIdentity<IdentityUser>(opt =>
+        opt.SignIn.RequireConfirmedAccount = true
+      ).AddEntityFrameworkStores<PlanarContext>();
+
+      services.AddRazorPages();
+
       services.AddControllersWithViews();
     }
 
@@ -30,15 +41,18 @@ namespace planar.server {
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
       if (env.IsDevelopment()) {
         app.UseDeveloperExceptionPage();
+        app.UseDatabaseErrorPage();
       }
 
       app.UseHttpsRedirection();
 
       app.UseRouting();
 
+      app.UseAuthentication();
       app.UseAuthorization();
 
       app.UseEndpoints(endpoints => {
+        endpoints.MapRazorPages();
         endpoints.MapControllers();
       });
 

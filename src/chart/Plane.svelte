@@ -2,6 +2,7 @@
     export let plane;
     export let planeid;
     export let className = `orbit-icon fa plane-${planeid}`;
+    export let center = false;
 
     import { createEventDispatcher } from 'svelte';
 
@@ -24,9 +25,11 @@
     on:mouseout={() => dispatch('message', { })}
     on:click={() => dispatch('click', { plane })}
 >
-    {#if plane.locked}
-    <i class="fa fa-lock"></i>
+    {#if center}
+        <i class="fa fa-home"></i>
+    {:else if plane.locked}
+        <i class="fa fa-lock"></i>
     {:else}
-    {display}
+        {display}
     {/if}
 </li>

@@ -713,112 +713,112 @@ var chart = (function () {
     }
 
     const rings = [
-        {
+      {
+        locked: false,
+        name: 'Prime material plane',
+      },
+      {
+        locked: true,
+        name: 'The Far Reaches',
+        planes: [
+          {
+            id: 1,
+            name: 'just a fucking spaceship',
+            locked: true,
+            description: "it's a fucking space ship"
+          },
+          {
+            id: 2,
+            name: 'just a fucking spaceship',
+            locked: true,
+            description: "it's a fucking space ship"
+          },
+          {
+            id: 3,
+            name: 'just a fucking spaceship',
+            locked: true,
+            description: "it's a fucking space ship"
+          },
+        ]
+      },
+      {
+        locked: true,
+        name: 'Planar boundaries',
+        planes: [
+          {
+            id: 4,
+            name: 'Elemental Plane',
+            locked: true,
+            description: "the elemental plane"
+          },
+          {
+            id: 5,
+            name: 'Elemental Plane',
+            locked: true,
+            description: "the elemental plane"
+          },
+          {
+            id: 6,
+            name: 'Elemental Plane',
+            locked: true,
+            description: "the elemental plane"
+          },
+        ]
+      },
+      {
+        locked: true,
+        name: 'Prime echoes',
+        planes: [
+          {
+            id: 7,
+            name: 'Feywild',
             locked: false,
-            name: 'Prime material plane',
-        },
-        {
-            locked: true,
-            name: 'The Far Reaches',
-            planes: [
-                {
-                    id: 1,
-                    name: 'just a fucking spaceship',
-                    locked: true,
-                    description: "it's a fucking space ship"
-                },
-                {
-                    id: 2,
-                    name: 'just a fucking spaceship',
-                    locked: true,
-                    description: "it's a fucking space ship"
-                },
-                {
-                    id: 3,
-                    name: 'just a fucking spaceship',
-                    locked: true,
-                    description: "it's a fucking space ship"
-                },
-            ]
-        },
-        {
-            locked: true,
-            name: 'Planar boundaries',
-            planes: [
-                {
-                    id: 4,
-                    name: 'Elemental Plane',
-                    locked: true,
-                    description: "the elemental plane"
-                },
-                {
-                    id: 5,
-                    name: 'Elemental Plane',
-                    locked: true,
-                    description: "the elemental plane"
-                },
-                {
-                    id: 6,
-                    name: 'Elemental Plane',
-                    locked: true,
-                    description: "the elemental plane"
-                },
-            ]
-        },
-        {
-            locked: true,
-            name: 'Prime echoes',
-            planes: [
-                {
-                    id: 7,
-                    name: 'Feywild',
-                    locked: false,
-                    description: "it's the feywild"
-                },
-                {
-                    id: 8,
-                    name: 'The Shadowfell',
-                    locked: false,
-                    description: "it's the shadowfell"
-                },
-                {
-                    id: 9,
-                    name: "Louie's Domain",
-                    locked: true,
-                    description: "uhhh"
-                }
-            ]
-        },
-        {
+            description: "An echo of the Prime Material Plane, skewing toward the light. The Fey make their home here."
+          },
+          {
+            id: 8,
+            name: 'The Shadowfell',
             locked: false,
-            name: 'Ephemeral Planes',
-            planes: [
-                {
-                    id: 10,
-                    name: 'Sphinxlandia',
-                    locked: false,
-                    description: 'tbd'
-                },
-                {
-                    id: 11,
-                    name: 'Ethereal plane',
-                    locked: true,
-                    description: 'tbd'
-                }
-            ]
-        },
+            description: "An echo of the Prime Material Plane, skewing toward the shadow. Shadows are not inherently evil, but evil finds a home in shadow."
+          },
+          {
+            id: 9,
+            name: "Louie's Domain",
+            locked: false,
+            description: "A domain which, curiously, contains only a single person."
+          }
+        ]
+      },
+      {
+        locked: false,
+        name: 'Ephemeral Planes',
+        planes: [
+          {
+            id: 10,
+            name: 'Sphinxlandia',
+            locked: false,
+            description: "A beautiful, empty sky, save for a platform with a pyramid. A lone figure sits at the entrance, too far for you to see clearly"
+          },
+          {
+            id: 11,
+            name: 'Ethereal plane',
+            locked: false,
+            description: "The Ethereal Plane, barely an echo of the Prime Material Plane. Mages hide here."
+          }
+        ]
+      },
     ];
 
     /* src\chart\Plane.svelte generated by Svelte v3.24.0 */
     const file = "src\\chart\\Plane.svelte";
 
-    // (29:4) {:else}
+    // (32:4) {:else}
     function create_else_block(ctx) {
     	let t;
 
     	const block = {
     		c: function create() {
-    			t = text(/*display*/ ctx[4]);
+    			t = text(/*display*/ ctx[5]);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t, anchor);
@@ -833,22 +833,52 @@ var chart = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(29:4) {:else}",
+    		source: "(32:4) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (27:4) {#if plane.locked}
-    function create_if_block(ctx) {
+    // (30:27) 
+    function create_if_block_1(ctx) {
     	let i;
 
     	const block = {
     		c: function create() {
     			i = element("i");
     			attr_dev(i, "class", "fa fa-lock");
-    			add_location(i, file, 27, 4, 588);
+    			add_location(i, file, 30, 8, 679);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, i, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(i);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1.name,
+    		type: "if",
+    		source: "(30:27) ",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (28:4) {#if center}
+    function create_if_block(ctx) {
+    	let i;
+
+    	const block = {
+    		c: function create() {
+    			i = element("i");
+    			attr_dev(i, "class", "fa fa-home");
+    			add_location(i, file, 28, 8, 614);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, i, anchor);
@@ -863,7 +893,7 @@ var chart = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(27:4) {#if plane.locked}",
+    		source: "(28:4) {#if center}",
     		ctx
     	});
 
@@ -876,7 +906,8 @@ var chart = (function () {
     	let dispose;
 
     	function select_block_type(ctx, dirty) {
-    		if (/*plane*/ ctx[0].locked) return create_if_block;
+    		if (/*center*/ ctx[2]) return create_if_block;
+    		if (/*plane*/ ctx[0].locked) return create_if_block_1;
     		return create_else_block;
     	}
 
@@ -888,7 +919,7 @@ var chart = (function () {
     			li = element("li");
     			if_block.c();
     			attr_dev(li, "class", /*className*/ ctx[1]);
-    			add_location(li, file, 20, 0, 393);
+    			add_location(li, file, 21, 0, 421);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -899,9 +930,9 @@ var chart = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(li, "mouseover", /*handleHover*/ ctx[3], false, false, false),
-    					listen_dev(li, "mouseout", /*mouseout_handler*/ ctx[6], false, false, false),
-    					listen_dev(li, "click", /*click_handler*/ ctx[7], false, false, false)
+    					listen_dev(li, "mouseover", /*handleHover*/ ctx[4], false, false, false),
+    					listen_dev(li, "mouseout", /*mouseout_handler*/ ctx[7], false, false, false),
+    					listen_dev(li, "click", /*click_handler*/ ctx[8], false, false, false)
     				];
 
     				mounted = true;
@@ -949,6 +980,7 @@ var chart = (function () {
     	let { plane } = $$props;
     	let { planeid } = $$props;
     	let { className = `orbit-icon fa plane-${planeid}` } = $$props;
+    	let { center = false } = $$props;
     	const dispatch = createEventDispatcher();
 
     	const handleHover = () => {
@@ -959,7 +991,7 @@ var chart = (function () {
     	? "L"
     	: plane.name.substring(0, 1).toUpperCase();
 
-    	const writable_props = ["plane", "planeid", "className"];
+    	const writable_props = ["plane", "planeid", "className", "center"];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Plane> was created with unknown prop '${key}'`);
@@ -972,14 +1004,16 @@ var chart = (function () {
 
     	$$self.$set = $$props => {
     		if ("plane" in $$props) $$invalidate(0, plane = $$props.plane);
-    		if ("planeid" in $$props) $$invalidate(5, planeid = $$props.planeid);
+    		if ("planeid" in $$props) $$invalidate(6, planeid = $$props.planeid);
     		if ("className" in $$props) $$invalidate(1, className = $$props.className);
+    		if ("center" in $$props) $$invalidate(2, center = $$props.center);
     	};
 
     	$$self.$capture_state = () => ({
     		plane,
     		planeid,
     		className,
+    		center,
     		createEventDispatcher,
     		dispatch,
     		handleHover,
@@ -988,9 +1022,10 @@ var chart = (function () {
 
     	$$self.$inject_state = $$props => {
     		if ("plane" in $$props) $$invalidate(0, plane = $$props.plane);
-    		if ("planeid" in $$props) $$invalidate(5, planeid = $$props.planeid);
+    		if ("planeid" in $$props) $$invalidate(6, planeid = $$props.planeid);
     		if ("className" in $$props) $$invalidate(1, className = $$props.className);
-    		if ("display" in $$props) $$invalidate(4, display = $$props.display);
+    		if ("center" in $$props) $$invalidate(2, center = $$props.center);
+    		if ("display" in $$props) $$invalidate(5, display = $$props.display);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -1000,6 +1035,7 @@ var chart = (function () {
     	return [
     		plane,
     		className,
+    		center,
     		dispatch,
     		handleHover,
     		display,
@@ -1012,7 +1048,13 @@ var chart = (function () {
     class Plane extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance, create_fragment, safe_not_equal, { plane: 0, planeid: 5, className: 1 });
+
+    		init(this, options, instance, create_fragment, safe_not_equal, {
+    			plane: 0,
+    			planeid: 6,
+    			className: 1,
+    			center: 2
+    		});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -1028,7 +1070,7 @@ var chart = (function () {
     			console.warn("<Plane> was created without expected prop 'plane'");
     		}
 
-    		if (/*planeid*/ ctx[5] === undefined && !("planeid" in props)) {
+    		if (/*planeid*/ ctx[6] === undefined && !("planeid" in props)) {
     			console.warn("<Plane> was created without expected prop 'planeid'");
     		}
     	}
@@ -1054,6 +1096,14 @@ var chart = (function () {
     	}
 
     	set className(value) {
+    		throw new Error("<Plane>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get center() {
+    		throw new Error("<Plane>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set center(value) {
     		throw new Error("<Plane>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
@@ -1163,8 +1213,8 @@ var chart = (function () {
 
     			t = space();
     			attr_dev(ul, "class", ul_class_value = "ring-" + /*i*/ ctx[7]);
-    			add_location(ul, file$1, 14, 6, 242);
-    			add_location(li, file$1, 13, 4, 230);
+    			add_location(ul, file$1, 14, 6, 256);
+    			add_location(li, file$1, 13, 4, 244);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -1232,7 +1282,8 @@ var chart = (function () {
     	plane = new Plane({
     			props: {
     				plane: /*center*/ ctx[0],
-    				className: "orbit-center"
+    				className: "orbit-center",
+    				center: true
     			},
     			$$inline: true
     		});
@@ -1520,7 +1571,7 @@ var chart = (function () {
     	orbit = new Orbit({ props: { rings }, $$inline: true });
     	orbit.$on("message", /*handleHover*/ ctx[3]);
     	orbit.$on("click", /*changeView*/ ctx[4]);
-    	let if_block = /*descriptionText*/ ctx[0] && create_if_block_1(ctx);
+    	let if_block = /*descriptionText*/ ctx[0] && create_if_block_1$1(ctx);
 
     	const block = {
     		c: function create() {
@@ -1546,7 +1597,7 @@ var chart = (function () {
     						transition_in(if_block, 1);
     					}
     				} else {
-    					if_block = create_if_block_1(ctx);
+    					if_block = create_if_block_1$1(ctx);
     					if_block.c();
     					transition_in(if_block, 1);
     					if_block.m(span, null);
@@ -1679,7 +1730,7 @@ var chart = (function () {
     }
 
     // (72:6) {#if descriptionText}
-    function create_if_block_1(ctx) {
+    function create_if_block_1$1(ctx) {
     	let div;
     	let t;
     	let div_transition;
@@ -1724,7 +1775,7 @@ var chart = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1.name,
+    		id: create_if_block_1$1.name,
     		type: "if",
     		source: "(72:6) {#if descriptionText}",
     		ctx

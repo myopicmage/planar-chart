@@ -1149,9 +1149,13 @@ var admin = (function () {
     	let t1;
     	let select;
     	let option0;
+    	let option0_value_value;
     	let option1;
+    	let option1_value_value;
     	let option2;
+    	let option2_value_value;
     	let option3;
+    	let option3_value_value;
     	let t6;
     	let div1;
     	let label1;
@@ -1238,16 +1242,16 @@ var admin = (function () {
     			button.textContent = "Save or whatever";
     			attr_dev(label0, "class", "form-label");
     			add_location(label0, file$1, 7, 6, 107);
-    			option0.__value = "0";
+    			option0.__value = option0_value_value = 0;
     			option0.value = option0.__value;
     			add_location(option0, file$1, 9, 8, 215);
-    			option1.__value = "1";
+    			option1.__value = option1_value_value = 1;
     			option1.value = option1.__value;
     			add_location(option1, file$1, 10, 8, 258);
-    			option2.__value = "2";
+    			option2.__value = option2_value_value = 2;
     			option2.value = option2.__value;
     			add_location(option2, file$1, 11, 8, 301);
-    			option3.__value = "3";
+    			option3.__value = option3_value_value = 3;
     			option3.value = option3.__value;
     			add_location(option3, file$1, 12, 8, 343);
     			attr_dev(select, "class", "form-select");
@@ -1268,34 +1272,34 @@ var admin = (function () {
     			attr_dev(input1, "class", "form-check-input");
     			add_location(input1, file$1, 22, 8, 707);
     			attr_dev(label3, "class", "form-check-label");
-    			add_location(label3, file$1, 23, 8, 795);
+    			add_location(label3, file$1, 23, 8, 797);
     			attr_dev(div2, "class", "form-check form-check-inline form-switch");
     			add_location(div2, file$1, 21, 6, 643);
     			attr_dev(input2, "type", "checkbox");
     			attr_dev(input2, "class", "form-check-input");
-    			add_location(input2, file$1, 26, 8, 929);
+    			add_location(input2, file$1, 26, 8, 931);
     			attr_dev(label4, "class", "form-check-label");
-    			add_location(label4, file$1, 27, 8, 1015);
+    			add_location(label4, file$1, 27, 8, 1019);
     			attr_dev(div3, "class", "form-check form-check-inline form-switch");
-    			add_location(div3, file$1, 25, 6, 865);
+    			add_location(div3, file$1, 25, 6, 867);
     			attr_dev(div4, "class", "col-6");
     			add_location(div4, file$1, 19, 4, 562);
     			attr_dev(div5, "class", "row");
     			add_location(div5, file$1, 5, 2, 57);
     			attr_dev(label5, "class", "form-label");
-    			add_location(label5, file$1, 33, 6, 1156);
+    			add_location(label5, file$1, 33, 6, 1160);
     			attr_dev(textarea, "class", "form-control");
-    			add_location(textarea, file$1, 34, 6, 1209);
+    			add_location(textarea, file$1, 34, 6, 1213);
     			attr_dev(div6, "class", "col-6");
-    			add_location(div6, file$1, 32, 4, 1129);
+    			add_location(div6, file$1, 32, 4, 1133);
     			attr_dev(div7, "class", "row mt-3");
-    			add_location(div7, file$1, 31, 2, 1101);
+    			add_location(div7, file$1, 31, 2, 1105);
     			attr_dev(button, "class", "btn btn-primary");
-    			add_location(button, file$1, 39, 6, 1363);
+    			add_location(button, file$1, 39, 6, 1367);
     			attr_dev(div8, "class", "col-2");
-    			add_location(div8, file$1, 38, 4, 1336);
+    			add_location(div8, file$1, 38, 4, 1340);
     			attr_dev(div9, "class", "row mt-3");
-    			add_location(div9, file$1, 37, 2, 1308);
+    			add_location(div9, file$1, 37, 2, 1312);
     			add_location(form, file$1, 4, 0, 47);
     		},
     		l: function claim(nodes) {
@@ -1326,13 +1330,13 @@ var admin = (function () {
     			append_dev(div4, t11);
     			append_dev(div4, div2);
     			append_dev(div2, input1);
-    			set_input_value(input1, /*plane*/ ctx[0].revealed);
+    			input1.checked = /*plane*/ ctx[0].revealed;
     			append_dev(div2, t12);
     			append_dev(div2, label3);
     			append_dev(div4, t14);
     			append_dev(div4, div3);
     			append_dev(div3, input2);
-    			set_input_value(input2, /*plane*/ ctx[0].locked);
+    			input2.checked = /*plane*/ ctx[0].locked;
     			append_dev(div3, t15);
     			append_dev(div3, label4);
     			append_dev(form, t17);
@@ -1369,11 +1373,11 @@ var admin = (function () {
     			}
 
     			if (dirty & /*plane*/ 1) {
-    				set_input_value(input1, /*plane*/ ctx[0].revealed);
+    				input1.checked = /*plane*/ ctx[0].revealed;
     			}
 
     			if (dirty & /*plane*/ 1) {
-    				set_input_value(input2, /*plane*/ ctx[0].locked);
+    				input2.checked = /*plane*/ ctx[0].locked;
     			}
 
     			if (dirty & /*plane*/ 1) {
@@ -1422,12 +1426,12 @@ var admin = (function () {
     	}
 
     	function input1_change_handler() {
-    		plane.revealed = this.value;
+    		plane.revealed = this.checked;
     		$$invalidate(0, plane);
     	}
 
     	function input2_change_handler() {
-    		plane.locked = this.value;
+    		plane.locked = this.checked;
     		$$invalidate(0, plane);
     	}
 
