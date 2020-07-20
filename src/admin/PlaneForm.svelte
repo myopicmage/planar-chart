@@ -1,8 +1,32 @@
 <script>
   export let plane = {};
+
+  $: disabled = false;
+
+  const handleSubmit = async () => {
+    disabled = true;
+
+    const url = plane.id
+      ? `/api/plane/${plane.id}`
+      : '/api/plane';
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(plane)
+    })
+    .then(resp => {
+      if (resp.ok) {
+        console.log('it worked');
+      }
+    })
+    .finally(() => disabled = false);
+  }
 </script>
 
-<form>
+<form on:submit|preventDefault={handleSubmit}>
   <div class="row">
     <div class="col-2">
       <label class="form-label">Ring</label>
@@ -37,7 +61,7 @@
   </div>
   <div class="row mt-3">
     <div class="col-2">
-      <button class="btn btn-primary">Save or whatever</button>
+      <button class="btn btn-primary" {disabled}>Save</button>
     </div>
   </div>
 </form>

@@ -20,25 +20,50 @@ namespace planar.server.Controllers {
     }
 
     public async Task<IEnumerable<Plane>> GetPlanes() =>
-      await _db.planes
-        .ToArrayAsync();
+      await _db.planes.ToArrayAsync();
 
     [HttpGet("{id}")]
-    public async Task<Plane> GetPlane(int id) => await _db.planes.FirstOrDefaultAsync(x => x.id == id);
+    public async Task<Plane> GetPlane(int id) =>
+      await _db.planes.FirstOrDefaultAsync(x => x.id == id);
 
-    [Route("add")]
-    public async Task<ActionResult> AddPlane() {
-      var plane = new Plane {
-        name = "The Feywild",
-        description = "An echo of the Prime Material Plane, skewing toward the light. The home of the Fey. Be wary, all ye who seek to travel here.",
-        ring = Ring.Echoes,
-      };
+    [HttpPost("{id}")]
+    public async Task<ActionResult> UpdatePlane(int id, [FromBody] Plane p) {
+      var plane = await _db.planes.FirstOrDefaultAsync(x => x.id == id);
 
-      await _db.planes.AddAsync(plane);
+      if (plane is null) {
+        return NotFound();
+      }
 
-      await _db.SaveChangesAsync();
+      if (!ModelState.IsValid) {
+        return BadRequest();
+      }
 
-      return RedirectToRoute(nameof(GetPlanes));
+      plane.name = p.name;
+      plane.description = p.description;
+      plane.ring = p.ring;
+      plane.revealed = p.revealed;
+      plane.locked = p.locked;
+
+      try {
+        await _db.SaveChangesAsync();
+
+        return Ok();
+      } catch (Exception ex) {
+        return BadRequest(ex.Message);
+      }
+    }
+
+    [HttpPost("add")]
+    public async Task<ActionResult> AddPlane([FromBody] Plane p) {
+      if (ModelState.IsValid) {
+        await _db.planes.AddAsync(p);
+
+        await _db.SaveChangesAsync();
+
+        return RedirectToRoute(nameof(GetPlanes));
+      } else {
+        return BadRequest();
+      }
     }
   }
 }
