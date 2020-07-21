@@ -81,7 +81,7 @@
 </style>
 
 <main class="orbit">
-  {#await connection}
+  <!-- {#await connection}
     <div id="connected-box">
       <i class="fa fa-spinner"></i>
     </div>
@@ -92,7 +92,7 @@
         ping
       </button>
     </div>
-  {/await}
+  {/await} -->
   {#if view === 'orbit'}
     <span transition:fade>
       <Orbit {rings} on:message={handleHover} on:click={changeView} />
