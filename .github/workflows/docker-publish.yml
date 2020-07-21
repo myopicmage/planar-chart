@@ -54,3 +54,23 @@ jobs:
 
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
+
+  deploy:
+    needs: push
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - uses: azure/webapps-container-deploy@v1
+        with:
+          app-name: 'planar-chart'
+          images: 'docker.pkg.github.com/myopicmage/planar-chart/planar-chart:latest'
+
+      - name: 'Azure logout'
+        run: |
+          az logout
