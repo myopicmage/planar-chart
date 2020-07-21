@@ -55,16 +55,16 @@ jobs:
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
 
-  deploy:
-    needs: push
-
-    runs-on: ubuntu-latest
-
-    steps:
       - name: 'Login via Azure CLI'
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - uses: azure/docker-login@v1
+        with:
+          login-server: docker.pkg.github.com
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: azure/webapps-deploy@v2
         with:
@@ -74,3 +74,4 @@ jobs:
       - name: 'Azure logout'
         run: |
           az logout
+
