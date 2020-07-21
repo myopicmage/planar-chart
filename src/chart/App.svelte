@@ -2,6 +2,8 @@
   import { fade } from 'svelte/transition';
 
   import { rings } from './data';
+  import { begin, ping } from './signalr';
+
   import Orbit from './Orbit.svelte';
 
   $: descriptionText = '';
@@ -28,9 +30,23 @@
     currentPlane = {};
     descriptionText = '';
   };
+
+  let connection = begin();
 </script>
 
-<style>
+<style type="text/scss">
+  #connected-box {
+    background-color:rgba(255, 255, 255, 0.7);
+    padding: 4px;
+    position: absolute;
+    right: 24px;
+    top: 24px;
+
+    &.success {
+      color: green;
+    }
+  }
+
   #description-container {
     background-color: #ececec;
     border-radius: 4px;
@@ -65,6 +81,18 @@
 </style>
 
 <main class="orbit">
+  {#await connection}
+    <div id="connected-box">
+      <i class="fa fa-spinner"></i>
+    </div>
+  {:then _}
+    <div id="connected-box" class="success">
+      <i class="fa fa-link"></i>
+      <button type="button" on:click={() => ping(2)}>
+        ping
+      </button>
+    </div>
+  {/await}
   {#if view === 'orbit'}
     <span transition:fade>
       <Orbit {rings} on:message={handleHover} on:click={changeView} />
