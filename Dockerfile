@@ -15,5 +15,5 @@ RUN dotnet publish -c release -o /app --no-restore
 FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /app
 COPY --from=build /app ./
-COPY ./chart/planes.db ./
+# COPY ./chart/planes.db ./
 ENTRYPOINT ["dotnet", "planar.server.dll"]
