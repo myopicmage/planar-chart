@@ -63,8 +63,8 @@ jobs:
       - uses: azure/docker-login@v1
         with:
           login-server: docker.pkg.github.com
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_TOKEN }}
 
       - uses: azure/webapps-deploy@v2
         with:
