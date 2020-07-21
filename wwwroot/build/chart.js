@@ -782,100 +782,100 @@ var chart = (function () {
     }
 
     const rings = [
-      {
-        locked: false,
-        name: 'Prime material plane',
-      },
-      {
-        locked: true,
-        name: 'The Far Reaches',
-        planes: [
-          {
-            id: 1,
-            name: 'just a fucking spaceship',
-            locked: true,
-            description: "it's a fucking space ship"
-          },
-          {
-            id: 2,
-            name: 'just a fucking spaceship',
-            locked: true,
-            description: "it's a fucking space ship"
-          },
-          {
-            id: 3,
-            name: 'just a fucking spaceship',
-            locked: true,
-            description: "it's a fucking space ship"
-          },
-        ]
-      },
-      {
-        locked: true,
-        name: 'Planar boundaries',
-        planes: [
-          {
-            id: 4,
-            name: 'Elemental Plane',
-            locked: true,
-            description: "the elemental plane"
-          },
-          {
-            id: 5,
-            name: 'Elemental Plane',
-            locked: true,
-            description: "the elemental plane"
-          },
-          {
-            id: 6,
-            name: 'Elemental Plane',
-            locked: true,
-            description: "the elemental plane"
-          },
-        ]
-      },
-      {
-        locked: true,
-        name: 'Prime echoes',
-        planes: [
-          {
-            id: 7,
-            name: 'Feywild',
+        {
             locked: false,
-            description: "An echo of the Prime Material Plane, skewing toward the light. The Fey make their home here."
-          },
-          {
-            id: 8,
-            name: 'The Shadowfell',
+            name: 'Prime material plane',
+        },
+        {
+            locked: true,
+            name: 'The Far Reaches',
+            planes: [
+                {
+                    id: 1,
+                    name: 'just a fucking spaceship',
+                    locked: true,
+                    description: "it's a fucking space ship"
+                },
+                {
+                    id: 2,
+                    name: 'just a fucking spaceship',
+                    locked: true,
+                    description: "it's a fucking space ship"
+                },
+                {
+                    id: 3,
+                    name: 'just a fucking spaceship',
+                    locked: true,
+                    description: "it's a fucking space ship"
+                },
+            ]
+        },
+        {
+            locked: true,
+            name: 'Planar boundaries',
+            planes: [
+                {
+                    id: 4,
+                    name: 'Elemental Plane',
+                    locked: true,
+                    description: "the elemental plane"
+                },
+                {
+                    id: 5,
+                    name: 'Elemental Plane',
+                    locked: true,
+                    description: "the elemental plane"
+                },
+                {
+                    id: 6,
+                    name: 'Elemental Plane',
+                    locked: true,
+                    description: "the elemental plane"
+                },
+            ]
+        },
+        {
+            locked: true,
+            name: 'Prime echoes',
+            planes: [
+                {
+                    id: 7,
+                    name: 'Feywild',
+                    locked: false,
+                    description: "An echo of the Prime Material Plane, skewing toward the light. The Fey make their home here."
+                },
+                {
+                    id: 8,
+                    name: 'The Shadowfell',
+                    locked: false,
+                    description: "An echo of the Prime Material Plane, skewing toward the shadow. Shadows are not inherently evil, but evil finds a home in shadow."
+                },
+                {
+                    id: 9,
+                    name: "Louie's Domain",
+                    locked: false,
+                    description: "A domain which, curiously, contains only a single person."
+                }
+            ]
+        },
+        {
             locked: false,
-            description: "An echo of the Prime Material Plane, skewing toward the shadow. Shadows are not inherently evil, but evil finds a home in shadow."
-          },
-          {
-            id: 9,
-            name: "Louie's Domain",
-            locked: false,
-            description: "A domain which, curiously, contains only a single person."
-          }
-        ]
-      },
-      {
-        locked: false,
-        name: 'Ephemeral Planes',
-        planes: [
-          {
-            id: 10,
-            name: 'Sphinxlandia',
-            locked: false,
-            description: "A beautiful, empty sky, save for a platform with a pyramid. A lone figure sits at the entrance, too far for you to see clearly"
-          },
-          {
-            id: 11,
-            name: 'Ethereal plane',
-            locked: false,
-            description: "The Ethereal Plane, barely an echo of the Prime Material Plane. Mages hide here."
-          }
-        ]
-      },
+            name: 'Ephemeral Planes',
+            planes: [
+                {
+                    id: 10,
+                    name: 'Sphinxlandia',
+                    locked: false,
+                    description: "A beautiful, empty sky, save for a platform with a pyramid. A lone figure sits at the entrance, too far for you to see clearly"
+                },
+                {
+                    id: 11,
+                    name: 'Ethereal plane',
+                    locked: false,
+                    description: "The Ethereal Plane, barely an echo of the Prime Material Plane. Mages hide here."
+                }
+            ]
+        },
     ];
 
     // Copyright (c) .NET Foundation. All rights reserved.
@@ -4088,26 +4088,23 @@ var chart = (function () {
     }
 
     const connection = new HubConnectionBuilder()
-      .withUrl("/updates")
-      .configureLogging(LogLevel.Information)
-      .withAutomaticReconnect()
-      .build();
-
+        .withUrl("/updates")
+        .configureLogging(LogLevel.Information)
+        .withAutomaticReconnect()
+        .build();
     const begin = async () => {
-      try {
-        await connection.start();
-      } catch (err) {
-        console.error(err);
-      }
+        try {
+            await connection.start();
+        }
+        catch (err) {
+            console.error(err);
+        }
     };
-
     const ping = planeId => {
-      connection.invoke("Ping", planeId)
-        .catch(console.error);
+        connection.invoke("Ping", planeId)
+            .catch(console.error);
     };
-
     connection.on("pong", planeId => console.log("pong: " + planeId));
-
     connection.on("ReceiveMessage", (user, message) => console.log(`user: ${user} message: ${message}`));
 
     /* src\chart\Plane.svelte generated by Svelte v3.24.0 */
@@ -5397,7 +5394,7 @@ var chart = (function () {
     }
 
     const app = new App({
-    	target: document.body,
+        target: document.body,
     });
 
     return app;

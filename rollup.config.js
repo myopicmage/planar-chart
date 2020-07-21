@@ -3,19 +3,20 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import preprocess from 'svelte-preprocess';
+import typescript from '@rollup/plugin-typescript';
 import { terser } from 'rollup-plugin-terser';
 
 const production = !process.env.ROLLUP_WATCH;
 
 const inputs = [
-  {
-    path: './src/chart/chart.js',
-    name: 'chart'
-  },
-  {
-    path: './src/admin/admin.js',
-    name: 'admin'
-  }
+	{
+		path: './src/chart/chart.ts',
+		name: 'chart'
+	},
+	{
+		path: './src/admin/admin.ts',
+		name: 'admin'
+	}
 ];
 
 const makeConfig = ({ path, name }) => ({
@@ -34,9 +35,10 @@ const makeConfig = ({ path, name }) => ({
 			// a separate file - better for performance
 			css: css => {
 				css.write(`wwwroot/build/${name}.css`);
-      },
-      preprocess: preprocess()
+			},
+			preprocess: preprocess()
 		}),
+		typescript({ sourceMap: !production }),
 
 		// If you have external dependencies installed from
 		// npm, you'll most likely need these plugins. In
