@@ -29,10 +29,6 @@ namespace planar.server {
         opt.UseSqlite(Configuration.GetConnectionString("planes"))
       );
 
-      services.AddDefaultIdentity<IdentityUser>(opt =>
-        opt.SignIn.RequireConfirmedAccount = true
-      ).AddEntityFrameworkStores<PlanarContext>();
-
       services.AddRazorPages();
 
       services.AddControllersWithViews();

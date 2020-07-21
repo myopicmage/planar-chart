@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace planar.server.Models {
-  public class PlanarContext : IdentityDbContext {
+  public class PlanarContext : DbContext {
     public DbSet<Buff> buffs { get; set; }
     public DbSet<Character> characters { get; set; }
     public DbSet<Location> locations { get; set; }
