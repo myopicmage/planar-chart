@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.SignalR;
+using planar.server.Models;
 using System.Threading.Tasks;
 
 namespace planar.server.Hubs {
@@ -9,6 +10,10 @@ namespace planar.server.Hubs {
 
     public async Task Ping(int planeId) {
       await Clients.All.SendAsync("pong", planeId);
+    }
+
+    public async Task UpdatePlane(Plane p) {
+      await Clients.All.SendAsync("UpdatePlane", p);
     }
   }
 }

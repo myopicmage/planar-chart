@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using planar.server.Hubs;
 using planar.server.Models;
 
 namespace planar.server.Controllers {
@@ -13,10 +15,12 @@ namespace planar.server.Controllers {
   public class PlaneController : ControllerBase {
     private readonly ILogger<PlaneController> _logger;
     private readonly PlanarContext _db;
+    private readonly IHubContext<UpdateHub> _hubCtx;
 
-    public PlaneController(ILogger<PlaneController> logger, PlanarContext ctx) {
+    public PlaneController(ILogger<PlaneController> logger, PlanarContext ctx, IHubContext<UpdateHub> hubCtx) {
       _logger = logger;
       _db = ctx;
+      _hubCtx = hubCtx;
     }
 
     public async Task<IEnumerable<Plane>> GetPlanes() =>
@@ -46,6 +50,8 @@ namespace planar.server.Controllers {
 
       try {
         await _db.SaveChangesAsync();
+
+        await _hubCtx.Clients.All.SendAsync("UpdatePlane", plane);
 
         return Ok();
       } catch (Exception ex) {

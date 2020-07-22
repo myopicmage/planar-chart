@@ -25,3 +25,5 @@ export const ping = planeId => {
 connection.on("pong", planeId => console.log("pong: " + planeId));
 
 connection.on("ReceiveMessage", (user, message) => console.log(`user: ${user} message: ${message}`));
+
+connection.on("UpdatePlane", console.log);
