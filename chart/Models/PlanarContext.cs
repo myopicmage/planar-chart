@@ -1,7 +1,8 @@
 #nullable disable
 
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
+using Microsoft.Azure.Services.AppAuthentication;
 
 namespace planar.server.Models {
   public class PlanarContext : DbContext {
@@ -11,7 +12,9 @@ namespace planar.server.Models {
     public DbSet<Plane> planes { get; set; }
     public DbSet<Quest> quests { get; set; }
 
-    public PlanarContext(DbContextOptions<PlanarContext> options)
-      : base(options) { }
+    public PlanarContext(DbContextOptions<PlanarContext> options) : base(options) {
+      var conn = (SqlConnection)Database.GetDbConnection();
+      conn.AccessToken = (new AzureServiceTokenProvider()).GetAccessTokenAsync("https://database.windows.net/").Result;
+    }
   }
 }
