@@ -1,5 +1,3 @@
-"use strict";
-
 import * as signalr from '@microsoft/signalr';
 
 const connection = new signalr
@@ -9,7 +7,7 @@ const connection = new signalr
   .withAutomaticReconnect()
   .build();
 
-export const begin = async () => {
+export const beginConnection = async () => {
   try {
     await connection.start();
   } catch (err) {

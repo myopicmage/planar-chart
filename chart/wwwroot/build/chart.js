@@ -1,2 +1,5188 @@
-var chart=function(){"use strict";function e(){}const t=e=>e;function n(e){return e()}function o(){return Object.create(null)}function r(e){e.forEach(n)}function i(e){return"function"==typeof e}function s(e,t){return e!=e?t==t:e!==t||e&&"object"==typeof e||"function"==typeof e}const c="undefined"!=typeof window;let a=c?()=>window.performance.now():()=>Date.now(),l=c?e=>requestAnimationFrame(e):e;const u=new Set;function h(e){u.forEach(t=>{t.c(e)||(u.delete(t),t.f())}),0!==u.size&&l(h)}function p(e,t){e.appendChild(t)}function f(e,t,n){e.insertBefore(t,n||null)}function g(e){e.parentNode.removeChild(e)}function d(e){return document.createElement(e)}function y(e){return document.createTextNode(e)}function b(){return y(" ")}function m(e,t,n,o){return e.addEventListener(t,n,o),()=>e.removeEventListener(t,n,o)}function v(e,t,n){null==n?e.removeAttribute(t):e.getAttribute(t)!==n&&e.setAttribute(t,n)}function w(e,t){t=""+t,e.wholeText!==t&&(e.data=t)}function S(e,t){const n=document.createEvent("CustomEvent");return n.initCustomEvent(e,!1,!1,t),n}const k=new Set;let C,E=0;function P(e,t,n,o,r,i,s,c=0){const a=16.666/o;let l="{\n";for(let e=0;e<=1;e+=a){const o=t+(n-t)*i(e);l+=100*e+`%{${s(o,1-o)}}\n`}const u=l+`100% {${s(n,1-n)}}\n}`,h=`__svelte_${function(e){let t=5381,n=e.length;for(;n--;)t=(t<<5)-t^e.charCodeAt(n);return t>>>0}(u)}_${c}`,p=e.ownerDocument;k.add(p);const f=p.__svelte_stylesheet||(p.__svelte_stylesheet=p.head.appendChild(d("style")).sheet),g=p.__svelte_rules||(p.__svelte_rules={});g[h]||(g[h]=!0,f.insertRule(`@keyframes ${h} ${u}`,f.cssRules.length));const y=e.style.animation||"";return e.style.animation=`${y?y+", ":""}${h} ${o}ms linear ${r}ms 1 both`,E+=1,h}function T(e,t){const n=(e.style.animation||"").split(", "),o=n.filter(t?e=>e.indexOf(t)<0:e=>-1===e.indexOf("__svelte")),r=n.length-o.length;r&&(e.style.animation=o.join(", "),E-=r,E||l(()=>{E||(k.forEach(e=>{const t=e.__svelte_stylesheet;let n=t.cssRules.length;for(;n--;)t.deleteRule(n);e.__svelte_rules={}}),k.clear())}))}function I(e){C=e}function D(){const e=function(){if(!C)throw new Error("Function called outside component initialization");return C}();return(t,n)=>{const o=e.$$.callbacks[t];if(o){const r=S(t,n);o.slice().forEach(t=>{t.call(e,r)})}}}function _(e,t){const n=e.$$.callbacks[t.type];n&&n.slice().forEach(e=>e(t))}const x=[],R=[],j=[],O=[],M=Promise.resolve();let $=!1;function H(e){j.push(e)}let A=!1;const W=new Set;function q(){if(!A){A=!0;do{for(let e=0;e<x.length;e+=1){const t=x[e];I(t),L(t.$$)}for(x.length=0;R.length;)R.pop()();for(let e=0;e<j.length;e+=1){const t=j[e];W.has(t)||(W.add(t),t())}j.length=0}while(x.length);for(;O.length;)O.pop()();$=!1,A=!1,W.clear()}}function L(e){if(null!==e.fragment){e.update(),r(e.before_update);const t=e.dirty;e.dirty=[-1],e.fragment&&e.fragment.p(e.ctx,t),e.after_update.forEach(H)}}let N;function F(e,t,n){e.dispatchEvent(S(`${t?"intro":"outro"}${n}`))}const U=new Set;let B;function X(){B={r:0,c:[],p:B}}function z(){B.r||r(B.c),B=B.p}function J(e,t){e&&e.i&&(U.delete(e),e.i(t))}function G(e,t,n,o){if(e&&e.o){if(U.has(e))return;U.add(e),B.c.push(()=>{U.delete(e),o&&(n&&e.d(1),o())}),e.o(t)}}const Q={duration:0};function V(n,o,s,c){let p=o(n,s),f=c?0:1,g=null,d=null,y=null;function b(){y&&T(n,y)}function m(e,t){const n=e.b-f;return t*=Math.abs(n),{a:f,b:e.b,d:n,duration:t,start:e.start,end:e.start+t,group:e.group}}function v(o){const{delay:i=0,duration:s=300,easing:c=t,tick:v=e,css:w}=p||Q,S={start:a()+i,b:o};o||(S.group=B,B.r+=1),g?d=S:(w&&(b(),y=P(n,f,o,s,i,c,w)),o&&v(0,1),g=m(S,s),H(()=>F(n,o,"start")),function(e){let t;0===u.size&&l(h),new Promise(n=>{u.add(t={c:e,f:n})})}(e=>{if(d&&e>d.start&&(g=m(d,s),d=null,F(n,g.b,"start"),w&&(b(),y=P(n,f,g.b,g.duration,0,c,p.css))),g)if(e>=g.end)v(f=g.b,1-f),F(n,g.b,"end"),d||(g.b?b():--g.group.r||r(g.group.c)),g=null;else if(e>=g.start){const t=e-g.start;f=g.a+g.d*c(t/g.duration),v(f,1-f)}return!(!g&&!d)}))}return{run(e){i(p)?(N||(N=Promise.resolve(),N.then(()=>{N=null})),N).then(()=>{p=p(),v(e)}):v(e)},end(){b(),g=d=null}}}function K(e,t){G(e,1,1,()=>{t.delete(e.key)})}function Y(e){e&&e.c()}function Z(e,t,o){const{fragment:s,on_mount:c,on_destroy:a,after_update:l}=e.$$;s&&s.m(t,o),H(()=>{const t=c.map(n).filter(i);a?a.push(...t):r(t),e.$$.on_mount=[]}),l.forEach(H)}function ee(e,t){const n=e.$$;null!==n.fragment&&(r(n.on_destroy),n.fragment&&n.fragment.d(t),n.on_destroy=n.fragment=null,n.ctx=[])}function te(e,t){-1===e.$$.dirty[0]&&(x.push(e),$||($=!0,M.then(q)),e.$$.dirty.fill(0)),e.$$.dirty[t/31|0]|=1<<t%31}function ne(t,n,i,s,c,a,l=[-1]){const u=C;I(t);const h=n.props||{},p=t.$$={fragment:null,ctx:null,props:a,update:e,not_equal:c,bound:o(),on_mount:[],on_destroy:[],before_update:[],after_update:[],context:new Map(u?u.$$.context:[]),callbacks:o(),dirty:l};let f=!1;if(p.ctx=i?i(t,h,(e,n,...o)=>{const r=o.length?o[0]:n;return p.ctx&&c(p.ctx[e],p.ctx[e]=r)&&(p.bound[e]&&p.bound[e](r),f&&te(t,e)),n}):[],p.update(),f=!0,r(p.before_update),p.fragment=!!s&&s(p.ctx),n.target){if(n.hydrate){const e=function(e){return Array.from(e.childNodes)}(n.target);p.fragment&&p.fragment.l(e),e.forEach(g)}else p.fragment&&p.fragment.c();n.intro&&J(t.$$.fragment),Z(t,n.target,n.anchor),q()}I(u)}class oe{$destroy(){ee(this,1),this.$destroy=e}$on(e,t){const n=this.$$.callbacks[e]||(this.$$.callbacks[e]=[]);return n.push(t),()=>{const e=n.indexOf(t);-1!==e&&n.splice(e,1)}}$set(){}}function re(e,{delay:n=0,duration:o=400,easing:r=t}){const i=+getComputedStyle(e).opacity;return{delay:n,duration:o,easing:r,css:e=>"opacity: "+e*i}}const ie=[{locked:!1,name:"Prime material plane"},{locked:!0,name:"The Far Reaches",planes:[{id:1,name:"just a fucking spaceship",locked:!0,description:"it's a fucking space ship"},{id:2,name:"just a fucking spaceship",locked:!0,description:"it's a fucking space ship"},{id:3,name:"just a fucking spaceship",locked:!0,description:"it's a fucking space ship"}]},{locked:!0,name:"Planar boundaries",planes:[{id:4,name:"Elemental Plane",locked:!0,description:"the elemental plane"},{id:5,name:"Elemental Plane",locked:!0,description:"the elemental plane"},{id:6,name:"Elemental Plane",locked:!0,description:"the elemental plane"}]},{locked:!0,name:"Prime echoes",planes:[{id:7,name:"Feywild",locked:!1,description:"An echo of the Prime Material Plane, skewing toward the light. The Fey make their home here."},{id:8,name:"The Shadowfell",locked:!1,description:"An echo of the Prime Material Plane, skewing toward the shadow. Shadows are not inherently evil, but evil finds a home in shadow."},{id:9,name:"Louie's Domain",locked:!1,description:"A domain which, curiously, contains only a single person."}]},{locked:!1,name:"Ephemeral Planes",planes:[{id:10,name:"Sphinxlandia",locked:!1,description:"A beautiful, empty sky, save for a platform with a pyramid. A lone figure sits at the entrance, too far for you to see clearly"},{id:11,name:"Ethereal plane",locked:!1,description:"The Ethereal Plane, barely an echo of the Prime Material Plane. Mages hide here."}]}];var se,ce,ae=(se=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(e,t){e.__proto__=t}||function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n])},function(e,t){function n(){this.constructor=e}se(e,t),e.prototype=null===t?Object.create(t):(n.prototype=t.prototype,new n)}),le=function(e){function t(t,n){var o=this,r=this.constructor.prototype;return(o=e.call(this,t)||this).statusCode=n,o.__proto__=r,o}return ae(t,e),t}(Error),ue=function(e){function t(t){void 0===t&&(t="A timeout occurred.");var n=this,o=this.constructor.prototype;return(n=e.call(this,t)||this).__proto__=o,n}return ae(t,e),t}(Error),he=function(e){function t(t){void 0===t&&(t="An abort occurred.");var n=this,o=this.constructor.prototype;return(n=e.call(this,t)||this).__proto__=o,n}return ae(t,e),t}(Error),pe=Object.assign||function(e){for(var t,n=1,o=arguments.length;n<o;n++)for(var r in t=arguments[n])Object.prototype.hasOwnProperty.call(t,r)&&(e[r]=t[r]);return e},fe=function(e,t,n){this.statusCode=e,this.statusText=t,this.content=n},ge=function(){function e(){}return e.prototype.get=function(e,t){return this.send(pe({},t,{method:"GET",url:e}))},e.prototype.post=function(e,t){return this.send(pe({},t,{method:"POST",url:e}))},e.prototype.delete=function(e,t){return this.send(pe({},t,{method:"DELETE",url:e}))},e.prototype.getCookieString=function(e){return""},e}();!function(e){e[e.Trace=0]="Trace",e[e.Debug=1]="Debug",e[e.Information=2]="Information",e[e.Warning=3]="Warning",e[e.Error=4]="Error",e[e.Critical=5]="Critical",e[e.None=6]="None"}(ce||(ce={}));var de=function(){function e(){}return e.prototype.log=function(e,t){},e.instance=new e,e}(),ye=function(e,t,n,o){return new(n||(n=Promise))((function(r,i){function s(e){try{a(o.next(e))}catch(e){i(e)}}function c(e){try{a(o.throw(e))}catch(e){i(e)}}function a(e){e.done?r(e.value):new n((function(t){t(e.value)})).then(s,c)}a((o=o.apply(e,t||[])).next())}))},be=function(e,t){var n,o,r,i,s={label:0,sent:function(){if(1&r[0])throw r[1];return r[1]},trys:[],ops:[]};return i={next:c(0),throw:c(1),return:c(2)},"function"==typeof Symbol&&(i[Symbol.iterator]=function(){return this}),i;function c(i){return function(c){return function(i){if(n)throw new TypeError("Generator is already executing.");for(;s;)try{if(n=1,o&&(r=2&i[0]?o.return:i[0]?o.throw||((r=o.return)&&r.call(o),0):o.next)&&!(r=r.call(o,i[1])).done)return r;switch(o=0,r&&(i=[2&i[0],r.value]),i[0]){case 0:case 1:r=i;break;case 4:return s.label++,{value:i[1],done:!1};case 5:s.label++,o=i[1],i=[0];continue;case 7:i=s.ops.pop(),s.trys.pop();continue;default:if(!(r=s.trys,(r=r.length>0&&r[r.length-1])||6!==i[0]&&2!==i[0])){s=0;continue}if(3===i[0]&&(!r||i[1]>r[0]&&i[1]<r[3])){s.label=i[1];break}if(6===i[0]&&s.label<r[1]){s.label=r[1],r=i;break}if(r&&s.label<r[2]){s.label=r[2],s.ops.push(i);break}r[2]&&s.ops.pop(),s.trys.pop();continue}i=t.call(e,s)}catch(e){i=[6,e],o=0}finally{n=r=0}if(5&i[0])throw i[1];return{value:i[0]?i[1]:void 0,done:!0}}([i,c])}}},me=function(){function e(){}return e.isRequired=function(e,t){if(null==e)throw new Error("The '"+t+"' argument is required.")},e.isIn=function(e,t,n){if(!(e in t))throw new Error("Unknown "+n+" value: "+e+".")},e}(),ve=function(){function e(){}return Object.defineProperty(e,"isBrowser",{get:function(){return"object"==typeof window},enumerable:!0,configurable:!0}),Object.defineProperty(e,"isWebWorker",{get:function(){return"object"==typeof self&&"importScripts"in self},enumerable:!0,configurable:!0}),Object.defineProperty(e,"isNode",{get:function(){return!this.isBrowser&&!this.isWebWorker},enumerable:!0,configurable:!0}),e}();function we(e,t){var n="";return Se(e)?(n="Binary data of length "+e.byteLength,t&&(n+=". Content: '"+function(e){var t=new Uint8Array(e),n="";return t.forEach((function(e){n+="0x"+(e<16?"0":"")+e.toString(16)+" "})),n.substr(0,n.length-1)}(e)+"'")):"string"==typeof e&&(n="String data of length "+e.length,t&&(n+=". Content: '"+e+"'")),n}function Se(e){return e&&"undefined"!=typeof ArrayBuffer&&(e instanceof ArrayBuffer||e.constructor&&"ArrayBuffer"===e.constructor.name)}function ke(e,t,n,o,r,i,s){return ye(this,void 0,void 0,(function(){var c,a,l,u,h;return be(this,(function(p){switch(p.label){case 0:return r?[4,r()]:[3,2];case 1:(l=p.sent())&&((c={}).Authorization="Bearer "+l,a=c),p.label=2;case 2:return e.log(ce.Trace,"("+t+" transport) sending data. "+we(i,s)+"."),u=Se(i)?"arraybuffer":"text",[4,n.post(o,{content:i,headers:a,responseType:u})];case 3:return h=p.sent(),e.log(ce.Trace,"("+t+" transport) request complete. Response status: "+h.statusCode+"."),[2]}}))}))}var Ce,Ee=function(){function e(e,t){this.subject=e,this.observer=t}return e.prototype.dispose=function(){var e=this.subject.observers.indexOf(this.observer);e>-1&&this.subject.observers.splice(e,1),0===this.subject.observers.length&&this.subject.cancelCallback&&this.subject.cancelCallback().catch((function(e){}))},e}(),Pe=function(){function e(e){this.minimumLogLevel=e,this.outputConsole=console}return e.prototype.log=function(e,t){if(e>=this.minimumLogLevel)switch(e){case ce.Critical:case ce.Error:this.outputConsole.error("["+(new Date).toISOString()+"] "+ce[e]+": "+t);break;case ce.Warning:this.outputConsole.warn("["+(new Date).toISOString()+"] "+ce[e]+": "+t);break;case ce.Information:this.outputConsole.info("["+(new Date).toISOString()+"] "+ce[e]+": "+t);break;default:this.outputConsole.log("["+(new Date).toISOString()+"] "+ce[e]+": "+t)}},e}(),Te=function(){var e=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(e,t){e.__proto__=t}||function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n])};return function(t,n){function o(){this.constructor=t}e(t,n),t.prototype=null===n?Object.create(n):(o.prototype=n.prototype,new o)}}(),Ie=Object.assign||function(e){for(var t,n=1,o=arguments.length;n<o;n++)for(var r in t=arguments[n])Object.prototype.hasOwnProperty.call(t,r)&&(e[r]=t[r]);return e};if("undefined"==typeof XMLHttpRequest){var De="function"==typeof __webpack_require__?__non_webpack_require__:require;Ce=De("request")}var _e,xe=function(e){function t(t){var n=e.call(this)||this;if(void 0===Ce)throw new Error("The 'request' module could not be loaded.");return n.logger=t,n.cookieJar=Ce.jar(),n.request=Ce.defaults({jar:n.cookieJar}),n}return Te(t,e),t.prototype.send=function(e){var t=this;return e.abortSignal&&e.abortSignal.aborted?Promise.reject(new he):new Promise((function(n,o){var r;r=Se(e.content)?Buffer.from(e.content):e.content||"";var i=t.request(e.url,{body:r,encoding:"arraybuffer"===e.responseType?null:"utf8",headers:Ie({"X-Requested-With":"XMLHttpRequest"},e.headers),method:e.method,timeout:e.timeout},(function(r,i,s){if(e.abortSignal&&(e.abortSignal.onabort=null),r)return"ETIMEDOUT"===r.code&&(t.logger.log(ce.Warning,"Timeout from HTTP request."),o(new ue)),t.logger.log(ce.Warning,"Error from HTTP request. "+r),void o(r);i.statusCode>=200&&i.statusCode<300?n(new fe(i.statusCode,i.statusMessage||"",s)):o(new le(i.statusMessage||"",i.statusCode||0))}));e.abortSignal&&(e.abortSignal.onabort=function(){i.abort(),o(new he)})}))},t.prototype.getCookieString=function(e){return this.cookieJar.getCookieString(e)},t}(ge),Re=function(){var e=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(e,t){e.__proto__=t}||function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n])};return function(t,n){function o(){this.constructor=t}e(t,n),t.prototype=null===n?Object.create(n):(o.prototype=n.prototype,new o)}}(),je=function(e){function t(t){var n=e.call(this)||this;return n.logger=t,n}return Re(t,e),t.prototype.send=function(e){var t=this;return e.abortSignal&&e.abortSignal.aborted?Promise.reject(new he):e.method?e.url?new Promise((function(n,o){var r=new XMLHttpRequest;r.open(e.method,e.url,!0),r.withCredentials=!0,r.setRequestHeader("X-Requested-With","XMLHttpRequest"),r.setRequestHeader("Content-Type","text/plain;charset=UTF-8");var i=e.headers;i&&Object.keys(i).forEach((function(e){r.setRequestHeader(e,i[e])})),e.responseType&&(r.responseType=e.responseType),e.abortSignal&&(e.abortSignal.onabort=function(){r.abort(),o(new he)}),e.timeout&&(r.timeout=e.timeout),r.onload=function(){e.abortSignal&&(e.abortSignal.onabort=null),r.status>=200&&r.status<300?n(new fe(r.status,r.statusText,r.response||r.responseText)):o(new le(r.statusText,r.status))},r.onerror=function(){t.logger.log(ce.Warning,"Error from HTTP request. "+r.status+": "+r.statusText+"."),o(new le(r.statusText,r.status))},r.ontimeout=function(){t.logger.log(ce.Warning,"Timeout from HTTP request."),o(new ue)},r.send(e.content||"")})):Promise.reject(new Error("No url defined.")):Promise.reject(new Error("No method defined."))},t}(ge),Oe=function(){var e=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(e,t){e.__proto__=t}||function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n])};return function(t,n){function o(){this.constructor=t}e(t,n),t.prototype=null===n?Object.create(n):(o.prototype=n.prototype,new o)}}(),Me=function(e){function t(t){var n=e.call(this)||this;return"undefined"!=typeof XMLHttpRequest?n.httpClient=new je(t):n.httpClient=new xe(t),n}return Oe(t,e),t.prototype.send=function(e){return e.abortSignal&&e.abortSignal.aborted?Promise.reject(new he):e.method?e.url?this.httpClient.send(e):Promise.reject(new Error("No url defined.")):Promise.reject(new Error("No method defined."))},t.prototype.getCookieString=function(e){return this.httpClient.getCookieString(e)},t}(ge),$e=function(){function e(){}return e.write=function(t){return""+t+e.RecordSeparator},e.parse=function(t){if(t[t.length-1]!==e.RecordSeparator)throw new Error("Message is incomplete.");var n=t.split(e.RecordSeparator);return n.pop(),n},e.RecordSeparatorCode=30,e.RecordSeparator=String.fromCharCode(e.RecordSeparatorCode),e}(),He=function(){function e(){}return e.prototype.writeHandshakeRequest=function(e){return $e.write(JSON.stringify(e))},e.prototype.parseHandshakeResponse=function(e){var t,n;if(Se(e)||"undefined"!=typeof Buffer&&e instanceof Buffer){var o=new Uint8Array(e);if(-1===(i=o.indexOf($e.RecordSeparatorCode)))throw new Error("Message is incomplete.");var r=i+1;t=String.fromCharCode.apply(null,o.slice(0,r)),n=o.byteLength>r?o.slice(r).buffer:null}else{var i,s=e;if(-1===(i=s.indexOf($e.RecordSeparator)))throw new Error("Message is incomplete.");r=i+1;t=s.substring(0,r),n=s.length>r?s.substring(r):null}var c=$e.parse(t),a=JSON.parse(c[0]);if(a.type)throw new Error("Expected a handshake response from the server.");return[n,a]},e}();!function(e){e[e.Invocation=1]="Invocation",e[e.StreamItem=2]="StreamItem",e[e.Completion=3]="Completion",e[e.StreamInvocation=4]="StreamInvocation",e[e.CancelInvocation=5]="CancelInvocation",e[e.Ping=6]="Ping",e[e.Close=7]="Close"}(_e||(_e={}));var Ae,We=function(){function e(){this.observers=[]}return e.prototype.next=function(e){for(var t=0,n=this.observers;t<n.length;t++){n[t].next(e)}},e.prototype.error=function(e){for(var t=0,n=this.observers;t<n.length;t++){var o=n[t];o.error&&o.error(e)}},e.prototype.complete=function(){for(var e=0,t=this.observers;e<t.length;e++){var n=t[e];n.complete&&n.complete()}},e.prototype.subscribe=function(e){return this.observers.push(e),new Ee(this,e)},e}(),qe=function(e,t,n,o){return new(n||(n=Promise))((function(r,i){function s(e){try{a(o.next(e))}catch(e){i(e)}}function c(e){try{a(o.throw(e))}catch(e){i(e)}}function a(e){e.done?r(e.value):new n((function(t){t(e.value)})).then(s,c)}a((o=o.apply(e,t||[])).next())}))},Le=function(e,t){var n,o,r,i,s={label:0,sent:function(){if(1&r[0])throw r[1];return r[1]},trys:[],ops:[]};return i={next:c(0),throw:c(1),return:c(2)},"function"==typeof Symbol&&(i[Symbol.iterator]=function(){return this}),i;function c(i){return function(c){return function(i){if(n)throw new TypeError("Generator is already executing.");for(;s;)try{if(n=1,o&&(r=2&i[0]?o.return:i[0]?o.throw||((r=o.return)&&r.call(o),0):o.next)&&!(r=r.call(o,i[1])).done)return r;switch(o=0,r&&(i=[2&i[0],r.value]),i[0]){case 0:case 1:r=i;break;case 4:return s.label++,{value:i[1],done:!1};case 5:s.label++,o=i[1],i=[0];continue;case 7:i=s.ops.pop(),s.trys.pop();continue;default:if(!(r=s.trys,(r=r.length>0&&r[r.length-1])||6!==i[0]&&2!==i[0])){s=0;continue}if(3===i[0]&&(!r||i[1]>r[0]&&i[1]<r[3])){s.label=i[1];break}if(6===i[0]&&s.label<r[1]){s.label=r[1],r=i;break}if(r&&s.label<r[2]){s.label=r[2],s.ops.push(i);break}r[2]&&s.ops.pop(),s.trys.pop();continue}i=t.call(e,s)}catch(e){i=[6,e],o=0}finally{n=r=0}if(5&i[0])throw i[1];return{value:i[0]?i[1]:void 0,done:!0}}([i,c])}}};!function(e){e.Disconnected="Disconnected",e.Connecting="Connecting",e.Connected="Connected",e.Disconnecting="Disconnecting",e.Reconnecting="Reconnecting"}(Ae||(Ae={}));var Ne,Fe,Ue=function(){function e(e,t,n,o){var r=this;me.isRequired(e,"connection"),me.isRequired(t,"logger"),me.isRequired(n,"protocol"),this.serverTimeoutInMilliseconds=3e4,this.keepAliveIntervalInMilliseconds=15e3,this.logger=t,this.protocol=n,this.connection=e,this.reconnectPolicy=o,this.handshakeProtocol=new He,this.connection.onreceive=function(e){return r.processIncomingData(e)},this.connection.onclose=function(e){return r.connectionClosed(e)},this.callbacks={},this.methods={},this.closedCallbacks=[],this.reconnectingCallbacks=[],this.reconnectedCallbacks=[],this.invocationId=0,this.receivedHandshakeResponse=!1,this.connectionState=Ae.Disconnected,this.connectionStarted=!1,this.cachedPingMessage=this.protocol.writeMessage({type:_e.Ping})}return e.create=function(t,n,o,r){return new e(t,n,o,r)},Object.defineProperty(e.prototype,"state",{get:function(){return this.connectionState},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"connectionId",{get:function(){return this.connection&&this.connection.connectionId||null},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"baseUrl",{get:function(){return this.connection.baseUrl||""},set:function(e){if(this.connectionState!==Ae.Disconnected&&this.connectionState!==Ae.Reconnecting)throw new Error("The HubConnection must be in the Disconnected or Reconnecting state to change the url.");if(!e)throw new Error("The HubConnection url must be a valid url.");this.connection.baseUrl=e},enumerable:!0,configurable:!0}),e.prototype.start=function(){return this.startPromise=this.startWithStateTransitions(),this.startPromise},e.prototype.startWithStateTransitions=function(){return qe(this,void 0,void 0,(function(){var e;return Le(this,(function(t){switch(t.label){case 0:if(this.connectionState!==Ae.Disconnected)return[2,Promise.reject(new Error("Cannot start a HubConnection that is not in the 'Disconnected' state."))];this.connectionState=Ae.Connecting,this.logger.log(ce.Debug,"Starting HubConnection."),t.label=1;case 1:return t.trys.push([1,3,,4]),[4,this.startInternal()];case 2:return t.sent(),this.connectionState=Ae.Connected,this.connectionStarted=!0,this.logger.log(ce.Debug,"HubConnection connected successfully."),[3,4];case 3:return e=t.sent(),this.connectionState=Ae.Disconnected,this.logger.log(ce.Debug,"HubConnection failed to start successfully because of error '"+e+"'."),[2,Promise.reject(e)];case 4:return[2]}}))}))},e.prototype.startInternal=function(){return qe(this,void 0,void 0,(function(){var e,t,n,o=this;return Le(this,(function(r){switch(r.label){case 0:return this.stopDuringStartError=void 0,this.receivedHandshakeResponse=!1,e=new Promise((function(e,t){o.handshakeResolver=e,o.handshakeRejecter=t})),[4,this.connection.start(this.protocol.transferFormat)];case 1:r.sent(),r.label=2;case 2:return r.trys.push([2,5,,7]),t={protocol:this.protocol.name,version:this.protocol.version},this.logger.log(ce.Debug,"Sending handshake request."),[4,this.sendMessage(this.handshakeProtocol.writeHandshakeRequest(t))];case 3:return r.sent(),this.logger.log(ce.Information,"Using HubProtocol '"+this.protocol.name+"'."),this.cleanupTimeout(),this.resetTimeoutPeriod(),this.resetKeepAliveInterval(),[4,e];case 4:if(r.sent(),this.stopDuringStartError)throw this.stopDuringStartError;return[3,7];case 5:return n=r.sent(),this.logger.log(ce.Debug,"Hub handshake failed with error '"+n+"' during start(). Stopping HubConnection."),this.cleanupTimeout(),this.cleanupPingTimer(),[4,this.connection.stop(n)];case 6:throw r.sent(),n;case 7:return[2]}}))}))},e.prototype.stop=function(){return qe(this,void 0,void 0,(function(){var e;return Le(this,(function(t){switch(t.label){case 0:return e=this.startPromise,this.stopPromise=this.stopInternal(),[4,this.stopPromise];case 1:t.sent(),t.label=2;case 2:return t.trys.push([2,4,,5]),[4,e];case 3:return t.sent(),[3,5];case 4:return t.sent(),[3,5];case 5:return[2]}}))}))},e.prototype.stopInternal=function(e){return this.connectionState===Ae.Disconnected?(this.logger.log(ce.Debug,"Call to HubConnection.stop("+e+") ignored because it is already in the disconnected state."),Promise.resolve()):this.connectionState===Ae.Disconnecting?(this.logger.log(ce.Debug,"Call to HttpConnection.stop("+e+") ignored because the connection is already in the disconnecting state."),this.stopPromise):(this.connectionState=Ae.Disconnecting,this.logger.log(ce.Debug,"Stopping HubConnection."),this.reconnectDelayHandle?(this.logger.log(ce.Debug,"Connection stopped during reconnect delay. Done reconnecting."),clearTimeout(this.reconnectDelayHandle),this.reconnectDelayHandle=void 0,this.completeClose(),Promise.resolve()):(this.cleanupTimeout(),this.cleanupPingTimer(),this.stopDuringStartError=e||new Error("The connection was stopped before the hub handshake could complete."),this.connection.stop(e)))},e.prototype.stream=function(e){for(var t=this,n=[],o=1;o<arguments.length;o++)n[o-1]=arguments[o];var r,i=this.replaceStreamingParams(n),s=i[0],c=i[1],a=this.createStreamInvocation(e,n,c),l=new We;return l.cancelCallback=function(){var e=t.createCancelInvocation(a.invocationId);return delete t.callbacks[a.invocationId],r.then((function(){return t.sendWithProtocol(e)}))},this.callbacks[a.invocationId]=function(e,t){t?l.error(t):e&&(e.type===_e.Completion?e.error?l.error(new Error(e.error)):l.complete():l.next(e.item))},r=this.sendWithProtocol(a).catch((function(e){l.error(e),delete t.callbacks[a.invocationId]})),this.launchStreams(s,r),l},e.prototype.sendMessage=function(e){return this.resetKeepAliveInterval(),this.connection.send(e)},e.prototype.sendWithProtocol=function(e){return this.sendMessage(this.protocol.writeMessage(e))},e.prototype.send=function(e){for(var t=[],n=1;n<arguments.length;n++)t[n-1]=arguments[n];var o=this.replaceStreamingParams(t),r=o[0],i=o[1],s=this.sendWithProtocol(this.createInvocation(e,t,!0,i));return this.launchStreams(r,s),s},e.prototype.invoke=function(e){for(var t=this,n=[],o=1;o<arguments.length;o++)n[o-1]=arguments[o];var r=this.replaceStreamingParams(n),i=r[0],s=r[1],c=this.createInvocation(e,n,!1,s),a=new Promise((function(e,n){t.callbacks[c.invocationId]=function(t,o){o?n(o):t&&(t.type===_e.Completion?t.error?n(new Error(t.error)):e(t.result):n(new Error("Unexpected message type: "+t.type)))};var o=t.sendWithProtocol(c).catch((function(e){n(e),delete t.callbacks[c.invocationId]}));t.launchStreams(i,o)}));return a},e.prototype.on=function(e,t){e&&t&&(e=e.toLowerCase(),this.methods[e]||(this.methods[e]=[]),-1===this.methods[e].indexOf(t)&&this.methods[e].push(t))},e.prototype.off=function(e,t){if(e){e=e.toLowerCase();var n=this.methods[e];if(n)if(t){var o=n.indexOf(t);-1!==o&&(n.splice(o,1),0===n.length&&delete this.methods[e])}else delete this.methods[e]}},e.prototype.onclose=function(e){e&&this.closedCallbacks.push(e)},e.prototype.onreconnecting=function(e){e&&this.reconnectingCallbacks.push(e)},e.prototype.onreconnected=function(e){e&&this.reconnectedCallbacks.push(e)},e.prototype.processIncomingData=function(e){if(this.cleanupTimeout(),this.receivedHandshakeResponse||(e=this.processHandshakeResponse(e),this.receivedHandshakeResponse=!0),e)for(var t=0,n=this.protocol.parseMessages(e,this.logger);t<n.length;t++){var o=n[t];switch(o.type){case _e.Invocation:this.invokeClientMethod(o);break;case _e.StreamItem:case _e.Completion:var r=this.callbacks[o.invocationId];r&&(o.type===_e.Completion&&delete this.callbacks[o.invocationId],r(o));break;case _e.Ping:break;case _e.Close:this.logger.log(ce.Information,"Close message received from server.");var i=o.error?new Error("Server returned an error on close: "+o.error):void 0;!0===o.allowReconnect?this.connection.stop(i):this.stopPromise=this.stopInternal(i);break;default:this.logger.log(ce.Warning,"Invalid message type: "+o.type+".")}}this.resetTimeoutPeriod()},e.prototype.processHandshakeResponse=function(e){var t,n,o;try{o=(t=this.handshakeProtocol.parseHandshakeResponse(e))[0],n=t[1]}catch(e){var r="Error parsing handshake response: "+e;this.logger.log(ce.Error,r);var i=new Error(r);throw this.handshakeRejecter(i),i}if(n.error){r="Server returned handshake error: "+n.error;this.logger.log(ce.Error,r);i=new Error(r);throw this.handshakeRejecter(i),i}return this.logger.log(ce.Debug,"Server handshake complete."),this.handshakeResolver(),o},e.prototype.resetKeepAliveInterval=function(){var e=this;this.cleanupPingTimer(),this.pingServerHandle=setTimeout((function(){return qe(e,void 0,void 0,(function(){return Le(this,(function(e){switch(e.label){case 0:if(this.connectionState!==Ae.Connected)return[3,4];e.label=1;case 1:return e.trys.push([1,3,,4]),[4,this.sendMessage(this.cachedPingMessage)];case 2:return e.sent(),[3,4];case 3:return e.sent(),this.cleanupPingTimer(),[3,4];case 4:return[2]}}))}))}),this.keepAliveIntervalInMilliseconds)},e.prototype.resetTimeoutPeriod=function(){var e=this;this.connection.features&&this.connection.features.inherentKeepAlive||(this.timeoutHandle=setTimeout((function(){return e.serverTimeout()}),this.serverTimeoutInMilliseconds))},e.prototype.serverTimeout=function(){this.connection.stop(new Error("Server timeout elapsed without receiving a message from the server."))},e.prototype.invokeClientMethod=function(e){var t=this,n=this.methods[e.target.toLowerCase()];if(n){try{n.forEach((function(n){return n.apply(t,e.arguments)}))}catch(t){this.logger.log(ce.Error,"A callback for the method "+e.target.toLowerCase()+" threw error '"+t+"'.")}if(e.invocationId){var o="Server requested a response, which is not supported in this version of the client.";this.logger.log(ce.Error,o),this.stopPromise=this.stopInternal(new Error(o))}}else this.logger.log(ce.Warning,"No client method with the name '"+e.target+"' found.")},e.prototype.connectionClosed=function(e){this.logger.log(ce.Debug,"HubConnection.connectionClosed("+e+") called while in state "+this.connectionState+"."),this.stopDuringStartError=this.stopDuringStartError||e||new Error("The underlying connection was closed before the hub handshake could complete."),this.handshakeResolver&&this.handshakeResolver(),this.cancelCallbacksWithError(e||new Error("Invocation canceled due to the underlying connection being closed.")),this.cleanupTimeout(),this.cleanupPingTimer(),this.connectionState===Ae.Disconnecting?this.completeClose(e):this.connectionState===Ae.Connected&&this.reconnectPolicy?this.reconnect(e):this.connectionState===Ae.Connected&&this.completeClose(e)},e.prototype.completeClose=function(e){var t=this;if(this.connectionStarted){this.connectionState=Ae.Disconnected,this.connectionStarted=!1;try{this.closedCallbacks.forEach((function(n){return n.apply(t,[e])}))}catch(t){this.logger.log(ce.Error,"An onclose callback called with error '"+e+"' threw error '"+t+"'.")}}},e.prototype.reconnect=function(e){return qe(this,void 0,void 0,(function(){var t,n,o,r,i,s=this;return Le(this,(function(c){switch(c.label){case 0:if(t=Date.now(),n=0,o=void 0!==e?e:new Error("Attempting to reconnect due to a unknown error."),null===(r=this.getNextRetryDelay(n++,0,o)))return this.logger.log(ce.Debug,"Connection not reconnecting because the IRetryPolicy returned null on the first reconnect attempt."),this.completeClose(e),[2];if(this.connectionState=Ae.Reconnecting,e?this.logger.log(ce.Information,"Connection reconnecting because of error '"+e+"'."):this.logger.log(ce.Information,"Connection reconnecting."),this.onreconnecting){try{this.reconnectingCallbacks.forEach((function(t){return t.apply(s,[e])}))}catch(t){this.logger.log(ce.Error,"An onreconnecting callback called with error '"+e+"' threw error '"+t+"'.")}if(this.connectionState!==Ae.Reconnecting)return this.logger.log(ce.Debug,"Connection left the reconnecting state in onreconnecting callback. Done reconnecting."),[2]}c.label=1;case 1:return null===r?[3,7]:(this.logger.log(ce.Information,"Reconnect attempt number "+n+" will start in "+r+" ms."),[4,new Promise((function(e){s.reconnectDelayHandle=setTimeout(e,r)}))]);case 2:if(c.sent(),this.reconnectDelayHandle=void 0,this.connectionState!==Ae.Reconnecting)return this.logger.log(ce.Debug,"Connection left the reconnecting state during reconnect delay. Done reconnecting."),[2];c.label=3;case 3:return c.trys.push([3,5,,6]),[4,this.startInternal()];case 4:if(c.sent(),this.connectionState=Ae.Connected,this.logger.log(ce.Information,"HubConnection reconnected successfully."),this.onreconnected)try{this.reconnectedCallbacks.forEach((function(e){return e.apply(s,[s.connection.connectionId])}))}catch(e){this.logger.log(ce.Error,"An onreconnected callback called with connectionId '"+this.connection.connectionId+"; threw error '"+e+"'.")}return[2];case 5:return i=c.sent(),this.logger.log(ce.Information,"Reconnect attempt failed because of error '"+i+"'."),this.connectionState!==Ae.Reconnecting?(this.logger.log(ce.Debug,"Connection left the reconnecting state during reconnect attempt. Done reconnecting."),[2]):(o=i instanceof Error?i:new Error(i.toString()),r=this.getNextRetryDelay(n++,Date.now()-t,o),[3,6]);case 6:return[3,1];case 7:return this.logger.log(ce.Information,"Reconnect retries have been exhausted after "+(Date.now()-t)+" ms and "+n+" failed attempts. Connection disconnecting."),this.completeClose(),[2]}}))}))},e.prototype.getNextRetryDelay=function(e,t,n){try{return this.reconnectPolicy.nextRetryDelayInMilliseconds({elapsedMilliseconds:t,previousRetryCount:e,retryReason:n})}catch(n){return this.logger.log(ce.Error,"IRetryPolicy.nextRetryDelayInMilliseconds("+e+", "+t+") threw error '"+n+"'."),null}},e.prototype.cancelCallbacksWithError=function(e){var t=this.callbacks;this.callbacks={},Object.keys(t).forEach((function(n){(0,t[n])(null,e)}))},e.prototype.cleanupPingTimer=function(){this.pingServerHandle&&clearTimeout(this.pingServerHandle)},e.prototype.cleanupTimeout=function(){this.timeoutHandle&&clearTimeout(this.timeoutHandle)},e.prototype.createInvocation=function(e,t,n,o){if(n)return{arguments:t,streamIds:o,target:e,type:_e.Invocation};var r=this.invocationId;return this.invocationId++,{arguments:t,invocationId:r.toString(),streamIds:o,target:e,type:_e.Invocation}},e.prototype.launchStreams=function(e,t){var n=this;if(0!==e.length){t||(t=Promise.resolve());var o=function(o){e[o].subscribe({complete:function(){t=t.then((function(){return n.sendWithProtocol(n.createCompletionMessage(o))}))},error:function(e){var r;r=e instanceof Error?e.message:e&&e.toString?e.toString():"Unknown error",t=t.then((function(){return n.sendWithProtocol(n.createCompletionMessage(o,r))}))},next:function(e){t=t.then((function(){return n.sendWithProtocol(n.createStreamItemMessage(o,e))}))}})};for(var r in e)o(r)}},e.prototype.replaceStreamingParams=function(e){for(var t=[],n=[],o=0;o<e.length;o++){var r=e[o];if(this.isObservable(r)){var i=this.invocationId;this.invocationId++,t[i]=r,n.push(i.toString()),e.splice(o,1)}}return[t,n]},e.prototype.isObservable=function(e){return e&&e.subscribe&&"function"==typeof e.subscribe},e.prototype.createStreamInvocation=function(e,t,n){var o=this.invocationId;return this.invocationId++,{arguments:t,invocationId:o.toString(),streamIds:n,target:e,type:_e.StreamInvocation}},e.prototype.createCancelInvocation=function(e){return{invocationId:e,type:_e.CancelInvocation}},e.prototype.createStreamItemMessage=function(e,t){return{invocationId:e,item:t,type:_e.StreamItem}},e.prototype.createCompletionMessage=function(e,t,n){return t?{error:t,invocationId:e,type:_e.Completion}:{invocationId:e,result:n,type:_e.Completion}},e}(),Be=[0,2e3,1e4,3e4,null],Xe=function(){function e(e){this.retryDelays=void 0!==e?e.concat([null]):Be}return e.prototype.nextRetryDelayInMilliseconds=function(e){return this.retryDelays[e.previousRetryCount]},e}();!function(e){e[e.None=0]="None",e[e.WebSockets=1]="WebSockets",e[e.ServerSentEvents=2]="ServerSentEvents",e[e.LongPolling=4]="LongPolling"}(Ne||(Ne={})),function(e){e[e.Text=1]="Text",e[e.Binary=2]="Binary"}(Fe||(Fe={}));var ze=function(){function e(){this.isAborted=!1,this.onabort=null}return e.prototype.abort=function(){this.isAborted||(this.isAborted=!0,this.onabort&&this.onabort())},Object.defineProperty(e.prototype,"signal",{get:function(){return this},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"aborted",{get:function(){return this.isAborted},enumerable:!0,configurable:!0}),e}(),Je=function(e,t,n,o){return new(n||(n=Promise))((function(r,i){function s(e){try{a(o.next(e))}catch(e){i(e)}}function c(e){try{a(o.throw(e))}catch(e){i(e)}}function a(e){e.done?r(e.value):new n((function(t){t(e.value)})).then(s,c)}a((o=o.apply(e,t||[])).next())}))},Ge=function(e,t){var n,o,r,i,s={label:0,sent:function(){if(1&r[0])throw r[1];return r[1]},trys:[],ops:[]};return i={next:c(0),throw:c(1),return:c(2)},"function"==typeof Symbol&&(i[Symbol.iterator]=function(){return this}),i;function c(i){return function(c){return function(i){if(n)throw new TypeError("Generator is already executing.");for(;s;)try{if(n=1,o&&(r=2&i[0]?o.return:i[0]?o.throw||((r=o.return)&&r.call(o),0):o.next)&&!(r=r.call(o,i[1])).done)return r;switch(o=0,r&&(i=[2&i[0],r.value]),i[0]){case 0:case 1:r=i;break;case 4:return s.label++,{value:i[1],done:!1};case 5:s.label++,o=i[1],i=[0];continue;case 7:i=s.ops.pop(),s.trys.pop();continue;default:if(!(r=s.trys,(r=r.length>0&&r[r.length-1])||6!==i[0]&&2!==i[0])){s=0;continue}if(3===i[0]&&(!r||i[1]>r[0]&&i[1]<r[3])){s.label=i[1];break}if(6===i[0]&&s.label<r[1]){s.label=r[1],r=i;break}if(r&&s.label<r[2]){s.label=r[2],s.ops.push(i);break}r[2]&&s.ops.pop(),s.trys.pop();continue}i=t.call(e,s)}catch(e){i=[6,e],o=0}finally{n=r=0}if(5&i[0])throw i[1];return{value:i[0]?i[1]:void 0,done:!0}}([i,c])}}},Qe=function(){function e(e,t,n,o){this.httpClient=e,this.accessTokenFactory=t,this.logger=n,this.pollAbort=new ze,this.logMessageContent=o,this.running=!1,this.onreceive=null,this.onclose=null}return Object.defineProperty(e.prototype,"pollAborted",{get:function(){return this.pollAbort.aborted},enumerable:!0,configurable:!0}),e.prototype.connect=function(e,t){return Je(this,void 0,void 0,(function(){var n,o,r,i;return Ge(this,(function(s){switch(s.label){case 0:if(me.isRequired(e,"url"),me.isRequired(t,"transferFormat"),me.isIn(t,Fe,"transferFormat"),this.url=e,this.logger.log(ce.Trace,"(LongPolling transport) Connecting."),t===Fe.Binary&&"undefined"!=typeof XMLHttpRequest&&"string"!=typeof(new XMLHttpRequest).responseType)throw new Error("Binary protocols over XmlHttpRequest not implementing advanced features are not supported.");return n={abortSignal:this.pollAbort.signal,headers:{},timeout:1e5},t===Fe.Binary&&(n.responseType="arraybuffer"),[4,this.getAccessToken()];case 1:return o=s.sent(),this.updateHeaderToken(n,o),r=e+"&_="+Date.now(),this.logger.log(ce.Trace,"(LongPolling transport) polling: "+r+"."),[4,this.httpClient.get(r,n)];case 2:return 200!==(i=s.sent()).statusCode?(this.logger.log(ce.Error,"(LongPolling transport) Unexpected response code: "+i.statusCode+"."),this.closeError=new le(i.statusText||"",i.statusCode),this.running=!1):this.running=!0,this.receiving=this.poll(this.url,n),[2]}}))}))},e.prototype.getAccessToken=function(){return Je(this,void 0,void 0,(function(){return Ge(this,(function(e){switch(e.label){case 0:return this.accessTokenFactory?[4,this.accessTokenFactory()]:[3,2];case 1:return[2,e.sent()];case 2:return[2,null]}}))}))},e.prototype.updateHeaderToken=function(e,t){e.headers||(e.headers={}),t?e.headers.Authorization="Bearer "+t:e.headers.Authorization&&delete e.headers.Authorization},e.prototype.poll=function(e,t){return Je(this,void 0,void 0,(function(){var n,o,r,i;return Ge(this,(function(s){switch(s.label){case 0:s.trys.push([0,,8,9]),s.label=1;case 1:return this.running?[4,this.getAccessToken()]:[3,7];case 2:n=s.sent(),this.updateHeaderToken(t,n),s.label=3;case 3:return s.trys.push([3,5,,6]),o=e+"&_="+Date.now(),this.logger.log(ce.Trace,"(LongPolling transport) polling: "+o+"."),[4,this.httpClient.get(o,t)];case 4:return 204===(r=s.sent()).statusCode?(this.logger.log(ce.Information,"(LongPolling transport) Poll terminated by server."),this.running=!1):200!==r.statusCode?(this.logger.log(ce.Error,"(LongPolling transport) Unexpected response code: "+r.statusCode+"."),this.closeError=new le(r.statusText||"",r.statusCode),this.running=!1):r.content?(this.logger.log(ce.Trace,"(LongPolling transport) data received. "+we(r.content,this.logMessageContent)+"."),this.onreceive&&this.onreceive(r.content)):this.logger.log(ce.Trace,"(LongPolling transport) Poll timed out, reissuing."),[3,6];case 5:return i=s.sent(),this.running?i instanceof ue?this.logger.log(ce.Trace,"(LongPolling transport) Poll timed out, reissuing."):(this.closeError=i,this.running=!1):this.logger.log(ce.Trace,"(LongPolling transport) Poll errored after shutdown: "+i.message),[3,6];case 6:return[3,1];case 7:return[3,9];case 8:return this.logger.log(ce.Trace,"(LongPolling transport) Polling complete."),this.pollAborted||this.raiseOnClose(),[7];case 9:return[2]}}))}))},e.prototype.send=function(e){return Je(this,void 0,void 0,(function(){return Ge(this,(function(t){return this.running?[2,ke(this.logger,"LongPolling",this.httpClient,this.url,this.accessTokenFactory,e,this.logMessageContent)]:[2,Promise.reject(new Error("Cannot send until the transport is connected"))]}))}))},e.prototype.stop=function(){return Je(this,void 0,void 0,(function(){var e,t;return Ge(this,(function(n){switch(n.label){case 0:this.logger.log(ce.Trace,"(LongPolling transport) Stopping polling."),this.running=!1,this.pollAbort.abort(),n.label=1;case 1:return n.trys.push([1,,5,6]),[4,this.receiving];case 2:return n.sent(),this.logger.log(ce.Trace,"(LongPolling transport) sending DELETE request to "+this.url+"."),e={headers:{}},[4,this.getAccessToken()];case 3:return t=n.sent(),this.updateHeaderToken(e,t),[4,this.httpClient.delete(this.url,e)];case 4:return n.sent(),this.logger.log(ce.Trace,"(LongPolling transport) DELETE request sent."),[3,6];case 5:return this.logger.log(ce.Trace,"(LongPolling transport) Stop finished."),this.raiseOnClose(),[7];case 6:return[2]}}))}))},e.prototype.raiseOnClose=function(){if(this.onclose){var e="(LongPolling transport) Firing onclose event.";this.closeError&&(e+=" Error: "+this.closeError),this.logger.log(ce.Trace,e),this.onclose(this.closeError)}},e}(),Ve=function(e,t,n,o){return new(n||(n=Promise))((function(r,i){function s(e){try{a(o.next(e))}catch(e){i(e)}}function c(e){try{a(o.throw(e))}catch(e){i(e)}}function a(e){e.done?r(e.value):new n((function(t){t(e.value)})).then(s,c)}a((o=o.apply(e,t||[])).next())}))},Ke=function(e,t){var n,o,r,i,s={label:0,sent:function(){if(1&r[0])throw r[1];return r[1]},trys:[],ops:[]};return i={next:c(0),throw:c(1),return:c(2)},"function"==typeof Symbol&&(i[Symbol.iterator]=function(){return this}),i;function c(i){return function(c){return function(i){if(n)throw new TypeError("Generator is already executing.");for(;s;)try{if(n=1,o&&(r=2&i[0]?o.return:i[0]?o.throw||((r=o.return)&&r.call(o),0):o.next)&&!(r=r.call(o,i[1])).done)return r;switch(o=0,r&&(i=[2&i[0],r.value]),i[0]){case 0:case 1:r=i;break;case 4:return s.label++,{value:i[1],done:!1};case 5:s.label++,o=i[1],i=[0];continue;case 7:i=s.ops.pop(),s.trys.pop();continue;default:if(!(r=s.trys,(r=r.length>0&&r[r.length-1])||6!==i[0]&&2!==i[0])){s=0;continue}if(3===i[0]&&(!r||i[1]>r[0]&&i[1]<r[3])){s.label=i[1];break}if(6===i[0]&&s.label<r[1]){s.label=r[1],r=i;break}if(r&&s.label<r[2]){s.label=r[2],s.ops.push(i);break}r[2]&&s.ops.pop(),s.trys.pop();continue}i=t.call(e,s)}catch(e){i=[6,e],o=0}finally{n=r=0}if(5&i[0])throw i[1];return{value:i[0]?i[1]:void 0,done:!0}}([i,c])}}},Ye=function(){function e(e,t,n,o,r){this.httpClient=e,this.accessTokenFactory=t,this.logger=n,this.logMessageContent=o,this.eventSourceConstructor=r,this.onreceive=null,this.onclose=null}return e.prototype.connect=function(e,t){return Ve(this,void 0,void 0,(function(){var n,o=this;return Ke(this,(function(r){switch(r.label){case 0:return me.isRequired(e,"url"),me.isRequired(t,"transferFormat"),me.isIn(t,Fe,"transferFormat"),this.logger.log(ce.Trace,"(SSE transport) Connecting."),this.url=e,this.accessTokenFactory?[4,this.accessTokenFactory()]:[3,2];case 1:(n=r.sent())&&(e+=(e.indexOf("?")<0?"?":"&")+"access_token="+encodeURIComponent(n)),r.label=2;case 2:return[2,new Promise((function(n,r){var i=!1;if(t===Fe.Text){var s;if(ve.isBrowser||ve.isWebWorker)s=new o.eventSourceConstructor(e,{withCredentials:!0});else{var c=o.httpClient.getCookieString(e);s=new o.eventSourceConstructor(e,{withCredentials:!0,headers:{Cookie:c}})}try{s.onmessage=function(e){if(o.onreceive)try{o.logger.log(ce.Trace,"(SSE transport) data received. "+we(e.data,o.logMessageContent)+"."),o.onreceive(e.data)}catch(e){return void o.close(e)}},s.onerror=function(e){var t=new Error(e.data||"Error occurred");i?o.close(t):r(t)},s.onopen=function(){o.logger.log(ce.Information,"SSE connected to "+o.url),o.eventSource=s,i=!0,n()}}catch(e){return void r(e)}}else r(new Error("The Server-Sent Events transport only supports the 'Text' transfer format"))}))]}}))}))},e.prototype.send=function(e){return Ve(this,void 0,void 0,(function(){return Ke(this,(function(t){return this.eventSource?[2,ke(this.logger,"SSE",this.httpClient,this.url,this.accessTokenFactory,e,this.logMessageContent)]:[2,Promise.reject(new Error("Cannot send until the transport is connected"))]}))}))},e.prototype.stop=function(){return this.close(),Promise.resolve()},e.prototype.close=function(e){this.eventSource&&(this.eventSource.close(),this.eventSource=void 0,this.onclose&&this.onclose(e))},e}(),Ze=function(e,t,n,o){return new(n||(n=Promise))((function(r,i){function s(e){try{a(o.next(e))}catch(e){i(e)}}function c(e){try{a(o.throw(e))}catch(e){i(e)}}function a(e){e.done?r(e.value):new n((function(t){t(e.value)})).then(s,c)}a((o=o.apply(e,t||[])).next())}))},et=function(e,t){var n,o,r,i,s={label:0,sent:function(){if(1&r[0])throw r[1];return r[1]},trys:[],ops:[]};return i={next:c(0),throw:c(1),return:c(2)},"function"==typeof Symbol&&(i[Symbol.iterator]=function(){return this}),i;function c(i){return function(c){return function(i){if(n)throw new TypeError("Generator is already executing.");for(;s;)try{if(n=1,o&&(r=2&i[0]?o.return:i[0]?o.throw||((r=o.return)&&r.call(o),0):o.next)&&!(r=r.call(o,i[1])).done)return r;switch(o=0,r&&(i=[2&i[0],r.value]),i[0]){case 0:case 1:r=i;break;case 4:return s.label++,{value:i[1],done:!1};case 5:s.label++,o=i[1],i=[0];continue;case 7:i=s.ops.pop(),s.trys.pop();continue;default:if(!(r=s.trys,(r=r.length>0&&r[r.length-1])||6!==i[0]&&2!==i[0])){s=0;continue}if(3===i[0]&&(!r||i[1]>r[0]&&i[1]<r[3])){s.label=i[1];break}if(6===i[0]&&s.label<r[1]){s.label=r[1],r=i;break}if(r&&s.label<r[2]){s.label=r[2],s.ops.push(i);break}r[2]&&s.ops.pop(),s.trys.pop();continue}i=t.call(e,s)}catch(e){i=[6,e],o=0}finally{n=r=0}if(5&i[0])throw i[1];return{value:i[0]?i[1]:void 0,done:!0}}([i,c])}}},tt=function(){function e(e,t,n,o,r){this.logger=n,this.accessTokenFactory=t,this.logMessageContent=o,this.webSocketConstructor=r,this.httpClient=e,this.onreceive=null,this.onclose=null}return e.prototype.connect=function(e,t){return Ze(this,void 0,void 0,(function(){var n,o=this;return et(this,(function(r){switch(r.label){case 0:return me.isRequired(e,"url"),me.isRequired(t,"transferFormat"),me.isIn(t,Fe,"transferFormat"),this.logger.log(ce.Trace,"(WebSockets transport) Connecting."),this.accessTokenFactory?[4,this.accessTokenFactory()]:[3,2];case 1:(n=r.sent())&&(e+=(e.indexOf("?")<0?"?":"&")+"access_token="+encodeURIComponent(n)),r.label=2;case 2:return[2,new Promise((function(n,r){var i;e=e.replace(/^http/,"ws");var s=o.httpClient.getCookieString(e),c=!1;ve.isNode&&s&&(i=new o.webSocketConstructor(e,void 0,{headers:{Cookie:""+s}})),i||(i=new o.webSocketConstructor(e)),t===Fe.Binary&&(i.binaryType="arraybuffer"),i.onopen=function(t){o.logger.log(ce.Information,"WebSocket connected to "+e+"."),o.webSocket=i,c=!0,n()},i.onerror=function(e){var t=null;t="undefined"!=typeof ErrorEvent&&e instanceof ErrorEvent?e.error:new Error("There was an error with the transport."),r(t)},i.onmessage=function(e){o.logger.log(ce.Trace,"(WebSockets transport) data received. "+we(e.data,o.logMessageContent)+"."),o.onreceive&&o.onreceive(e.data)},i.onclose=function(e){if(c)o.close(e);else{var t=null;t="undefined"!=typeof ErrorEvent&&e instanceof ErrorEvent?e.error:new Error("There was an error with the transport."),r(t)}}}))]}}))}))},e.prototype.send=function(e){return this.webSocket&&this.webSocket.readyState===this.webSocketConstructor.OPEN?(this.logger.log(ce.Trace,"(WebSockets transport) sending data. "+we(e,this.logMessageContent)+"."),this.webSocket.send(e),Promise.resolve()):Promise.reject("WebSocket is not in the OPEN state")},e.prototype.stop=function(){return this.webSocket&&this.close(void 0),Promise.resolve()},e.prototype.close=function(e){this.webSocket&&(this.webSocket.onclose=function(){},this.webSocket.onmessage=function(){},this.webSocket.onerror=function(){},this.webSocket.close(),this.webSocket=void 0),this.logger.log(ce.Trace,"(WebSockets transport) socket closed."),this.onclose&&(!e||!1!==e.wasClean&&1e3===e.code?this.onclose():this.onclose(new Error("WebSocket closed with status code: "+e.code+" ("+e.reason+").")))},e}(),nt=function(e,t,n,o){return new(n||(n=Promise))((function(r,i){function s(e){try{a(o.next(e))}catch(e){i(e)}}function c(e){try{a(o.throw(e))}catch(e){i(e)}}function a(e){e.done?r(e.value):new n((function(t){t(e.value)})).then(s,c)}a((o=o.apply(e,t||[])).next())}))},ot=function(e,t){var n,o,r,i,s={label:0,sent:function(){if(1&r[0])throw r[1];return r[1]},trys:[],ops:[]};return i={next:c(0),throw:c(1),return:c(2)},"function"==typeof Symbol&&(i[Symbol.iterator]=function(){return this}),i;function c(i){return function(c){return function(i){if(n)throw new TypeError("Generator is already executing.");for(;s;)try{if(n=1,o&&(r=2&i[0]?o.return:i[0]?o.throw||((r=o.return)&&r.call(o),0):o.next)&&!(r=r.call(o,i[1])).done)return r;switch(o=0,r&&(i=[2&i[0],r.value]),i[0]){case 0:case 1:r=i;break;case 4:return s.label++,{value:i[1],done:!1};case 5:s.label++,o=i[1],i=[0];continue;case 7:i=s.ops.pop(),s.trys.pop();continue;default:if(!(r=s.trys,(r=r.length>0&&r[r.length-1])||6!==i[0]&&2!==i[0])){s=0;continue}if(3===i[0]&&(!r||i[1]>r[0]&&i[1]<r[3])){s.label=i[1];break}if(6===i[0]&&s.label<r[1]){s.label=r[1],r=i;break}if(r&&s.label<r[2]){s.label=r[2],s.ops.push(i);break}r[2]&&s.ops.pop(),s.trys.pop();continue}i=t.call(e,s)}catch(e){i=[6,e],o=0}finally{n=r=0}if(5&i[0])throw i[1];return{value:i[0]?i[1]:void 0,done:!0}}([i,c])}}},rt=null,it=null;if(ve.isNode&&"undefined"!=typeof require){var st="function"==typeof __webpack_require__?__non_webpack_require__:require;rt=st("ws"),it=st("eventsource")}var ct=function(){function e(e,t){var n;void 0===t&&(t={}),this.features={},this.negotiateVersion=1,me.isRequired(e,"url"),this.logger=void 0===(n=t.logger)?new Pe(ce.Information):null===n?de.instance:n.log?n:new Pe(n),this.baseUrl=this.resolveUrl(e),(t=t||{}).logMessageContent=t.logMessageContent||!1,ve.isNode||"undefined"==typeof WebSocket||t.WebSocket?ve.isNode&&!t.WebSocket&&rt&&(t.WebSocket=rt):t.WebSocket=WebSocket,ve.isNode||"undefined"==typeof EventSource||t.EventSource?ve.isNode&&!t.EventSource&&void 0!==it&&(t.EventSource=it):t.EventSource=EventSource,this.httpClient=t.httpClient||new Me(this.logger),this.connectionState="Disconnected",this.connectionStarted=!1,this.options=t,this.onreceive=null,this.onclose=null}return e.prototype.start=function(e){return nt(this,void 0,void 0,(function(){var t;return ot(this,(function(n){switch(n.label){case 0:return e=e||Fe.Binary,me.isIn(e,Fe,"transferFormat"),this.logger.log(ce.Debug,"Starting connection with transfer format '"+Fe[e]+"'."),"Disconnected"!==this.connectionState?[2,Promise.reject(new Error("Cannot start an HttpConnection that is not in the 'Disconnected' state."))]:(this.connectionState="Connecting ",this.startInternalPromise=this.startInternal(e),[4,this.startInternalPromise]);case 1:return n.sent(),"Disconnecting"!==this.connectionState?[3,3]:(t="Failed to start the HttpConnection before stop() was called.",this.logger.log(ce.Error,t),[4,this.stopPromise]);case 2:return n.sent(),[2,Promise.reject(new Error(t))];case 3:if("Connected"!==this.connectionState)return t="HttpConnection.startInternal completed gracefully but didn't enter the connection into the connected state!",this.logger.log(ce.Error,t),[2,Promise.reject(new Error(t))];n.label=4;case 4:return this.connectionStarted=!0,[2]}}))}))},e.prototype.send=function(e){return"Connected"!==this.connectionState?Promise.reject(new Error("Cannot send data if the connection is not in the 'Connected' State.")):(this.sendQueue||(this.sendQueue=new at(this.transport)),this.sendQueue.send(e))},e.prototype.stop=function(e){return nt(this,void 0,void 0,(function(){var t=this;return ot(this,(function(n){switch(n.label){case 0:return"Disconnected"===this.connectionState?(this.logger.log(ce.Debug,"Call to HttpConnection.stop("+e+") ignored because the connection is already in the disconnected state."),[2,Promise.resolve()]):"Disconnecting"===this.connectionState?(this.logger.log(ce.Debug,"Call to HttpConnection.stop("+e+") ignored because the connection is already in the disconnecting state."),[2,this.stopPromise]):(this.connectionState="Disconnecting",this.stopPromise=new Promise((function(e){t.stopPromiseResolver=e})),[4,this.stopInternal(e)]);case 1:return n.sent(),[4,this.stopPromise];case 2:return n.sent(),[2]}}))}))},e.prototype.stopInternal=function(e){return nt(this,void 0,void 0,(function(){var t;return ot(this,(function(n){switch(n.label){case 0:this.stopError=e,n.label=1;case 1:return n.trys.push([1,3,,4]),[4,this.startInternalPromise];case 2:return n.sent(),[3,4];case 3:return n.sent(),[3,4];case 4:if(!this.transport)return[3,9];n.label=5;case 5:return n.trys.push([5,7,,8]),[4,this.transport.stop()];case 6:return n.sent(),[3,8];case 7:return t=n.sent(),this.logger.log(ce.Error,"HttpConnection.transport.stop() threw error '"+t+"'."),this.stopConnection(),[3,8];case 8:return this.transport=void 0,[3,10];case 9:this.logger.log(ce.Debug,"HttpConnection.transport is undefined in HttpConnection.stop() because start() failed."),this.stopConnection(),n.label=10;case 10:return[2]}}))}))},e.prototype.startInternal=function(e){return nt(this,void 0,void 0,(function(){var t,n,o,r,i,s;return ot(this,(function(c){switch(c.label){case 0:t=this.baseUrl,this.accessTokenFactory=this.options.accessTokenFactory,c.label=1;case 1:return c.trys.push([1,12,,13]),this.options.skipNegotiation?this.options.transport!==Ne.WebSockets?[3,3]:(this.transport=this.constructTransport(Ne.WebSockets),[4,this.startTransport(t,e)]):[3,5];case 2:return c.sent(),[3,4];case 3:throw new Error("Negotiation can only be skipped when using the WebSocket transport directly.");case 4:return[3,11];case 5:n=null,o=0,r=function(){var e;return ot(this,(function(r){switch(r.label){case 0:return[4,i.getNegotiationResponse(t)];case 1:if(n=r.sent(),"Disconnecting"===i.connectionState||"Disconnected"===i.connectionState)throw new Error("The connection was stopped during negotiation.");if(n.error)throw new Error(n.error);if(n.ProtocolVersion)throw new Error("Detected a connection attempt to an ASP.NET SignalR Server. This client only supports connecting to an ASP.NET Core SignalR Server. See https://aka.ms/signalr-core-differences for details.");return n.url&&(t=n.url),n.accessToken&&(e=n.accessToken,i.accessTokenFactory=function(){return e}),o++,[2]}}))},i=this,c.label=6;case 6:return[5,r()];case 7:c.sent(),c.label=8;case 8:if(n.url&&o<100)return[3,6];c.label=9;case 9:if(100===o&&n.url)throw new Error("Negotiate redirection limit exceeded.");return[4,this.createTransport(t,this.options.transport,n,e)];case 10:c.sent(),c.label=11;case 11:return this.transport instanceof Qe&&(this.features.inherentKeepAlive=!0),"Connecting "===this.connectionState&&(this.logger.log(ce.Debug,"The HttpConnection connected successfully."),this.connectionState="Connected"),[3,13];case 12:return s=c.sent(),this.logger.log(ce.Error,"Failed to start the connection: "+s),this.connectionState="Disconnected",this.transport=void 0,[2,Promise.reject(s)];case 13:return[2]}}))}))},e.prototype.getNegotiationResponse=function(e){return nt(this,void 0,void 0,(function(){var t,n,o,r,i,s,c;return ot(this,(function(a){switch(a.label){case 0:return this.accessTokenFactory?[4,this.accessTokenFactory()]:[3,2];case 1:(o=a.sent())&&((t={}).Authorization="Bearer "+o,n=t),a.label=2;case 2:r=this.resolveNegotiateUrl(e),this.logger.log(ce.Debug,"Sending negotiation request: "+r+"."),a.label=3;case 3:return a.trys.push([3,5,,6]),[4,this.httpClient.post(r,{content:"",headers:n})];case 4:return 200!==(i=a.sent()).statusCode?[2,Promise.reject(new Error("Unexpected status code returned from negotiate "+i.statusCode))]:((!(s=JSON.parse(i.content)).negotiateVersion||s.negotiateVersion<1)&&(s.connectionToken=s.connectionId),[2,s]);case 5:return c=a.sent(),this.logger.log(ce.Error,"Failed to complete negotiation with the server: "+c),[2,Promise.reject(c)];case 6:return[2]}}))}))},e.prototype.createConnectUrl=function(e,t){return t?e+(-1===e.indexOf("?")?"?":"&")+"id="+t:e},e.prototype.createTransport=function(e,t,n,o){return nt(this,void 0,void 0,(function(){var r,i,s,c,a,l,u,h,p,f,g;return ot(this,(function(d){switch(d.label){case 0:return r=this.createConnectUrl(e,n.connectionToken),this.isITransport(t)?(this.logger.log(ce.Debug,"Connection was provided an instance of ITransport, using that directly."),this.transport=t,[4,this.startTransport(r,o)]):[3,2];case 1:return d.sent(),this.connectionId=n.connectionId,[2];case 2:i=[],s=n.availableTransports||[],c=n,a=0,l=s,d.label=3;case 3:return a<l.length?(u=l[a],(h=this.resolveTransportOrError(u,t,o))instanceof Error?(i.push(u.transport+" failed: "+h),[3,12]):[3,4]):[3,13];case 4:if(!this.isITransport(h))return[3,12];if(this.transport=h,c)return[3,9];d.label=5;case 5:return d.trys.push([5,7,,8]),[4,this.getNegotiationResponse(e)];case 6:return c=d.sent(),[3,8];case 7:return p=d.sent(),[2,Promise.reject(p)];case 8:r=this.createConnectUrl(e,c.connectionToken),d.label=9;case 9:return d.trys.push([9,11,,12]),[4,this.startTransport(r,o)];case 10:return d.sent(),this.connectionId=c.connectionId,[2];case 11:return f=d.sent(),this.logger.log(ce.Error,"Failed to start the transport '"+u.transport+"': "+f),c=void 0,i.push(u.transport+" failed: "+f),"Connecting "!==this.connectionState?(g="Failed to select transport before stop() was called.",this.logger.log(ce.Debug,g),[2,Promise.reject(new Error(g))]):[3,12];case 12:return a++,[3,3];case 13:return i.length>0?[2,Promise.reject(new Error("Unable to connect to the server with any of the available transports. "+i.join(" ")))]:[2,Promise.reject(new Error("None of the transports supported by the client are supported by the server."))]}}))}))},e.prototype.constructTransport=function(e){switch(e){case Ne.WebSockets:if(!this.options.WebSocket)throw new Error("'WebSocket' is not supported in your environment.");return new tt(this.httpClient,this.accessTokenFactory,this.logger,this.options.logMessageContent||!1,this.options.WebSocket);case Ne.ServerSentEvents:if(!this.options.EventSource)throw new Error("'EventSource' is not supported in your environment.");return new Ye(this.httpClient,this.accessTokenFactory,this.logger,this.options.logMessageContent||!1,this.options.EventSource);case Ne.LongPolling:return new Qe(this.httpClient,this.accessTokenFactory,this.logger,this.options.logMessageContent||!1);default:throw new Error("Unknown transport: "+e+".")}},e.prototype.startTransport=function(e,t){var n=this;return this.transport.onreceive=this.onreceive,this.transport.onclose=function(e){return n.stopConnection(e)},this.transport.connect(e,t)},e.prototype.resolveTransportOrError=function(e,t,n){var o=Ne[e.transport];if(null==o)return this.logger.log(ce.Debug,"Skipping transport '"+e.transport+"' because it is not supported by this client."),new Error("Skipping transport '"+e.transport+"' because it is not supported by this client.");if(!function(e,t){return!e||0!=(t&e)}(t,o))return this.logger.log(ce.Debug,"Skipping transport '"+Ne[o]+"' because it was disabled by the client."),new Error("'"+Ne[o]+"' is disabled by the client.");if(!(e.transferFormats.map((function(e){return Fe[e]})).indexOf(n)>=0))return this.logger.log(ce.Debug,"Skipping transport '"+Ne[o]+"' because it does not support the requested transfer format '"+Fe[n]+"'."),new Error("'"+Ne[o]+"' does not support "+Fe[n]+".");if(o===Ne.WebSockets&&!this.options.WebSocket||o===Ne.ServerSentEvents&&!this.options.EventSource)return this.logger.log(ce.Debug,"Skipping transport '"+Ne[o]+"' because it is not supported in your environment.'"),new Error("'"+Ne[o]+"' is not supported in your environment.");this.logger.log(ce.Debug,"Selecting transport '"+Ne[o]+"'.");try{return this.constructTransport(o)}catch(e){return e}},e.prototype.isITransport=function(e){return e&&"object"==typeof e&&"connect"in e},e.prototype.stopConnection=function(e){var t=this;if(this.logger.log(ce.Debug,"HttpConnection.stopConnection("+e+") called while in state "+this.connectionState+"."),this.transport=void 0,e=this.stopError||e,this.stopError=void 0,"Disconnected"!==this.connectionState)if("Connecting "!==this.connectionState){if("Disconnecting"===this.connectionState&&this.stopPromiseResolver(),e?this.logger.log(ce.Error,"Connection disconnected with error '"+e+"'."):this.logger.log(ce.Information,"Connection disconnected."),this.sendQueue&&(this.sendQueue.stop().catch((function(e){t.logger.log(ce.Error,"TransportSendQueue.stop() threw error '"+e+"'.")})),this.sendQueue=void 0),this.connectionId=void 0,this.connectionState="Disconnected",this.connectionStarted){this.connectionStarted=!1;try{this.onclose&&this.onclose(e)}catch(t){this.logger.log(ce.Error,"HttpConnection.onclose("+e+") threw error '"+t+"'.")}}}else this.logger.log(ce.Warning,"Call to HttpConnection.stopConnection("+e+") was ignored because the connection hasn't yet left the in the connecting state.");else this.logger.log(ce.Debug,"Call to HttpConnection.stopConnection("+e+") was ignored because the connection is already in the disconnected state.")},e.prototype.resolveUrl=function(e){if(0===e.lastIndexOf("https://",0)||0===e.lastIndexOf("http://",0))return e;if(!ve.isBrowser||!window.document)throw new Error("Cannot resolve '"+e+"'.");var t=window.document.createElement("a");return t.href=e,this.logger.log(ce.Information,"Normalizing '"+e+"' to '"+t.href+"'."),t.href},e.prototype.resolveNegotiateUrl=function(e){var t=e.indexOf("?"),n=e.substring(0,-1===t?e.length:t);return"/"!==n[n.length-1]&&(n+="/"),n+="negotiate",-1===(n+=-1===t?"":e.substring(t)).indexOf("negotiateVersion")&&(n+=-1===t?"?":"&",n+="negotiateVersion="+this.negotiateVersion),n},e}();var at=function(){function e(e){this.transport=e,this.buffer=[],this.executing=!0,this.sendBufferedData=new lt,this.transportResult=new lt,this.sendLoopPromise=this.sendLoop()}return e.prototype.send=function(e){return this.bufferData(e),this.transportResult||(this.transportResult=new lt),this.transportResult.promise},e.prototype.stop=function(){return this.executing=!1,this.sendBufferedData.resolve(),this.sendLoopPromise},e.prototype.bufferData=function(e){if(this.buffer.length&&typeof this.buffer[0]!=typeof e)throw new Error("Expected data to be of type "+typeof this.buffer+" but was of type "+typeof e);this.buffer.push(e),this.sendBufferedData.resolve()},e.prototype.sendLoop=function(){return nt(this,void 0,void 0,(function(){var t,n,o;return ot(this,(function(r){switch(r.label){case 0:return[4,this.sendBufferedData.promise];case 1:if(r.sent(),!this.executing)return this.transportResult&&this.transportResult.reject("Connection stopped."),[3,6];this.sendBufferedData=new lt,t=this.transportResult,this.transportResult=void 0,n="string"==typeof this.buffer[0]?this.buffer.join(""):e.concatBuffers(this.buffer),this.buffer.length=0,r.label=2;case 2:return r.trys.push([2,4,,5]),[4,this.transport.send(n)];case 3:return r.sent(),t.resolve(),[3,5];case 4:return o=r.sent(),t.reject(o),[3,5];case 5:return[3,0];case 6:return[2]}}))}))},e.concatBuffers=function(e){for(var t=e.map((function(e){return e.byteLength})).reduce((function(e,t){return e+t})),n=new Uint8Array(t),o=0,r=0,i=e;r<i.length;r++){var s=i[r];n.set(new Uint8Array(s),o),o+=s.byteLength}return n},e}(),lt=function(){function e(){var e=this;this.promise=new Promise((function(t,n){var o;return o=[t,n],e.resolver=o[0],e.rejecter=o[1],o}))}return e.prototype.resolve=function(){this.resolver()},e.prototype.reject=function(e){this.rejecter(e)},e}(),ut=function(){function e(){this.name="json",this.version=1,this.transferFormat=Fe.Text}return e.prototype.parseMessages=function(e,t){if("string"!=typeof e)throw new Error("Invalid input for JSON hub protocol. Expected a string.");if(!e)return[];null===t&&(t=de.instance);for(var n=[],o=0,r=$e.parse(e);o<r.length;o++){var i=r[o],s=JSON.parse(i);if("number"!=typeof s.type)throw new Error("Invalid payload.");switch(s.type){case _e.Invocation:this.isInvocationMessage(s);break;case _e.StreamItem:this.isStreamItemMessage(s);break;case _e.Completion:this.isCompletionMessage(s);break;case _e.Ping:case _e.Close:break;default:t.log(ce.Information,"Unknown message type '"+s.type+"' ignored.");continue}n.push(s)}return n},e.prototype.writeMessage=function(e){return $e.write(JSON.stringify(e))},e.prototype.isInvocationMessage=function(e){this.assertNotEmptyString(e.target,"Invalid payload for Invocation message."),void 0!==e.invocationId&&this.assertNotEmptyString(e.invocationId,"Invalid payload for Invocation message.")},e.prototype.isStreamItemMessage=function(e){if(this.assertNotEmptyString(e.invocationId,"Invalid payload for StreamItem message."),void 0===e.item)throw new Error("Invalid payload for StreamItem message.")},e.prototype.isCompletionMessage=function(e){if(e.result&&e.error)throw new Error("Invalid payload for Completion message.");!e.result&&e.error&&this.assertNotEmptyString(e.error,"Invalid payload for Completion message."),this.assertNotEmptyString(e.invocationId,"Invalid payload for Completion message.")},e.prototype.assertNotEmptyString=function(e,t){if("string"!=typeof e||""===e)throw new Error(t)},e}(),ht=Object.assign||function(e){for(var t,n=1,o=arguments.length;n<o;n++)for(var r in t=arguments[n])Object.prototype.hasOwnProperty.call(t,r)&&(e[r]=t[r]);return e},pt={trace:ce.Trace,debug:ce.Debug,info:ce.Information,information:ce.Information,warn:ce.Warning,warning:ce.Warning,error:ce.Error,critical:ce.Critical,none:ce.None};const ft=(new(function(){function e(){}return e.prototype.configureLogging=function(e){if(me.isRequired(e,"logging"),void 0!==e.log)this.logger=e;else if("string"==typeof e){var t=function(e){var t=pt[e.toLowerCase()];if(void 0!==t)return t;throw new Error("Unknown log level: "+e)}(e);this.logger=new Pe(t)}else this.logger=new Pe(e);return this},e.prototype.withUrl=function(e,t){return me.isRequired(e,"url"),this.url=e,this.httpConnectionOptions=ht({},this.httpConnectionOptions,"object"==typeof t?t:{transport:t}),this},e.prototype.withHubProtocol=function(e){return me.isRequired(e,"protocol"),this.protocol=e,this},e.prototype.withAutomaticReconnect=function(e){if(this.reconnectPolicy)throw new Error("A reconnectPolicy has already been set.");return e?Array.isArray(e)?this.reconnectPolicy=new Xe(e):this.reconnectPolicy=e:this.reconnectPolicy=new Xe,this},e.prototype.build=function(){var e=this.httpConnectionOptions||{};if(void 0===e.logger&&(e.logger=this.logger),!this.url)throw new Error("The 'HubConnectionBuilder.withUrl' method must be called before building the connection.");var t=new ct(this.url,e);return Ue.create(t,this.logger||de.instance,this.protocol||new ut,this.reconnectPolicy)},e}())).withUrl("/updates").configureLogging(ce.Information).withAutomaticReconnect().build(),gt=async()=>{try{await ft.start()}catch(e){console.error(e)}};function dt(t){let n;return{c(){n=y(t[5])},m(e,t){f(e,n,t)},p:e,d(e){e&&g(n)}}}function yt(t){let n;return{c(){n=d("i"),v(n,"class","fa fa-lock")},m(e,t){f(e,n,t)},p:e,d(e){e&&g(n)}}}function bt(t){let n;return{c(){n=d("i"),v(n,"class","fa fa-home")},m(e,t){f(e,n,t)},p:e,d(e){e&&g(n)}}}function mt(t){let n,o,i;function s(e,t){return e[2]?bt:e[0].locked?yt:dt}let c=s(t),a=c(t);return{c(){n=d("li"),a.c(),v(n,"class",t[1])},m(e,r){f(e,n,r),a.m(n,null),o||(i=[m(n,"mouseover",t[4]),m(n,"mouseout",t[7]),m(n,"click",t[8])],o=!0)},p(e,[t]){c===(c=s(e))&&a?a.p(e,t):(a.d(1),a=c(e),a&&(a.c(),a.m(n,null))),2&t&&v(n,"class",e[1])},i:e,o:e,d(e){e&&g(n),a.d(),o=!1,r(i)}}}function vt(e,t,n){let{plane:o}=t,{planeid:r}=t,{className:i="orbit-icon fa plane-"+r}=t,{center:s=!1}=t;const c=D();let a=o.locked?"L":o.name.substring(0,1).toUpperCase();return e.$set=e=>{"plane"in e&&n(0,o=e.plane),"planeid"in e&&n(6,r=e.planeid),"className"in e&&n(1,i=e.className),"center"in e&&n(2,s=e.center)},[o,i,s,c,()=>{c("message",{plane:o})},a,r,()=>c("message",{}),()=>c("click",{plane:o})]}ft.on("pong",e=>console.log("pong: "+e)),ft.on("ReceiveMessage",(e,t)=>console.log(`user: ${e} message: ${t}`)),ft.on("UpdatePlane",console.log);class wt extends oe{constructor(e){super(),ne(this,e,vt,mt,s,{plane:0,planeid:6,className:1,center:2})}}function St(e,t,n){const o=e.slice();return o[8]=t[n],o[10]=n,o}function kt(e,t,n){const o=e.slice();return o[5]=t[n],o[7]=n,o}function Ct(t,n){let o,r,i;return r=new wt({props:{plane:n[8],planeid:n[10]}}),r.$on("message",n[3]),r.$on("click",n[4]),{key:t,first:null,c(){o=y(""),Y(r.$$.fragment),this.first=o},m(e,t){f(e,o,t),Z(r,e,t),i=!0},p:e,i(e){i||(J(r.$$.fragment,e),i=!0)},o(e){G(r.$$.fragment,e),i=!1},d(e){e&&g(o),ee(r,e)}}}function Et(e){let t,n,o,r,i,s=[],c=new Map,a=e[5].planes;const l=e=>e[8].id;for(let t=0;t<a.length;t+=1){let n=St(e,a,t),o=l(n);c.set(o,s[t]=Ct(o,n))}return{c(){t=d("li"),n=d("ul");for(let e=0;e<s.length;e+=1)s[e].c();r=b(),v(n,"class",o="ring-"+e[7])},m(e,o){f(e,t,o),p(t,n);for(let e=0;e<s.length;e+=1)s[e].m(n,null);p(t,r),i=!0},p(e,t){if(2&t){const o=e[5].planes;X(),s=function(e,t,n,o,r,i,s,c,a,l,u,h){let p=e.length,f=i.length,g=p;const d={};for(;g--;)d[e[g].key]=g;const y=[],b=new Map,m=new Map;for(g=f;g--;){const e=h(r,i,g),c=n(e);let a=s.get(c);a?o&&a.p(e,t):(a=l(c,e),a.c()),b.set(c,y[g]=a),c in d&&m.set(c,Math.abs(g-d[c]))}const v=new Set,w=new Set;function S(e){J(e,1),e.m(c,u),s.set(e.key,e),u=e.first,f--}for(;p&&f;){const t=y[f-1],n=e[p-1],o=t.key,r=n.key;t===n?(u=t.first,p--,f--):b.has(r)?!s.has(o)||v.has(o)?S(t):w.has(r)?p--:m.get(o)>m.get(r)?(w.add(o),S(t)):(v.add(r),p--):(a(n,s),p--)}for(;p--;){const t=e[p];b.has(t.key)||a(t,s)}for(;f;)S(y[f-1]);return y}(s,t,l,1,e,o,c,n,K,Ct,null,St),z()}},i(e){if(!i){for(let e=0;e<a.length;e+=1)J(s[e]);i=!0}},o(e){for(let e=0;e<s.length;e+=1)G(s[e]);i=!1},d(e){e&&g(t);for(let e=0;e<s.length;e+=1)s[e].d()}}}function Pt(e){let t,n,o,r;n=new wt({props:{plane:e[0],className:"orbit-center",center:!0}});let i=e[1],s=[];for(let t=0;t<i.length;t+=1)s[t]=Et(kt(e,i,t));const c=e=>G(s[e],1,1,()=>{s[e]=null});return{c(){t=d("ul"),Y(n.$$.fragment),o=b();for(let e=0;e<s.length;e+=1)s[e].c();v(t,"class","orbit-wrap")},m(e,i){f(e,t,i),Z(n,t,null),p(t,o);for(let e=0;e<s.length;e+=1)s[e].m(t,null);r=!0},p(e,[n]){if(2&n){let o;for(i=e[1],o=0;o<i.length;o+=1){const r=kt(e,i,o);s[o]?(s[o].p(r,n),J(s[o],1)):(s[o]=Et(r),s[o].c(),J(s[o],1),s[o].m(t,null))}for(X(),o=i.length;o<s.length;o+=1)c(o);z()}},i(e){if(!r){J(n.$$.fragment,e);for(let e=0;e<i.length;e+=1)J(s[e]);r=!0}},o(e){G(n.$$.fragment,e),s=s.filter(Boolean);for(let e=0;e<s.length;e+=1)G(s[e]);r=!1},d(e){e&&g(t),ee(n),function(e,t){for(let n=0;n<e.length;n+=1)e[n]&&e[n].d(t)}(s,e)}}}function Tt(e,t,n){let{rings:o}=t;const[r,...i]=o;return e.$set=e=>{"rings"in e&&n(2,o=e.rings)},[r,i,o,function(t){_(e,t)},function(t){_(e,t)}]}class It extends oe{constructor(e){super(),ne(this,e,Tt,Pt,s,{rings:2})}}function Dt(e){let t,n,o,r,i,s,c,a,l;function u(e,t){return e[2].locked?Rt:xt}let h=u(e),y=h(e);return{c(){t=d("div"),n=d("div"),y.c(),o=b(),r=d("p"),i=d("button"),i.textContent="Close",v(n,"class","large-description svelte-2acrpo"),v(t,"class","large-description-container svelte-2acrpo")},m(s,u){f(s,t,u),p(t,n),y.m(n,null),p(n,o),p(n,r),p(r,i),c=!0,a||(l=m(i,"click",e[5]),a=!0)},p(e,t){h===(h=u(e))&&y?y.p(e,t):(y.d(1),y=h(e),y&&(y.c(),y.m(n,o)))},i(e){c||(H(()=>{s||(s=V(n,re,{},!0)),s.run(1)}),c=!0)},o(e){s||(s=V(n,re,{},!1)),s.run(0),c=!1},d(e){e&&g(t),y.d(),e&&s&&s.end(),a=!1,l()}}}function _t(e){let t,n,o,r,i;n=new It({props:{rings:ie}}),n.$on("message",e[3]),n.$on("click",e[4]);let s=e[0]&&jt(e);return{c(){t=d("span"),Y(n.$$.fragment),o=b(),s&&s.c()},m(e,r){f(e,t,r),Z(n,t,null),p(t,o),s&&s.m(t,null),i=!0},p(e,n){e[0]?s?(s.p(e,n),1&n&&J(s,1)):(s=jt(e),s.c(),J(s,1),s.m(t,null)):s&&(X(),G(s,1,1,()=>{s=null}),z())},i(e){i||(J(n.$$.fragment,e),J(s),H(()=>{r||(r=V(t,re,{},!0)),r.run(1)}),i=!0)},o(e){G(n.$$.fragment,e),G(s),r||(r=V(t,re,{},!1)),r.run(0),i=!1},d(e){e&&g(t),ee(n),s&&s.d(),e&&r&&r.end()}}}function xt(e){let t,n,o,r,i,s=e[2].name+"",c=e[2].description+"";return{c(){t=d("h2"),n=y(s),o=b(),r=d("p"),i=y(c)},m(e,s){f(e,t,s),p(t,n),f(e,o,s),f(e,r,s),p(r,i)},p(e,t){4&t&&s!==(s=e[2].name+"")&&w(n,s),4&t&&c!==(c=e[2].description+"")&&w(i,c)},d(e){e&&g(t),e&&g(o),e&&g(r)}}}function Rt(t){let n;return{c(){n=d("i"),v(n,"class","fa fa-lock")},m(e,t){f(e,n,t)},p:e,d(e){e&&g(n)}}}function jt(e){let t,n,o,r;return{c(){t=d("div"),n=y(e[0]),v(t,"id","description-container"),v(t,"class","svelte-2acrpo")},m(e,o){f(e,t,o),p(t,n),r=!0},p(e,t){(!r||1&t)&&w(n,e[0])},i(e){r||(H(()=>{o||(o=V(t,re,{},!0)),o.run(1)}),r=!0)},o(e){o||(o=V(t,re,{},!1)),o.run(0),r=!1},d(e){e&&g(t),e&&o&&o.end()}}}function Ot(e){let t,n,o,r;const i=[_t,Dt],s=[];function c(e,t){return"orbit"===e[1]?0:1}return n=c(e),o=s[n]=i[n](e),{c(){t=d("main"),o.c(),v(t,"class","orbit")},m(e,o){f(e,t,o),s[n].m(t,null),r=!0},p(e,[r]){let a=n;n=c(e),n===a?s[n].p(e,r):(X(),G(s[a],1,1,()=>{s[a]=null}),z(),o=s[n],o||(o=s[n]=i[n](e),o.c()),J(o,1),o.m(t,null))},i(e){r||(J(o),r=!0)},o(e){G(o),r=!1},d(e){e&&g(t),s[n].d()}}}function Mt(e,t,n){let o,r,i;gt();return n(0,o=""),n(1,r="orbit"),n(2,i={}),[o,r,i,e=>{e.detail.plane?e.detail.plane&&e.detail.plane.locked?n(0,o="Locked"):n(0,o=e.detail.plane.description):n(0,o="")},e=>{n(2,i=e.detail.plane),n(1,r="description")},()=>{n(1,r="orbit"),n(2,i={}),n(0,o="")}]}return new class extends oe{constructor(e){super(),ne(this,e,Mt,Ot,s,{})}}({target:document.body})}();
+
+(function(l, r) { if (l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (window.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(window.document);
+var chart = (function () {
+    'use strict';
+
+    function noop() { }
+    const identity = x => x;
+    function add_location(element, file, line, column, char) {
+        element.__svelte_meta = {
+            loc: { file, line, column, char }
+        };
+    }
+    function run(fn) {
+        return fn();
+    }
+    function blank_object() {
+        return Object.create(null);
+    }
+    function run_all(fns) {
+        fns.forEach(run);
+    }
+    function is_function(thing) {
+        return typeof thing === 'function';
+    }
+    function safe_not_equal(a, b) {
+        return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
+    }
+
+    const is_client = typeof window !== 'undefined';
+    let now = is_client
+        ? () => window.performance.now()
+        : () => Date.now();
+    let raf = is_client ? cb => requestAnimationFrame(cb) : noop;
+
+    const tasks = new Set();
+    function run_tasks(now) {
+        tasks.forEach(task => {
+            if (!task.c(now)) {
+                tasks.delete(task);
+                task.f();
+            }
+        });
+        if (tasks.size !== 0)
+            raf(run_tasks);
+    }
+    /**
+     * Creates a new task that runs on each raf frame
+     * until it returns a falsy value or is aborted
+     */
+    function loop(callback) {
+        let task;
+        if (tasks.size === 0)
+            raf(run_tasks);
+        return {
+            promise: new Promise(fulfill => {
+                tasks.add(task = { c: callback, f: fulfill });
+            }),
+            abort() {
+                tasks.delete(task);
+            }
+        };
+    }
+
+    function append(target, node) {
+        target.appendChild(node);
+    }
+    function insert(target, node, anchor) {
+        target.insertBefore(node, anchor || null);
+    }
+    function detach(node) {
+        node.parentNode.removeChild(node);
+    }
+    function destroy_each(iterations, detaching) {
+        for (let i = 0; i < iterations.length; i += 1) {
+            if (iterations[i])
+                iterations[i].d(detaching);
+        }
+    }
+    function element(name) {
+        return document.createElement(name);
+    }
+    function text(data) {
+        return document.createTextNode(data);
+    }
+    function space() {
+        return text(' ');
+    }
+    function empty() {
+        return text('');
+    }
+    function listen(node, event, handler, options) {
+        node.addEventListener(event, handler, options);
+        return () => node.removeEventListener(event, handler, options);
+    }
+    function attr(node, attribute, value) {
+        if (value == null)
+            node.removeAttribute(attribute);
+        else if (node.getAttribute(attribute) !== value)
+            node.setAttribute(attribute, value);
+    }
+    function children(element) {
+        return Array.from(element.childNodes);
+    }
+    function custom_event(type, detail) {
+        const e = document.createEvent('CustomEvent');
+        e.initCustomEvent(type, false, false, detail);
+        return e;
+    }
+
+    const active_docs = new Set();
+    let active = 0;
+    // https://github.com/darkskyapp/string-hash/blob/master/index.js
+    function hash(str) {
+        let hash = 5381;
+        let i = str.length;
+        while (i--)
+            hash = ((hash << 5) - hash) ^ str.charCodeAt(i);
+        return hash >>> 0;
+    }
+    function create_rule(node, a, b, duration, delay, ease, fn, uid = 0) {
+        const step = 16.666 / duration;
+        let keyframes = '{\n';
+        for (let p = 0; p <= 1; p += step) {
+            const t = a + (b - a) * ease(p);
+            keyframes += p * 100 + `%{${fn(t, 1 - t)}}\n`;
+        }
+        const rule = keyframes + `100% {${fn(b, 1 - b)}}\n}`;
+        const name = `__svelte_${hash(rule)}_${uid}`;
+        const doc = node.ownerDocument;
+        active_docs.add(doc);
+        const stylesheet = doc.__svelte_stylesheet || (doc.__svelte_stylesheet = doc.head.appendChild(element('style')).sheet);
+        const current_rules = doc.__svelte_rules || (doc.__svelte_rules = {});
+        if (!current_rules[name]) {
+            current_rules[name] = true;
+            stylesheet.insertRule(`@keyframes ${name} ${rule}`, stylesheet.cssRules.length);
+        }
+        const animation = node.style.animation || '';
+        node.style.animation = `${animation ? `${animation}, ` : ``}${name} ${duration}ms linear ${delay}ms 1 both`;
+        active += 1;
+        return name;
+    }
+    function delete_rule(node, name) {
+        const previous = (node.style.animation || '').split(', ');
+        const next = previous.filter(name
+            ? anim => anim.indexOf(name) < 0 // remove specific animation
+            : anim => anim.indexOf('__svelte') === -1 // remove all Svelte animations
+        );
+        const deleted = previous.length - next.length;
+        if (deleted) {
+            node.style.animation = next.join(', ');
+            active -= deleted;
+            if (!active)
+                clear_rules();
+        }
+    }
+    function clear_rules() {
+        raf(() => {
+            if (active)
+                return;
+            active_docs.forEach(doc => {
+                const stylesheet = doc.__svelte_stylesheet;
+                let i = stylesheet.cssRules.length;
+                while (i--)
+                    stylesheet.deleteRule(i);
+                doc.__svelte_rules = {};
+            });
+            active_docs.clear();
+        });
+    }
+
+    let current_component;
+    function set_current_component(component) {
+        current_component = component;
+    }
+    function get_current_component() {
+        if (!current_component)
+            throw new Error(`Function called outside component initialization`);
+        return current_component;
+    }
+    function createEventDispatcher() {
+        const component = get_current_component();
+        return (type, detail) => {
+            const callbacks = component.$$.callbacks[type];
+            if (callbacks) {
+                // TODO are there situations where events could be dispatched
+                // in a server (non-DOM) environment?
+                const event = custom_event(type, detail);
+                callbacks.slice().forEach(fn => {
+                    fn.call(component, event);
+                });
+            }
+        };
+    }
+    // TODO figure out if we still want to support
+    // shorthand events, or if we want to implement
+    // a real bubbling mechanism
+    function bubble(component, event) {
+        const callbacks = component.$$.callbacks[event.type];
+        if (callbacks) {
+            callbacks.slice().forEach(fn => fn(event));
+        }
+    }
+
+    const dirty_components = [];
+    const binding_callbacks = [];
+    const render_callbacks = [];
+    const flush_callbacks = [];
+    const resolved_promise = Promise.resolve();
+    let update_scheduled = false;
+    function schedule_update() {
+        if (!update_scheduled) {
+            update_scheduled = true;
+            resolved_promise.then(flush);
+        }
+    }
+    function add_render_callback(fn) {
+        render_callbacks.push(fn);
+    }
+    let flushing = false;
+    const seen_callbacks = new Set();
+    function flush() {
+        if (flushing)
+            return;
+        flushing = true;
+        do {
+            // first, call beforeUpdate functions
+            // and update components
+            for (let i = 0; i < dirty_components.length; i += 1) {
+                const component = dirty_components[i];
+                set_current_component(component);
+                update(component.$$);
+            }
+            dirty_components.length = 0;
+            while (binding_callbacks.length)
+                binding_callbacks.pop()();
+            // then, once components are updated, call
+            // afterUpdate functions. This may cause
+            // subsequent updates...
+            for (let i = 0; i < render_callbacks.length; i += 1) {
+                const callback = render_callbacks[i];
+                if (!seen_callbacks.has(callback)) {
+                    // ...so guard against infinite loops
+                    seen_callbacks.add(callback);
+                    callback();
+                }
+            }
+            render_callbacks.length = 0;
+        } while (dirty_components.length);
+        while (flush_callbacks.length) {
+            flush_callbacks.pop()();
+        }
+        update_scheduled = false;
+        flushing = false;
+        seen_callbacks.clear();
+    }
+    function update($$) {
+        if ($$.fragment !== null) {
+            $$.update();
+            run_all($$.before_update);
+            const dirty = $$.dirty;
+            $$.dirty = [-1];
+            $$.fragment && $$.fragment.p($$.ctx, dirty);
+            $$.after_update.forEach(add_render_callback);
+        }
+    }
+
+    let promise;
+    function wait() {
+        if (!promise) {
+            promise = Promise.resolve();
+            promise.then(() => {
+                promise = null;
+            });
+        }
+        return promise;
+    }
+    function dispatch(node, direction, kind) {
+        node.dispatchEvent(custom_event(`${direction ? 'intro' : 'outro'}${kind}`));
+    }
+    const outroing = new Set();
+    let outros;
+    function group_outros() {
+        outros = {
+            r: 0,
+            c: [],
+            p: outros // parent group
+        };
+    }
+    function check_outros() {
+        if (!outros.r) {
+            run_all(outros.c);
+        }
+        outros = outros.p;
+    }
+    function transition_in(block, local) {
+        if (block && block.i) {
+            outroing.delete(block);
+            block.i(local);
+        }
+    }
+    function transition_out(block, local, detach, callback) {
+        if (block && block.o) {
+            if (outroing.has(block))
+                return;
+            outroing.add(block);
+            outros.c.push(() => {
+                outroing.delete(block);
+                if (callback) {
+                    if (detach)
+                        block.d(1);
+                    callback();
+                }
+            });
+            block.o(local);
+        }
+    }
+    const null_transition = { duration: 0 };
+    function create_bidirectional_transition(node, fn, params, intro) {
+        let config = fn(node, params);
+        let t = intro ? 0 : 1;
+        let running_program = null;
+        let pending_program = null;
+        let animation_name = null;
+        function clear_animation() {
+            if (animation_name)
+                delete_rule(node, animation_name);
+        }
+        function init(program, duration) {
+            const d = program.b - t;
+            duration *= Math.abs(d);
+            return {
+                a: t,
+                b: program.b,
+                d,
+                duration,
+                start: program.start,
+                end: program.start + duration,
+                group: program.group
+            };
+        }
+        function go(b) {
+            const { delay = 0, duration = 300, easing = identity, tick = noop, css } = config || null_transition;
+            const program = {
+                start: now() + delay,
+                b
+            };
+            if (!b) {
+                // @ts-ignore todo: improve typings
+                program.group = outros;
+                outros.r += 1;
+            }
+            if (running_program) {
+                pending_program = program;
+            }
+            else {
+                // if this is an intro, and there's a delay, we need to do
+                // an initial tick and/or apply CSS animation immediately
+                if (css) {
+                    clear_animation();
+                    animation_name = create_rule(node, t, b, duration, delay, easing, css);
+                }
+                if (b)
+                    tick(0, 1);
+                running_program = init(program, duration);
+                add_render_callback(() => dispatch(node, b, 'start'));
+                loop(now => {
+                    if (pending_program && now > pending_program.start) {
+                        running_program = init(pending_program, duration);
+                        pending_program = null;
+                        dispatch(node, running_program.b, 'start');
+                        if (css) {
+                            clear_animation();
+                            animation_name = create_rule(node, t, running_program.b, running_program.duration, 0, easing, config.css);
+                        }
+                    }
+                    if (running_program) {
+                        if (now >= running_program.end) {
+                            tick(t = running_program.b, 1 - t);
+                            dispatch(node, running_program.b, 'end');
+                            if (!pending_program) {
+                                // we're done
+                                if (running_program.b) {
+                                    // intro — we can tidy up immediately
+                                    clear_animation();
+                                }
+                                else {
+                                    // outro — needs to be coordinated
+                                    if (!--running_program.group.r)
+                                        run_all(running_program.group.c);
+                                }
+                            }
+                            running_program = null;
+                        }
+                        else if (now >= running_program.start) {
+                            const p = now - running_program.start;
+                            t = running_program.a + running_program.d * easing(p / running_program.duration);
+                            tick(t, 1 - t);
+                        }
+                    }
+                    return !!(running_program || pending_program);
+                });
+            }
+        }
+        return {
+            run(b) {
+                if (is_function(config)) {
+                    wait().then(() => {
+                        // @ts-ignore
+                        config = config();
+                        go(b);
+                    });
+                }
+                else {
+                    go(b);
+                }
+            },
+            end() {
+                clear_animation();
+                running_program = pending_program = null;
+            }
+        };
+    }
+    function outro_and_destroy_block(block, lookup) {
+        transition_out(block, 1, 1, () => {
+            lookup.delete(block.key);
+        });
+    }
+    function update_keyed_each(old_blocks, dirty, get_key, dynamic, ctx, list, lookup, node, destroy, create_each_block, next, get_context) {
+        let o = old_blocks.length;
+        let n = list.length;
+        let i = o;
+        const old_indexes = {};
+        while (i--)
+            old_indexes[old_blocks[i].key] = i;
+        const new_blocks = [];
+        const new_lookup = new Map();
+        const deltas = new Map();
+        i = n;
+        while (i--) {
+            const child_ctx = get_context(ctx, list, i);
+            const key = get_key(child_ctx);
+            let block = lookup.get(key);
+            if (!block) {
+                block = create_each_block(key, child_ctx);
+                block.c();
+            }
+            else if (dynamic) {
+                block.p(child_ctx, dirty);
+            }
+            new_lookup.set(key, new_blocks[i] = block);
+            if (key in old_indexes)
+                deltas.set(key, Math.abs(i - old_indexes[key]));
+        }
+        const will_move = new Set();
+        const did_move = new Set();
+        function insert(block) {
+            transition_in(block, 1);
+            block.m(node, next);
+            lookup.set(block.key, block);
+            next = block.first;
+            n--;
+        }
+        while (o && n) {
+            const new_block = new_blocks[n - 1];
+            const old_block = old_blocks[o - 1];
+            const new_key = new_block.key;
+            const old_key = old_block.key;
+            if (new_block === old_block) {
+                // do nothing
+                next = new_block.first;
+                o--;
+                n--;
+            }
+            else if (!new_lookup.has(old_key)) {
+                // remove old block
+                destroy(old_block, lookup);
+                o--;
+            }
+            else if (!lookup.has(new_key) || will_move.has(new_key)) {
+                insert(new_block);
+            }
+            else if (did_move.has(old_key)) {
+                o--;
+            }
+            else if (deltas.get(new_key) > deltas.get(old_key)) {
+                did_move.add(new_key);
+                insert(new_block);
+            }
+            else {
+                will_move.add(old_key);
+                o--;
+            }
+        }
+        while (o--) {
+            const old_block = old_blocks[o];
+            if (!new_lookup.has(old_block.key))
+                destroy(old_block, lookup);
+        }
+        while (n)
+            insert(new_blocks[n - 1]);
+        return new_blocks;
+    }
+    function validate_each_keys(ctx, list, get_context, get_key) {
+        const keys = new Set();
+        for (let i = 0; i < list.length; i++) {
+            const key = get_key(get_context(ctx, list, i));
+            if (keys.has(key)) {
+                throw new Error(`Cannot have duplicate keys in a keyed each`);
+            }
+            keys.add(key);
+        }
+    }
+    function create_component(block) {
+        block && block.c();
+    }
+    function mount_component(component, target, anchor) {
+        const { fragment, on_mount, on_destroy, after_update } = component.$$;
+        fragment && fragment.m(target, anchor);
+        // onMount happens before the initial afterUpdate
+        add_render_callback(() => {
+            const new_on_destroy = on_mount.map(run).filter(is_function);
+            if (on_destroy) {
+                on_destroy.push(...new_on_destroy);
+            }
+            else {
+                // Edge case - component was destroyed immediately,
+                // most likely as a result of a binding initialising
+                run_all(new_on_destroy);
+            }
+            component.$$.on_mount = [];
+        });
+        after_update.forEach(add_render_callback);
+    }
+    function destroy_component(component, detaching) {
+        const $$ = component.$$;
+        if ($$.fragment !== null) {
+            run_all($$.on_destroy);
+            $$.fragment && $$.fragment.d(detaching);
+            // TODO null out other refs, including component.$$ (but need to
+            // preserve final state?)
+            $$.on_destroy = $$.fragment = null;
+            $$.ctx = [];
+        }
+    }
+    function make_dirty(component, i) {
+        if (component.$$.dirty[0] === -1) {
+            dirty_components.push(component);
+            schedule_update();
+            component.$$.dirty.fill(0);
+        }
+        component.$$.dirty[(i / 31) | 0] |= (1 << (i % 31));
+    }
+    function init(component, options, instance, create_fragment, not_equal, props, dirty = [-1]) {
+        const parent_component = current_component;
+        set_current_component(component);
+        const prop_values = options.props || {};
+        const $$ = component.$$ = {
+            fragment: null,
+            ctx: null,
+            // state
+            props,
+            update: noop,
+            not_equal,
+            bound: blank_object(),
+            // lifecycle
+            on_mount: [],
+            on_destroy: [],
+            before_update: [],
+            after_update: [],
+            context: new Map(parent_component ? parent_component.$$.context : []),
+            // everything else
+            callbacks: blank_object(),
+            dirty
+        };
+        let ready = false;
+        $$.ctx = instance
+            ? instance(component, prop_values, (i, ret, ...rest) => {
+                const value = rest.length ? rest[0] : ret;
+                if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
+                    if ($$.bound[i])
+                        $$.bound[i](value);
+                    if (ready)
+                        make_dirty(component, i);
+                }
+                return ret;
+            })
+            : [];
+        $$.update();
+        ready = true;
+        run_all($$.before_update);
+        // `false` as a special case of no DOM component
+        $$.fragment = create_fragment ? create_fragment($$.ctx) : false;
+        if (options.target) {
+            if (options.hydrate) {
+                const nodes = children(options.target);
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                $$.fragment && $$.fragment.l(nodes);
+                nodes.forEach(detach);
+            }
+            else {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                $$.fragment && $$.fragment.c();
+            }
+            if (options.intro)
+                transition_in(component.$$.fragment);
+            mount_component(component, options.target, options.anchor);
+            flush();
+        }
+        set_current_component(parent_component);
+    }
+    class SvelteComponent {
+        $destroy() {
+            destroy_component(this, 1);
+            this.$destroy = noop;
+        }
+        $on(type, callback) {
+            const callbacks = (this.$$.callbacks[type] || (this.$$.callbacks[type] = []));
+            callbacks.push(callback);
+            return () => {
+                const index = callbacks.indexOf(callback);
+                if (index !== -1)
+                    callbacks.splice(index, 1);
+            };
+        }
+        $set() {
+            // overridden by instance, if it has props
+        }
+    }
+
+    function dispatch_dev(type, detail) {
+        document.dispatchEvent(custom_event(type, Object.assign({ version: '3.24.0' }, detail)));
+    }
+    function append_dev(target, node) {
+        dispatch_dev("SvelteDOMInsert", { target, node });
+        append(target, node);
+    }
+    function insert_dev(target, node, anchor) {
+        dispatch_dev("SvelteDOMInsert", { target, node, anchor });
+        insert(target, node, anchor);
+    }
+    function detach_dev(node) {
+        dispatch_dev("SvelteDOMRemove", { node });
+        detach(node);
+    }
+    function listen_dev(node, event, handler, options, has_prevent_default, has_stop_propagation) {
+        const modifiers = options === true ? ["capture"] : options ? Array.from(Object.keys(options)) : [];
+        if (has_prevent_default)
+            modifiers.push('preventDefault');
+        if (has_stop_propagation)
+            modifiers.push('stopPropagation');
+        dispatch_dev("SvelteDOMAddEventListener", { node, event, handler, modifiers });
+        const dispose = listen(node, event, handler, options);
+        return () => {
+            dispatch_dev("SvelteDOMRemoveEventListener", { node, event, handler, modifiers });
+            dispose();
+        };
+    }
+    function attr_dev(node, attribute, value) {
+        attr(node, attribute, value);
+        if (value == null)
+            dispatch_dev("SvelteDOMRemoveAttribute", { node, attribute });
+        else
+            dispatch_dev("SvelteDOMSetAttribute", { node, attribute, value });
+    }
+    function set_data_dev(text, data) {
+        data = '' + data;
+        if (text.wholeText === data)
+            return;
+        dispatch_dev("SvelteDOMSetData", { node: text, data });
+        text.data = data;
+    }
+    function validate_each_argument(arg) {
+        if (typeof arg !== 'string' && !(arg && typeof arg === 'object' && 'length' in arg)) {
+            let msg = '{#each} only iterates over array-like objects.';
+            if (typeof Symbol === 'function' && arg && Symbol.iterator in arg) {
+                msg += ' You can use a spread to convert this iterable into an array.';
+            }
+            throw new Error(msg);
+        }
+    }
+    function validate_slots(name, slot, keys) {
+        for (const slot_key of Object.keys(slot)) {
+            if (!~keys.indexOf(slot_key)) {
+                console.warn(`<${name}> received an unexpected slot "${slot_key}".`);
+            }
+        }
+    }
+    class SvelteComponentDev extends SvelteComponent {
+        constructor(options) {
+            if (!options || (!options.target && !options.$$inline)) {
+                throw new Error(`'target' is a required option`);
+            }
+            super();
+        }
+        $destroy() {
+            super.$destroy();
+            this.$destroy = () => {
+                console.warn(`Component was already destroyed`); // eslint-disable-line no-console
+            };
+        }
+        $capture_state() { }
+        $inject_state() { }
+    }
+
+    function fade(node, { delay = 0, duration = 400, easing = identity }) {
+        const o = +getComputedStyle(node).opacity;
+        return {
+            delay,
+            duration,
+            easing,
+            css: t => `opacity: ${t * o}`
+        };
+    }
+
+    const rings = [
+        {
+            locked: false,
+            name: 'Prime material plane',
+            planes: []
+        },
+        {
+            locked: true,
+            name: 'The Far Reaches',
+            planes: [
+                {
+                    id: 1,
+                    name: 'just a fucking spaceship',
+                    locked: true,
+                    description: "it's a fucking space ship"
+                },
+                {
+                    id: 2,
+                    name: 'just a fucking spaceship',
+                    locked: true,
+                    description: "it's a fucking space ship"
+                },
+                {
+                    id: 3,
+                    name: 'just a fucking spaceship',
+                    locked: true,
+                    description: "it's a fucking space ship"
+                },
+            ]
+        },
+        {
+            locked: true,
+            name: 'Planar boundaries',
+            planes: [
+                {
+                    id: 4,
+                    name: 'Elemental Plane',
+                    locked: true,
+                    description: "the elemental plane"
+                },
+                {
+                    id: 5,
+                    name: 'Elemental Plane',
+                    locked: true,
+                    description: "the elemental plane"
+                },
+                {
+                    id: 6,
+                    name: 'Elemental Plane',
+                    locked: true,
+                    description: "the elemental plane"
+                },
+            ]
+        },
+        {
+            locked: true,
+            name: 'Prime echoes',
+            planes: [
+                {
+                    id: 7,
+                    name: 'Feywild',
+                    locked: false,
+                    description: "An echo of the Prime Material Plane, skewing toward the light. The Fey make their home here."
+                },
+                {
+                    id: 8,
+                    name: 'The Shadowfell',
+                    locked: false,
+                    description: "An echo of the Prime Material Plane, skewing toward the shadow. Shadows are not inherently evil, but evil finds a home in shadow."
+                },
+                {
+                    id: 9,
+                    name: "Louie's Domain",
+                    locked: false,
+                    description: "A domain which, curiously, contains only a single person."
+                }
+            ]
+        },
+        {
+            locked: false,
+            name: 'Ephemeral Planes',
+            planes: [
+                {
+                    id: 10,
+                    name: 'Sphinxlandia',
+                    locked: false,
+                    description: "A beautiful, empty sky, save for a platform with a pyramid. A lone figure sits at the entrance, too far for you to see clearly"
+                },
+                {
+                    id: 11,
+                    name: 'Ethereal plane',
+                    locked: false,
+                    description: "The Ethereal Plane, barely an echo of the Prime Material Plane. Mages hide here."
+                }
+            ]
+        },
+    ];
+
+    // Copyright (c) .NET Foundation. All rights reserved.
+    // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+    var __extends = (undefined && undefined.__extends) || (function () {
+        var extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return function (d, b) {
+            extendStatics(d, b);
+            function __() { this.constructor = d; }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
+    })();
+    /** Error thrown when an HTTP request fails. */
+    var HttpError = /** @class */ (function (_super) {
+        __extends(HttpError, _super);
+        /** Constructs a new instance of {@link @microsoft/signalr.HttpError}.
+         *
+         * @param {string} errorMessage A descriptive error message.
+         * @param {number} statusCode The HTTP status code represented by this error.
+         */
+        function HttpError(errorMessage, statusCode) {
+            var _newTarget = this.constructor;
+            var _this = this;
+            var trueProto = _newTarget.prototype;
+            _this = _super.call(this, errorMessage) || this;
+            _this.statusCode = statusCode;
+            // Workaround issue in Typescript compiler
+            // https://github.com/Microsoft/TypeScript/issues/13965#issuecomment-278570200
+            _this.__proto__ = trueProto;
+            return _this;
+        }
+        return HttpError;
+    }(Error));
+    /** Error thrown when a timeout elapses. */
+    var TimeoutError = /** @class */ (function (_super) {
+        __extends(TimeoutError, _super);
+        /** Constructs a new instance of {@link @microsoft/signalr.TimeoutError}.
+         *
+         * @param {string} errorMessage A descriptive error message.
+         */
+        function TimeoutError(errorMessage) {
+            var _newTarget = this.constructor;
+            if (errorMessage === void 0) { errorMessage = "A timeout occurred."; }
+            var _this = this;
+            var trueProto = _newTarget.prototype;
+            _this = _super.call(this, errorMessage) || this;
+            // Workaround issue in Typescript compiler
+            // https://github.com/Microsoft/TypeScript/issues/13965#issuecomment-278570200
+            _this.__proto__ = trueProto;
+            return _this;
+        }
+        return TimeoutError;
+    }(Error));
+    /** Error thrown when an action is aborted. */
+    var AbortError = /** @class */ (function (_super) {
+        __extends(AbortError, _super);
+        /** Constructs a new instance of {@link AbortError}.
+         *
+         * @param {string} errorMessage A descriptive error message.
+         */
+        function AbortError(errorMessage) {
+            var _newTarget = this.constructor;
+            if (errorMessage === void 0) { errorMessage = "An abort occurred."; }
+            var _this = this;
+            var trueProto = _newTarget.prototype;
+            _this = _super.call(this, errorMessage) || this;
+            // Workaround issue in Typescript compiler
+            // https://github.com/Microsoft/TypeScript/issues/13965#issuecomment-278570200
+            _this.__proto__ = trueProto;
+            return _this;
+        }
+        return AbortError;
+    }(Error));
+
+    // Copyright (c) .NET Foundation. All rights reserved.
+    // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+    var __assign = (undefined && undefined.__assign) || Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    /** Represents an HTTP response. */
+    var HttpResponse = /** @class */ (function () {
+        function HttpResponse(statusCode, statusText, content) {
+            this.statusCode = statusCode;
+            this.statusText = statusText;
+            this.content = content;
+        }
+        return HttpResponse;
+    }());
+    /** Abstraction over an HTTP client.
+     *
+     * This class provides an abstraction over an HTTP client so that a different implementation can be provided on different platforms.
+     */
+    var HttpClient = /** @class */ (function () {
+        function HttpClient() {
+        }
+        HttpClient.prototype.get = function (url, options) {
+            return this.send(__assign({}, options, { method: "GET", url: url }));
+        };
+        HttpClient.prototype.post = function (url, options) {
+            return this.send(__assign({}, options, { method: "POST", url: url }));
+        };
+        HttpClient.prototype.delete = function (url, options) {
+            return this.send(__assign({}, options, { method: "DELETE", url: url }));
+        };
+        /** Gets all cookies that apply to the specified URL.
+         *
+         * @param url The URL that the cookies are valid for.
+         * @returns {string} A string containing all the key-value cookie pairs for the specified URL.
+         */
+        // @ts-ignore
+        HttpClient.prototype.getCookieString = function (url) {
+            return "";
+        };
+        return HttpClient;
+    }());
+
+    // Copyright (c) .NET Foundation. All rights reserved.
+    // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+    // These values are designed to match the ASP.NET Log Levels since that's the pattern we're emulating here.
+    /** Indicates the severity of a log message.
+     *
+     * Log Levels are ordered in increasing severity. So `Debug` is more severe than `Trace`, etc.
+     */
+    var LogLevel;
+    (function (LogLevel) {
+        /** Log level for very low severity diagnostic messages. */
+        LogLevel[LogLevel["Trace"] = 0] = "Trace";
+        /** Log level for low severity diagnostic messages. */
+        LogLevel[LogLevel["Debug"] = 1] = "Debug";
+        /** Log level for informational diagnostic messages. */
+        LogLevel[LogLevel["Information"] = 2] = "Information";
+        /** Log level for diagnostic messages that indicate a non-fatal problem. */
+        LogLevel[LogLevel["Warning"] = 3] = "Warning";
+        /** Log level for diagnostic messages that indicate a failure in the current operation. */
+        LogLevel[LogLevel["Error"] = 4] = "Error";
+        /** Log level for diagnostic messages that indicate a failure that will terminate the entire application. */
+        LogLevel[LogLevel["Critical"] = 5] = "Critical";
+        /** The highest possible log level. Used when configuring logging to indicate that no log messages should be emitted. */
+        LogLevel[LogLevel["None"] = 6] = "None";
+    })(LogLevel || (LogLevel = {}));
+
+    // Copyright (c) .NET Foundation. All rights reserved.
+    // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+    /** A logger that does nothing when log messages are sent to it. */
+    var NullLogger = /** @class */ (function () {
+        function NullLogger() {
+        }
+        /** @inheritDoc */
+        // tslint:disable-next-line
+        NullLogger.prototype.log = function (_logLevel, _message) {
+        };
+        /** The singleton instance of the {@link @microsoft/signalr.NullLogger}. */
+        NullLogger.instance = new NullLogger();
+        return NullLogger;
+    }());
+
+    // Copyright (c) .NET Foundation. All rights reserved.
+    // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+    var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+            function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
+    var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
+        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+        function verb(n) { return function (v) { return step([n, v]); }; }
+        function step(op) {
+            if (f) throw new TypeError("Generator is already executing.");
+            while (_) try {
+                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+                if (y = 0, t) op = [op[0] & 2, t.value];
+                switch (op[0]) {
+                    case 0: case 1: t = op; break;
+                    case 4: _.label++; return { value: op[1], done: false };
+                    case 5: _.label++; y = op[1]; op = [0]; continue;
+                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                    default:
+                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                        if (t[2]) _.ops.pop();
+                        _.trys.pop(); continue;
+                }
+                op = body.call(thisArg, _);
+            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+        }
+    };
+    /** @private */
+    var Arg = /** @class */ (function () {
+        function Arg() {
+        }
+        Arg.isRequired = function (val, name) {
+            if (val === null || val === undefined) {
+                throw new Error("The '" + name + "' argument is required.");
+            }
+        };
+        Arg.isIn = function (val, values, name) {
+            // TypeScript enums have keys for **both** the name and the value of each enum member on the type itself.
+            if (!(val in values)) {
+                throw new Error("Unknown " + name + " value: " + val + ".");
+            }
+        };
+        return Arg;
+    }());
+    /** @private */
+    var Platform = /** @class */ (function () {
+        function Platform() {
+        }
+        Object.defineProperty(Platform, "isBrowser", {
+            get: function () {
+                return typeof window === "object";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Platform, "isWebWorker", {
+            get: function () {
+                return typeof self === "object" && "importScripts" in self;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Platform, "isNode", {
+            get: function () {
+                return !this.isBrowser && !this.isWebWorker;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        return Platform;
+    }());
+    /** @private */
+    function getDataDetail(data, includeContent) {
+        var detail = "";
+        if (isArrayBuffer(data)) {
+            detail = "Binary data of length " + data.byteLength;
+            if (includeContent) {
+                detail += ". Content: '" + formatArrayBuffer(data) + "'";
+            }
+        }
+        else if (typeof data === "string") {
+            detail = "String data of length " + data.length;
+            if (includeContent) {
+                detail += ". Content: '" + data + "'";
+            }
+        }
+        return detail;
+    }
+    /** @private */
+    function formatArrayBuffer(data) {
+        var view = new Uint8Array(data);
+        // Uint8Array.map only supports returning another Uint8Array?
+        var str = "";
+        view.forEach(function (num) {
+            var pad = num < 16 ? "0" : "";
+            str += "0x" + pad + num.toString(16) + " ";
+        });
+        // Trim of trailing space.
+        return str.substr(0, str.length - 1);
+    }
+    // Also in signalr-protocol-msgpack/Utils.ts
+    /** @private */
+    function isArrayBuffer(val) {
+        return val && typeof ArrayBuffer !== "undefined" &&
+            (val instanceof ArrayBuffer ||
+                // Sometimes we get an ArrayBuffer that doesn't satisfy instanceof
+                (val.constructor && val.constructor.name === "ArrayBuffer"));
+    }
+    /** @private */
+    function sendMessage(logger, transportName, httpClient, url, accessTokenFactory, content, logMessageContent) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, headers, token, responseType, response;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        if (!accessTokenFactory) return [3 /*break*/, 2];
+                        return [4 /*yield*/, accessTokenFactory()];
+                    case 1:
+                        token = _b.sent();
+                        if (token) {
+                            headers = (_a = {},
+                                _a["Authorization"] = "Bearer " + token,
+                                _a);
+                        }
+                        _b.label = 2;
+                    case 2:
+                        logger.log(LogLevel.Trace, "(" + transportName + " transport) sending data. " + getDataDetail(content, logMessageContent) + ".");
+                        responseType = isArrayBuffer(content) ? "arraybuffer" : "text";
+                        return [4 /*yield*/, httpClient.post(url, {
+                                content: content,
+                                headers: headers,
+                                responseType: responseType,
+                            })];
+                    case 3:
+                        response = _b.sent();
+                        logger.log(LogLevel.Trace, "(" + transportName + " transport) request complete. Response status: " + response.statusCode + ".");
+                        return [2 /*return*/];
+                }
+            });
+        });
+    }
+    /** @private */
+    function createLogger(logger) {
+        if (logger === undefined) {
+            return new ConsoleLogger(LogLevel.Information);
+        }
+        if (logger === null) {
+            return NullLogger.instance;
+        }
+        if (logger.log) {
+            return logger;
+        }
+        return new ConsoleLogger(logger);
+    }
+    /** @private */
+    var SubjectSubscription = /** @class */ (function () {
+        function SubjectSubscription(subject, observer) {
+            this.subject = subject;
+            this.observer = observer;
+        }
+        SubjectSubscription.prototype.dispose = function () {
+            var index = this.subject.observers.indexOf(this.observer);
+            if (index > -1) {
+                this.subject.observers.splice(index, 1);
+            }
+            if (this.subject.observers.length === 0 && this.subject.cancelCallback) {
+                this.subject.cancelCallback().catch(function (_) { });
+            }
+        };
+        return SubjectSubscription;
+    }());
+    /** @private */
+    var ConsoleLogger = /** @class */ (function () {
+        function ConsoleLogger(minimumLogLevel) {
+            this.minimumLogLevel = minimumLogLevel;
+            this.outputConsole = console;
+        }
+        ConsoleLogger.prototype.log = function (logLevel, message) {
+            if (logLevel >= this.minimumLogLevel) {
+                switch (logLevel) {
+                    case LogLevel.Critical:
+                    case LogLevel.Error:
+                        this.outputConsole.error("[" + new Date().toISOString() + "] " + LogLevel[logLevel] + ": " + message);
+                        break;
+                    case LogLevel.Warning:
+                        this.outputConsole.warn("[" + new Date().toISOString() + "] " + LogLevel[logLevel] + ": " + message);
+                        break;
+                    case LogLevel.Information:
+                        this.outputConsole.info("[" + new Date().toISOString() + "] " + LogLevel[logLevel] + ": " + message);
+                        break;
+                    default:
+                        // console.debug only goes to attached debuggers in Node, so we use console.log for Trace and Debug
+                        this.outputConsole.log("[" + new Date().toISOString() + "] " + LogLevel[logLevel] + ": " + message);
+                        break;
+                }
+            }
+        };
+        return ConsoleLogger;
+    }());
+
+    // Copyright (c) .NET Foundation. All rights reserved.
+    // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+    var __extends$1 = (undefined && undefined.__extends) || (function () {
+        var extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return function (d, b) {
+            extendStatics(d, b);
+            function __() { this.constructor = d; }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
+    })();
+    var __assign$1 = (undefined && undefined.__assign) || Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    var requestModule;
+    if (typeof XMLHttpRequest === "undefined") {
+        // In order to ignore the dynamic require in webpack builds we need to do this magic
+        // @ts-ignore: TS doesn't know about these names
+        var requireFunc = typeof __webpack_require__ === "function" ? __non_webpack_require__ : require;
+        requestModule = requireFunc("request");
+    }
+    /** @private */
+    var NodeHttpClient = /** @class */ (function (_super) {
+        __extends$1(NodeHttpClient, _super);
+        function NodeHttpClient(logger) {
+            var _this = _super.call(this) || this;
+            if (typeof requestModule === "undefined") {
+                throw new Error("The 'request' module could not be loaded.");
+            }
+            _this.logger = logger;
+            _this.cookieJar = requestModule.jar();
+            _this.request = requestModule.defaults({ jar: _this.cookieJar });
+            return _this;
+        }
+        NodeHttpClient.prototype.send = function (httpRequest) {
+            var _this = this;
+            // Check that abort was not signaled before calling send
+            if (httpRequest.abortSignal) {
+                if (httpRequest.abortSignal.aborted) {
+                    return Promise.reject(new AbortError());
+                }
+            }
+            return new Promise(function (resolve, reject) {
+                var requestBody;
+                if (isArrayBuffer(httpRequest.content)) {
+                    requestBody = Buffer.from(httpRequest.content);
+                }
+                else {
+                    requestBody = httpRequest.content || "";
+                }
+                var currentRequest = _this.request(httpRequest.url, {
+                    body: requestBody,
+                    // If binary is expected 'null' should be used, otherwise for text 'utf8'
+                    encoding: httpRequest.responseType === "arraybuffer" ? null : "utf8",
+                    headers: __assign$1({ 
+                        // Tell auth middleware to 401 instead of redirecting
+                        "X-Requested-With": "XMLHttpRequest" }, httpRequest.headers),
+                    method: httpRequest.method,
+                    timeout: httpRequest.timeout,
+                }, function (error, response, body) {
+                    if (httpRequest.abortSignal) {
+                        httpRequest.abortSignal.onabort = null;
+                    }
+                    if (error) {
+                        if (error.code === "ETIMEDOUT") {
+                            _this.logger.log(LogLevel.Warning, "Timeout from HTTP request.");
+                            reject(new TimeoutError());
+                        }
+                        _this.logger.log(LogLevel.Warning, "Error from HTTP request. " + error);
+                        reject(error);
+                        return;
+                    }
+                    if (response.statusCode >= 200 && response.statusCode < 300) {
+                        resolve(new HttpResponse(response.statusCode, response.statusMessage || "", body));
+                    }
+                    else {
+                        reject(new HttpError(response.statusMessage || "", response.statusCode || 0));
+                    }
+                });
+                if (httpRequest.abortSignal) {
+                    httpRequest.abortSignal.onabort = function () {
+                        currentRequest.abort();
+                        reject(new AbortError());
+                    };
+                }
+            });
+        };
+        NodeHttpClient.prototype.getCookieString = function (url) {
+            return this.cookieJar.getCookieString(url);
+        };
+        return NodeHttpClient;
+    }(HttpClient));
+
+    // Copyright (c) .NET Foundation. All rights reserved.
+    // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+    var __extends$2 = (undefined && undefined.__extends) || (function () {
+        var extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return function (d, b) {
+            extendStatics(d, b);
+            function __() { this.constructor = d; }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
+    })();
+    var XhrHttpClient = /** @class */ (function (_super) {
+        __extends$2(XhrHttpClient, _super);
+        function XhrHttpClient(logger) {
+            var _this = _super.call(this) || this;
+            _this.logger = logger;
+            return _this;
+        }
+        /** @inheritDoc */
+        XhrHttpClient.prototype.send = function (request) {
+            var _this = this;
+            // Check that abort was not signaled before calling send
+            if (request.abortSignal && request.abortSignal.aborted) {
+                return Promise.reject(new AbortError());
+            }
+            if (!request.method) {
+                return Promise.reject(new Error("No method defined."));
+            }
+            if (!request.url) {
+                return Promise.reject(new Error("No url defined."));
+            }
+            return new Promise(function (resolve, reject) {
+                var xhr = new XMLHttpRequest();
+                xhr.open(request.method, request.url, true);
+                xhr.withCredentials = true;
+                xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+                // Explicitly setting the Content-Type header for React Native on Android platform.
+                xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+                var headers = request.headers;
+                if (headers) {
+                    Object.keys(headers)
+                        .forEach(function (header) {
+                        xhr.setRequestHeader(header, headers[header]);
+                    });
+                }
+                if (request.responseType) {
+                    xhr.responseType = request.responseType;
+                }
+                if (request.abortSignal) {
+                    request.abortSignal.onabort = function () {
+                        xhr.abort();
+                        reject(new AbortError());
+                    };
+                }
+                if (request.timeout) {
+                    xhr.timeout = request.timeout;
+                }
+                xhr.onload = function () {
+                    if (request.abortSignal) {
+                        request.abortSignal.onabort = null;
+                    }
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        resolve(new HttpResponse(xhr.status, xhr.statusText, xhr.response || xhr.responseText));
+                    }
+                    else {
+                        reject(new HttpError(xhr.statusText, xhr.status));
+                    }
+                };
+                xhr.onerror = function () {
+                    _this.logger.log(LogLevel.Warning, "Error from HTTP request. " + xhr.status + ": " + xhr.statusText + ".");
+                    reject(new HttpError(xhr.statusText, xhr.status));
+                };
+                xhr.ontimeout = function () {
+                    _this.logger.log(LogLevel.Warning, "Timeout from HTTP request.");
+                    reject(new TimeoutError());
+                };
+                xhr.send(request.content || "");
+            });
+        };
+        return XhrHttpClient;
+    }(HttpClient));
+
+    // Copyright (c) .NET Foundation. All rights reserved.
+    // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+    var __extends$3 = (undefined && undefined.__extends) || (function () {
+        var extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return function (d, b) {
+            extendStatics(d, b);
+            function __() { this.constructor = d; }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
+    })();
+    /** Default implementation of {@link @microsoft/signalr.HttpClient}. */
+    var DefaultHttpClient = /** @class */ (function (_super) {
+        __extends$3(DefaultHttpClient, _super);
+        /** Creates a new instance of the {@link @microsoft/signalr.DefaultHttpClient}, using the provided {@link @microsoft/signalr.ILogger} to log messages. */
+        function DefaultHttpClient(logger) {
+            var _this = _super.call(this) || this;
+            if (typeof XMLHttpRequest !== "undefined") {
+                _this.httpClient = new XhrHttpClient(logger);
+            }
+            else {
+                _this.httpClient = new NodeHttpClient(logger);
+            }
+            return _this;
+        }
+        /** @inheritDoc */
+        DefaultHttpClient.prototype.send = function (request) {
+            // Check that abort was not signaled before calling send
+            if (request.abortSignal && request.abortSignal.aborted) {
+                return Promise.reject(new AbortError());
+            }
+            if (!request.method) {
+                return Promise.reject(new Error("No method defined."));
+            }
+            if (!request.url) {
+                return Promise.reject(new Error("No url defined."));
+            }
+            return this.httpClient.send(request);
+        };
+        DefaultHttpClient.prototype.getCookieString = function (url) {
+            return this.httpClient.getCookieString(url);
+        };
+        return DefaultHttpClient;
+    }(HttpClient));
+
+    // Copyright (c) .NET Foundation. All rights reserved.
+    // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+    // Not exported from index
+    /** @private */
+    var TextMessageFormat = /** @class */ (function () {
+        function TextMessageFormat() {
+        }
+        TextMessageFormat.write = function (output) {
+            return "" + output + TextMessageFormat.RecordSeparator;
+        };
+        TextMessageFormat.parse = function (input) {
+            if (input[input.length - 1] !== TextMessageFormat.RecordSeparator) {
+                throw new Error("Message is incomplete.");
+            }
+            var messages = input.split(TextMessageFormat.RecordSeparator);
+            messages.pop();
+            return messages;
+        };
+        TextMessageFormat.RecordSeparatorCode = 0x1e;
+        TextMessageFormat.RecordSeparator = String.fromCharCode(TextMessageFormat.RecordSeparatorCode);
+        return TextMessageFormat;
+    }());
+
+    // Copyright (c) .NET Foundation. All rights reserved.
+    /** @private */
+    var HandshakeProtocol = /** @class */ (function () {
+        function HandshakeProtocol() {
+        }
+        // Handshake request is always JSON
+        HandshakeProtocol.prototype.writeHandshakeRequest = function (handshakeRequest) {
+            return TextMessageFormat.write(JSON.stringify(handshakeRequest));
+        };
+        HandshakeProtocol.prototype.parseHandshakeResponse = function (data) {
+            var responseMessage;
+            var messageData;
+            var remainingData;
+            if (isArrayBuffer(data) || (typeof Buffer !== "undefined" && data instanceof Buffer)) {
+                // Format is binary but still need to read JSON text from handshake response
+                var binaryData = new Uint8Array(data);
+                var separatorIndex = binaryData.indexOf(TextMessageFormat.RecordSeparatorCode);
+                if (separatorIndex === -1) {
+                    throw new Error("Message is incomplete.");
+                }
+                // content before separator is handshake response
+                // optional content after is additional messages
+                var responseLength = separatorIndex + 1;
+                messageData = String.fromCharCode.apply(null, binaryData.slice(0, responseLength));
+                remainingData = (binaryData.byteLength > responseLength) ? binaryData.slice(responseLength).buffer : null;
+            }
+            else {
+                var textData = data;
+                var separatorIndex = textData.indexOf(TextMessageFormat.RecordSeparator);
+                if (separatorIndex === -1) {
+                    throw new Error("Message is incomplete.");
+                }
+                // content before separator is handshake response
+                // optional content after is additional messages
+                var responseLength = separatorIndex + 1;
+                messageData = textData.substring(0, responseLength);
+                remainingData = (textData.length > responseLength) ? textData.substring(responseLength) : null;
+            }
+            // At this point we should have just the single handshake message
+            var messages = TextMessageFormat.parse(messageData);
+            var response = JSON.parse(messages[0]);
+            if (response.type) {
+                throw new Error("Expected a handshake response from the server.");
+            }
+            responseMessage = response;
+            // multiple messages could have arrived with handshake
+            // return additional data to be parsed as usual, or null if all parsed
+            return [remainingData, responseMessage];
+        };
+        return HandshakeProtocol;
+    }());
+
+    // Copyright (c) .NET Foundation. All rights reserved.
+    // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+    /** Defines the type of a Hub Message. */
+    var MessageType;
+    (function (MessageType) {
+        /** Indicates the message is an Invocation message and implements the {@link @microsoft/signalr.InvocationMessage} interface. */
+        MessageType[MessageType["Invocation"] = 1] = "Invocation";
+        /** Indicates the message is a StreamItem message and implements the {@link @microsoft/signalr.StreamItemMessage} interface. */
+        MessageType[MessageType["StreamItem"] = 2] = "StreamItem";
+        /** Indicates the message is a Completion message and implements the {@link @microsoft/signalr.CompletionMessage} interface. */
+        MessageType[MessageType["Completion"] = 3] = "Completion";
+        /** Indicates the message is a Stream Invocation message and implements the {@link @microsoft/signalr.StreamInvocationMessage} interface. */
+        MessageType[MessageType["StreamInvocation"] = 4] = "StreamInvocation";
+        /** Indicates the message is a Cancel Invocation message and implements the {@link @microsoft/signalr.CancelInvocationMessage} interface. */
+        MessageType[MessageType["CancelInvocation"] = 5] = "CancelInvocation";
+        /** Indicates the message is a Ping message and implements the {@link @microsoft/signalr.PingMessage} interface. */
+        MessageType[MessageType["Ping"] = 6] = "Ping";
+        /** Indicates the message is a Close message and implements the {@link @microsoft/signalr.CloseMessage} interface. */
+        MessageType[MessageType["Close"] = 7] = "Close";
+    })(MessageType || (MessageType = {}));
+
+    // Copyright (c) .NET Foundation. All rights reserved.
+    /** Stream implementation to stream items to the server. */
+    var Subject = /** @class */ (function () {
+        function Subject() {
+            this.observers = [];
+        }
+        Subject.prototype.next = function (item) {
+            for (var _i = 0, _a = this.observers; _i < _a.length; _i++) {
+                var observer = _a[_i];
+                observer.next(item);
+            }
+        };
+        Subject.prototype.error = function (err) {
+            for (var _i = 0, _a = this.observers; _i < _a.length; _i++) {
+                var observer = _a[_i];
+                if (observer.error) {
+                    observer.error(err);
+                }
+            }
+        };
+        Subject.prototype.complete = function () {
+            for (var _i = 0, _a = this.observers; _i < _a.length; _i++) {
+                var observer = _a[_i];
+                if (observer.complete) {
+                    observer.complete();
+                }
+            }
+        };
+        Subject.prototype.subscribe = function (observer) {
+            this.observers.push(observer);
+            return new SubjectSubscription(this, observer);
+        };
+        return Subject;
+    }());
+
+    // Copyright (c) .NET Foundation. All rights reserved.
+    // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+    var __awaiter$1 = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+            function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
+    var __generator$1 = (undefined && undefined.__generator) || function (thisArg, body) {
+        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+        function verb(n) { return function (v) { return step([n, v]); }; }
+        function step(op) {
+            if (f) throw new TypeError("Generator is already executing.");
+            while (_) try {
+                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+                if (y = 0, t) op = [op[0] & 2, t.value];
+                switch (op[0]) {
+                    case 0: case 1: t = op; break;
+                    case 4: _.label++; return { value: op[1], done: false };
+                    case 5: _.label++; y = op[1]; op = [0]; continue;
+                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                    default:
+                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                        if (t[2]) _.ops.pop();
+                        _.trys.pop(); continue;
+                }
+                op = body.call(thisArg, _);
+            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+        }
+    };
+    var DEFAULT_TIMEOUT_IN_MS = 30 * 1000;
+    var DEFAULT_PING_INTERVAL_IN_MS = 15 * 1000;
+    /** Describes the current state of the {@link HubConnection} to the server. */
+    var HubConnectionState;
+    (function (HubConnectionState) {
+        /** The hub connection is disconnected. */
+        HubConnectionState["Disconnected"] = "Disconnected";
+        /** The hub connection is connecting. */
+        HubConnectionState["Connecting"] = "Connecting";
+        /** The hub connection is connected. */
+        HubConnectionState["Connected"] = "Connected";
+        /** The hub connection is disconnecting. */
+        HubConnectionState["Disconnecting"] = "Disconnecting";
+        /** The hub connection is reconnecting. */
+        HubConnectionState["Reconnecting"] = "Reconnecting";
+    })(HubConnectionState || (HubConnectionState = {}));
+    /** Represents a connection to a SignalR Hub. */
+    var HubConnection = /** @class */ (function () {
+        function HubConnection(connection, logger, protocol, reconnectPolicy) {
+            var _this = this;
+            Arg.isRequired(connection, "connection");
+            Arg.isRequired(logger, "logger");
+            Arg.isRequired(protocol, "protocol");
+            this.serverTimeoutInMilliseconds = DEFAULT_TIMEOUT_IN_MS;
+            this.keepAliveIntervalInMilliseconds = DEFAULT_PING_INTERVAL_IN_MS;
+            this.logger = logger;
+            this.protocol = protocol;
+            this.connection = connection;
+            this.reconnectPolicy = reconnectPolicy;
+            this.handshakeProtocol = new HandshakeProtocol();
+            this.connection.onreceive = function (data) { return _this.processIncomingData(data); };
+            this.connection.onclose = function (error) { return _this.connectionClosed(error); };
+            this.callbacks = {};
+            this.methods = {};
+            this.closedCallbacks = [];
+            this.reconnectingCallbacks = [];
+            this.reconnectedCallbacks = [];
+            this.invocationId = 0;
+            this.receivedHandshakeResponse = false;
+            this.connectionState = HubConnectionState.Disconnected;
+            this.connectionStarted = false;
+            this.cachedPingMessage = this.protocol.writeMessage({ type: MessageType.Ping });
+        }
+        /** @internal */
+        // Using a public static factory method means we can have a private constructor and an _internal_
+        // create method that can be used by HubConnectionBuilder. An "internal" constructor would just
+        // be stripped away and the '.d.ts' file would have no constructor, which is interpreted as a
+        // public parameter-less constructor.
+        HubConnection.create = function (connection, logger, protocol, reconnectPolicy) {
+            return new HubConnection(connection, logger, protocol, reconnectPolicy);
+        };
+        Object.defineProperty(HubConnection.prototype, "state", {
+            /** Indicates the state of the {@link HubConnection} to the server. */
+            get: function () {
+                return this.connectionState;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(HubConnection.prototype, "connectionId", {
+            /** Represents the connection id of the {@link HubConnection} on the server. The connection id will be null when the connection is either
+             *  in the disconnected state or if the negotiation step was skipped.
+             */
+            get: function () {
+                return this.connection ? (this.connection.connectionId || null) : null;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(HubConnection.prototype, "baseUrl", {
+            /** Indicates the url of the {@link HubConnection} to the server. */
+            get: function () {
+                return this.connection.baseUrl || "";
+            },
+            /**
+             * Sets a new url for the HubConnection. Note that the url can only be changed when the connection is in either the Disconnected or
+             * Reconnecting states.
+             * @param {string} url The url to connect to.
+             */
+            set: function (url) {
+                if (this.connectionState !== HubConnectionState.Disconnected && this.connectionState !== HubConnectionState.Reconnecting) {
+                    throw new Error("The HubConnection must be in the Disconnected or Reconnecting state to change the url.");
+                }
+                if (!url) {
+                    throw new Error("The HubConnection url must be a valid url.");
+                }
+                this.connection.baseUrl = url;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /** Starts the connection.
+         *
+         * @returns {Promise<void>} A Promise that resolves when the connection has been successfully established, or rejects with an error.
+         */
+        HubConnection.prototype.start = function () {
+            this.startPromise = this.startWithStateTransitions();
+            return this.startPromise;
+        };
+        HubConnection.prototype.startWithStateTransitions = function () {
+            return __awaiter$1(this, void 0, void 0, function () {
+                var e_1;
+                return __generator$1(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            if (this.connectionState !== HubConnectionState.Disconnected) {
+                                return [2 /*return*/, Promise.reject(new Error("Cannot start a HubConnection that is not in the 'Disconnected' state."))];
+                            }
+                            this.connectionState = HubConnectionState.Connecting;
+                            this.logger.log(LogLevel.Debug, "Starting HubConnection.");
+                            _a.label = 1;
+                        case 1:
+                            _a.trys.push([1, 3, , 4]);
+                            return [4 /*yield*/, this.startInternal()];
+                        case 2:
+                            _a.sent();
+                            this.connectionState = HubConnectionState.Connected;
+                            this.connectionStarted = true;
+                            this.logger.log(LogLevel.Debug, "HubConnection connected successfully.");
+                            return [3 /*break*/, 4];
+                        case 3:
+                            e_1 = _a.sent();
+                            this.connectionState = HubConnectionState.Disconnected;
+                            this.logger.log(LogLevel.Debug, "HubConnection failed to start successfully because of error '" + e_1 + "'.");
+                            return [2 /*return*/, Promise.reject(e_1)];
+                        case 4: return [2 /*return*/];
+                    }
+                });
+            });
+        };
+        HubConnection.prototype.startInternal = function () {
+            return __awaiter$1(this, void 0, void 0, function () {
+                var handshakePromise, handshakeRequest, e_2;
+                var _this = this;
+                return __generator$1(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            this.stopDuringStartError = undefined;
+                            this.receivedHandshakeResponse = false;
+                            handshakePromise = new Promise(function (resolve, reject) {
+                                _this.handshakeResolver = resolve;
+                                _this.handshakeRejecter = reject;
+                            });
+                            return [4 /*yield*/, this.connection.start(this.protocol.transferFormat)];
+                        case 1:
+                            _a.sent();
+                            _a.label = 2;
+                        case 2:
+                            _a.trys.push([2, 5, , 7]);
+                            handshakeRequest = {
+                                protocol: this.protocol.name,
+                                version: this.protocol.version,
+                            };
+                            this.logger.log(LogLevel.Debug, "Sending handshake request.");
+                            return [4 /*yield*/, this.sendMessage(this.handshakeProtocol.writeHandshakeRequest(handshakeRequest))];
+                        case 3:
+                            _a.sent();
+                            this.logger.log(LogLevel.Information, "Using HubProtocol '" + this.protocol.name + "'.");
+                            // defensively cleanup timeout in case we receive a message from the server before we finish start
+                            this.cleanupTimeout();
+                            this.resetTimeoutPeriod();
+                            this.resetKeepAliveInterval();
+                            return [4 /*yield*/, handshakePromise];
+                        case 4:
+                            _a.sent();
+                            // It's important to check the stopDuringStartError instead of just relying on the handshakePromise
+                            // being rejected on close, because this continuation can run after both the handshake completed successfully
+                            // and the connection was closed.
+                            if (this.stopDuringStartError) {
+                                // It's important to throw instead of returning a rejected promise, because we don't want to allow any state
+                                // transitions to occur between now and the calling code observing the exceptions. Returning a rejected promise
+                                // will cause the calling continuation to get scheduled to run later.
+                                throw this.stopDuringStartError;
+                            }
+                            return [3 /*break*/, 7];
+                        case 5:
+                            e_2 = _a.sent();
+                            this.logger.log(LogLevel.Debug, "Hub handshake failed with error '" + e_2 + "' during start(). Stopping HubConnection.");
+                            this.cleanupTimeout();
+                            this.cleanupPingTimer();
+                            // HttpConnection.stop() should not complete until after the onclose callback is invoked.
+                            // This will transition the HubConnection to the disconnected state before HttpConnection.stop() completes.
+                            return [4 /*yield*/, this.connection.stop(e_2)];
+                        case 6:
+                            // HttpConnection.stop() should not complete until after the onclose callback is invoked.
+                            // This will transition the HubConnection to the disconnected state before HttpConnection.stop() completes.
+                            _a.sent();
+                            throw e_2;
+                        case 7: return [2 /*return*/];
+                    }
+                });
+            });
+        };
+        /** Stops the connection.
+         *
+         * @returns {Promise<void>} A Promise that resolves when the connection has been successfully terminated, or rejects with an error.
+         */
+        HubConnection.prototype.stop = function () {
+            return __awaiter$1(this, void 0, void 0, function () {
+                var startPromise, e_3;
+                return __generator$1(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            startPromise = this.startPromise;
+                            this.stopPromise = this.stopInternal();
+                            return [4 /*yield*/, this.stopPromise];
+                        case 1:
+                            _a.sent();
+                            _a.label = 2;
+                        case 2:
+                            _a.trys.push([2, 4, , 5]);
+                            // Awaiting undefined continues immediately
+                            return [4 /*yield*/, startPromise];
+                        case 3:
+                            // Awaiting undefined continues immediately
+                            _a.sent();
+                            return [3 /*break*/, 5];
+                        case 4:
+                            e_3 = _a.sent();
+                            return [3 /*break*/, 5];
+                        case 5: return [2 /*return*/];
+                    }
+                });
+            });
+        };
+        HubConnection.prototype.stopInternal = function (error) {
+            if (this.connectionState === HubConnectionState.Disconnected) {
+                this.logger.log(LogLevel.Debug, "Call to HubConnection.stop(" + error + ") ignored because it is already in the disconnected state.");
+                return Promise.resolve();
+            }
+            if (this.connectionState === HubConnectionState.Disconnecting) {
+                this.logger.log(LogLevel.Debug, "Call to HttpConnection.stop(" + error + ") ignored because the connection is already in the disconnecting state.");
+                return this.stopPromise;
+            }
+            this.connectionState = HubConnectionState.Disconnecting;
+            this.logger.log(LogLevel.Debug, "Stopping HubConnection.");
+            if (this.reconnectDelayHandle) {
+                // We're in a reconnect delay which means the underlying connection is currently already stopped.
+                // Just clear the handle to stop the reconnect loop (which no one is waiting on thankfully) and
+                // fire the onclose callbacks.
+                this.logger.log(LogLevel.Debug, "Connection stopped during reconnect delay. Done reconnecting.");
+                clearTimeout(this.reconnectDelayHandle);
+                this.reconnectDelayHandle = undefined;
+                this.completeClose();
+                return Promise.resolve();
+            }
+            this.cleanupTimeout();
+            this.cleanupPingTimer();
+            this.stopDuringStartError = error || new Error("The connection was stopped before the hub handshake could complete.");
+            // HttpConnection.stop() should not complete until after either HttpConnection.start() fails
+            // or the onclose callback is invoked. The onclose callback will transition the HubConnection
+            // to the disconnected state if need be before HttpConnection.stop() completes.
+            return this.connection.stop(error);
+        };
+        /** Invokes a streaming hub method on the server using the specified name and arguments.
+         *
+         * @typeparam T The type of the items returned by the server.
+         * @param {string} methodName The name of the server method to invoke.
+         * @param {any[]} args The arguments used to invoke the server method.
+         * @returns {IStreamResult<T>} An object that yields results from the server as they are received.
+         */
+        HubConnection.prototype.stream = function (methodName) {
+            var _this = this;
+            var args = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args[_i - 1] = arguments[_i];
+            }
+            var _a = this.replaceStreamingParams(args), streams = _a[0], streamIds = _a[1];
+            var invocationDescriptor = this.createStreamInvocation(methodName, args, streamIds);
+            var promiseQueue;
+            var subject = new Subject();
+            subject.cancelCallback = function () {
+                var cancelInvocation = _this.createCancelInvocation(invocationDescriptor.invocationId);
+                delete _this.callbacks[invocationDescriptor.invocationId];
+                return promiseQueue.then(function () {
+                    return _this.sendWithProtocol(cancelInvocation);
+                });
+            };
+            this.callbacks[invocationDescriptor.invocationId] = function (invocationEvent, error) {
+                if (error) {
+                    subject.error(error);
+                    return;
+                }
+                else if (invocationEvent) {
+                    // invocationEvent will not be null when an error is not passed to the callback
+                    if (invocationEvent.type === MessageType.Completion) {
+                        if (invocationEvent.error) {
+                            subject.error(new Error(invocationEvent.error));
+                        }
+                        else {
+                            subject.complete();
+                        }
+                    }
+                    else {
+                        subject.next((invocationEvent.item));
+                    }
+                }
+            };
+            promiseQueue = this.sendWithProtocol(invocationDescriptor)
+                .catch(function (e) {
+                subject.error(e);
+                delete _this.callbacks[invocationDescriptor.invocationId];
+            });
+            this.launchStreams(streams, promiseQueue);
+            return subject;
+        };
+        HubConnection.prototype.sendMessage = function (message) {
+            this.resetKeepAliveInterval();
+            return this.connection.send(message);
+        };
+        /**
+         * Sends a js object to the server.
+         * @param message The js object to serialize and send.
+         */
+        HubConnection.prototype.sendWithProtocol = function (message) {
+            return this.sendMessage(this.protocol.writeMessage(message));
+        };
+        /** Invokes a hub method on the server using the specified name and arguments. Does not wait for a response from the receiver.
+         *
+         * The Promise returned by this method resolves when the client has sent the invocation to the server. The server may still
+         * be processing the invocation.
+         *
+         * @param {string} methodName The name of the server method to invoke.
+         * @param {any[]} args The arguments used to invoke the server method.
+         * @returns {Promise<void>} A Promise that resolves when the invocation has been successfully sent, or rejects with an error.
+         */
+        HubConnection.prototype.send = function (methodName) {
+            var args = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args[_i - 1] = arguments[_i];
+            }
+            var _a = this.replaceStreamingParams(args), streams = _a[0], streamIds = _a[1];
+            var sendPromise = this.sendWithProtocol(this.createInvocation(methodName, args, true, streamIds));
+            this.launchStreams(streams, sendPromise);
+            return sendPromise;
+        };
+        /** Invokes a hub method on the server using the specified name and arguments.
+         *
+         * The Promise returned by this method resolves when the server indicates it has finished invoking the method. When the promise
+         * resolves, the server has finished invoking the method. If the server method returns a result, it is produced as the result of
+         * resolving the Promise.
+         *
+         * @typeparam T The expected return type.
+         * @param {string} methodName The name of the server method to invoke.
+         * @param {any[]} args The arguments used to invoke the server method.
+         * @returns {Promise<T>} A Promise that resolves with the result of the server method (if any), or rejects with an error.
+         */
+        HubConnection.prototype.invoke = function (methodName) {
+            var _this = this;
+            var args = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args[_i - 1] = arguments[_i];
+            }
+            var _a = this.replaceStreamingParams(args), streams = _a[0], streamIds = _a[1];
+            var invocationDescriptor = this.createInvocation(methodName, args, false, streamIds);
+            var p = new Promise(function (resolve, reject) {
+                // invocationId will always have a value for a non-blocking invocation
+                _this.callbacks[invocationDescriptor.invocationId] = function (invocationEvent, error) {
+                    if (error) {
+                        reject(error);
+                        return;
+                    }
+                    else if (invocationEvent) {
+                        // invocationEvent will not be null when an error is not passed to the callback
+                        if (invocationEvent.type === MessageType.Completion) {
+                            if (invocationEvent.error) {
+                                reject(new Error(invocationEvent.error));
+                            }
+                            else {
+                                resolve(invocationEvent.result);
+                            }
+                        }
+                        else {
+                            reject(new Error("Unexpected message type: " + invocationEvent.type));
+                        }
+                    }
+                };
+                var promiseQueue = _this.sendWithProtocol(invocationDescriptor)
+                    .catch(function (e) {
+                    reject(e);
+                    // invocationId will always have a value for a non-blocking invocation
+                    delete _this.callbacks[invocationDescriptor.invocationId];
+                });
+                _this.launchStreams(streams, promiseQueue);
+            });
+            return p;
+        };
+        /** Registers a handler that will be invoked when the hub method with the specified method name is invoked.
+         *
+         * @param {string} methodName The name of the hub method to define.
+         * @param {Function} newMethod The handler that will be raised when the hub method is invoked.
+         */
+        HubConnection.prototype.on = function (methodName, newMethod) {
+            if (!methodName || !newMethod) {
+                return;
+            }
+            methodName = methodName.toLowerCase();
+            if (!this.methods[methodName]) {
+                this.methods[methodName] = [];
+            }
+            // Preventing adding the same handler multiple times.
+            if (this.methods[methodName].indexOf(newMethod) !== -1) {
+                return;
+            }
+            this.methods[methodName].push(newMethod);
+        };
+        HubConnection.prototype.off = function (methodName, method) {
+            if (!methodName) {
+                return;
+            }
+            methodName = methodName.toLowerCase();
+            var handlers = this.methods[methodName];
+            if (!handlers) {
+                return;
+            }
+            if (method) {
+                var removeIdx = handlers.indexOf(method);
+                if (removeIdx !== -1) {
+                    handlers.splice(removeIdx, 1);
+                    if (handlers.length === 0) {
+                        delete this.methods[methodName];
+                    }
+                }
+            }
+            else {
+                delete this.methods[methodName];
+            }
+        };
+        /** Registers a handler that will be invoked when the connection is closed.
+         *
+         * @param {Function} callback The handler that will be invoked when the connection is closed. Optionally receives a single argument containing the error that caused the connection to close (if any).
+         */
+        HubConnection.prototype.onclose = function (callback) {
+            if (callback) {
+                this.closedCallbacks.push(callback);
+            }
+        };
+        /** Registers a handler that will be invoked when the connection starts reconnecting.
+         *
+         * @param {Function} callback The handler that will be invoked when the connection starts reconnecting. Optionally receives a single argument containing the error that caused the connection to start reconnecting (if any).
+         */
+        HubConnection.prototype.onreconnecting = function (callback) {
+            if (callback) {
+                this.reconnectingCallbacks.push(callback);
+            }
+        };
+        /** Registers a handler that will be invoked when the connection successfully reconnects.
+         *
+         * @param {Function} callback The handler that will be invoked when the connection successfully reconnects.
+         */
+        HubConnection.prototype.onreconnected = function (callback) {
+            if (callback) {
+                this.reconnectedCallbacks.push(callback);
+            }
+        };
+        HubConnection.prototype.processIncomingData = function (data) {
+            this.cleanupTimeout();
+            if (!this.receivedHandshakeResponse) {
+                data = this.processHandshakeResponse(data);
+                this.receivedHandshakeResponse = true;
+            }
+            // Data may have all been read when processing handshake response
+            if (data) {
+                // Parse the messages
+                var messages = this.protocol.parseMessages(data, this.logger);
+                for (var _i = 0, messages_1 = messages; _i < messages_1.length; _i++) {
+                    var message = messages_1[_i];
+                    switch (message.type) {
+                        case MessageType.Invocation:
+                            this.invokeClientMethod(message);
+                            break;
+                        case MessageType.StreamItem:
+                        case MessageType.Completion:
+                            var callback = this.callbacks[message.invocationId];
+                            if (callback) {
+                                if (message.type === MessageType.Completion) {
+                                    delete this.callbacks[message.invocationId];
+                                }
+                                callback(message);
+                            }
+                            break;
+                        case MessageType.Ping:
+                            // Don't care about pings
+                            break;
+                        case MessageType.Close:
+                            this.logger.log(LogLevel.Information, "Close message received from server.");
+                            var error = message.error ? new Error("Server returned an error on close: " + message.error) : undefined;
+                            if (message.allowReconnect === true) {
+                                // It feels wrong not to await connection.stop() here, but processIncomingData is called as part of an onreceive callback which is not async,
+                                // this is already the behavior for serverTimeout(), and HttpConnection.Stop() should catch and log all possible exceptions.
+                                // tslint:disable-next-line:no-floating-promises
+                                this.connection.stop(error);
+                            }
+                            else {
+                                // We cannot await stopInternal() here, but subsequent calls to stop() will await this if stopInternal() is still ongoing.
+                                this.stopPromise = this.stopInternal(error);
+                            }
+                            break;
+                        default:
+                            this.logger.log(LogLevel.Warning, "Invalid message type: " + message.type + ".");
+                            break;
+                    }
+                }
+            }
+            this.resetTimeoutPeriod();
+        };
+        HubConnection.prototype.processHandshakeResponse = function (data) {
+            var _a;
+            var responseMessage;
+            var remainingData;
+            try {
+                _a = this.handshakeProtocol.parseHandshakeResponse(data), remainingData = _a[0], responseMessage = _a[1];
+            }
+            catch (e) {
+                var message = "Error parsing handshake response: " + e;
+                this.logger.log(LogLevel.Error, message);
+                var error = new Error(message);
+                this.handshakeRejecter(error);
+                throw error;
+            }
+            if (responseMessage.error) {
+                var message = "Server returned handshake error: " + responseMessage.error;
+                this.logger.log(LogLevel.Error, message);
+                var error = new Error(message);
+                this.handshakeRejecter(error);
+                throw error;
+            }
+            else {
+                this.logger.log(LogLevel.Debug, "Server handshake complete.");
+            }
+            this.handshakeResolver();
+            return remainingData;
+        };
+        HubConnection.prototype.resetKeepAliveInterval = function () {
+            var _this = this;
+            this.cleanupPingTimer();
+            this.pingServerHandle = setTimeout(function () { return __awaiter$1(_this, void 0, void 0, function () {
+                var _a;
+                return __generator$1(this, function (_b) {
+                    switch (_b.label) {
+                        case 0:
+                            if (!(this.connectionState === HubConnectionState.Connected)) return [3 /*break*/, 4];
+                            _b.label = 1;
+                        case 1:
+                            _b.trys.push([1, 3, , 4]);
+                            return [4 /*yield*/, this.sendMessage(this.cachedPingMessage)];
+                        case 2:
+                            _b.sent();
+                            return [3 /*break*/, 4];
+                        case 3:
+                            _a = _b.sent();
+                            // We don't care about the error. It should be seen elsewhere in the client.
+                            // The connection is probably in a bad or closed state now, cleanup the timer so it stops triggering
+                            this.cleanupPingTimer();
+                            return [3 /*break*/, 4];
+                        case 4: return [2 /*return*/];
+                    }
+                });
+            }); }, this.keepAliveIntervalInMilliseconds);
+        };
+        HubConnection.prototype.resetTimeoutPeriod = function () {
+            var _this = this;
+            if (!this.connection.features || !this.connection.features.inherentKeepAlive) {
+                // Set the timeout timer
+                this.timeoutHandle = setTimeout(function () { return _this.serverTimeout(); }, this.serverTimeoutInMilliseconds);
+            }
+        };
+        HubConnection.prototype.serverTimeout = function () {
+            // The server hasn't talked to us in a while. It doesn't like us anymore ... :(
+            // Terminate the connection, but we don't need to wait on the promise. This could trigger reconnecting.
+            // tslint:disable-next-line:no-floating-promises
+            this.connection.stop(new Error("Server timeout elapsed without receiving a message from the server."));
+        };
+        HubConnection.prototype.invokeClientMethod = function (invocationMessage) {
+            var _this = this;
+            var methods = this.methods[invocationMessage.target.toLowerCase()];
+            if (methods) {
+                try {
+                    methods.forEach(function (m) { return m.apply(_this, invocationMessage.arguments); });
+                }
+                catch (e) {
+                    this.logger.log(LogLevel.Error, "A callback for the method " + invocationMessage.target.toLowerCase() + " threw error '" + e + "'.");
+                }
+                if (invocationMessage.invocationId) {
+                    // This is not supported in v1. So we return an error to avoid blocking the server waiting for the response.
+                    var message = "Server requested a response, which is not supported in this version of the client.";
+                    this.logger.log(LogLevel.Error, message);
+                    // We don't want to wait on the stop itself.
+                    this.stopPromise = this.stopInternal(new Error(message));
+                }
+            }
+            else {
+                this.logger.log(LogLevel.Warning, "No client method with the name '" + invocationMessage.target + "' found.");
+            }
+        };
+        HubConnection.prototype.connectionClosed = function (error) {
+            this.logger.log(LogLevel.Debug, "HubConnection.connectionClosed(" + error + ") called while in state " + this.connectionState + ".");
+            // Triggering this.handshakeRejecter is insufficient because it could already be resolved without the continuation having run yet.
+            this.stopDuringStartError = this.stopDuringStartError || error || new Error("The underlying connection was closed before the hub handshake could complete.");
+            // If the handshake is in progress, start will be waiting for the handshake promise, so we complete it.
+            // If it has already completed, this should just noop.
+            if (this.handshakeResolver) {
+                this.handshakeResolver();
+            }
+            this.cancelCallbacksWithError(error || new Error("Invocation canceled due to the underlying connection being closed."));
+            this.cleanupTimeout();
+            this.cleanupPingTimer();
+            if (this.connectionState === HubConnectionState.Disconnecting) {
+                this.completeClose(error);
+            }
+            else if (this.connectionState === HubConnectionState.Connected && this.reconnectPolicy) {
+                // tslint:disable-next-line:no-floating-promises
+                this.reconnect(error);
+            }
+            else if (this.connectionState === HubConnectionState.Connected) {
+                this.completeClose(error);
+            }
+            // If none of the above if conditions were true were called the HubConnection must be in either:
+            // 1. The Connecting state in which case the handshakeResolver will complete it and stopDuringStartError will fail it.
+            // 2. The Reconnecting state in which case the handshakeResolver will complete it and stopDuringStartError will fail the current reconnect attempt
+            //    and potentially continue the reconnect() loop.
+            // 3. The Disconnected state in which case we're already done.
+        };
+        HubConnection.prototype.completeClose = function (error) {
+            var _this = this;
+            if (this.connectionStarted) {
+                this.connectionState = HubConnectionState.Disconnected;
+                this.connectionStarted = false;
+                try {
+                    this.closedCallbacks.forEach(function (c) { return c.apply(_this, [error]); });
+                }
+                catch (e) {
+                    this.logger.log(LogLevel.Error, "An onclose callback called with error '" + error + "' threw error '" + e + "'.");
+                }
+            }
+        };
+        HubConnection.prototype.reconnect = function (error) {
+            return __awaiter$1(this, void 0, void 0, function () {
+                var reconnectStartTime, previousReconnectAttempts, retryError, nextRetryDelay, e_4;
+                var _this = this;
+                return __generator$1(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            reconnectStartTime = Date.now();
+                            previousReconnectAttempts = 0;
+                            retryError = error !== undefined ? error : new Error("Attempting to reconnect due to a unknown error.");
+                            nextRetryDelay = this.getNextRetryDelay(previousReconnectAttempts++, 0, retryError);
+                            if (nextRetryDelay === null) {
+                                this.logger.log(LogLevel.Debug, "Connection not reconnecting because the IRetryPolicy returned null on the first reconnect attempt.");
+                                this.completeClose(error);
+                                return [2 /*return*/];
+                            }
+                            this.connectionState = HubConnectionState.Reconnecting;
+                            if (error) {
+                                this.logger.log(LogLevel.Information, "Connection reconnecting because of error '" + error + "'.");
+                            }
+                            else {
+                                this.logger.log(LogLevel.Information, "Connection reconnecting.");
+                            }
+                            if (this.onreconnecting) {
+                                try {
+                                    this.reconnectingCallbacks.forEach(function (c) { return c.apply(_this, [error]); });
+                                }
+                                catch (e) {
+                                    this.logger.log(LogLevel.Error, "An onreconnecting callback called with error '" + error + "' threw error '" + e + "'.");
+                                }
+                                // Exit early if an onreconnecting callback called connection.stop().
+                                if (this.connectionState !== HubConnectionState.Reconnecting) {
+                                    this.logger.log(LogLevel.Debug, "Connection left the reconnecting state in onreconnecting callback. Done reconnecting.");
+                                    return [2 /*return*/];
+                                }
+                            }
+                            _a.label = 1;
+                        case 1:
+                            if (!(nextRetryDelay !== null)) return [3 /*break*/, 7];
+                            this.logger.log(LogLevel.Information, "Reconnect attempt number " + previousReconnectAttempts + " will start in " + nextRetryDelay + " ms.");
+                            return [4 /*yield*/, new Promise(function (resolve) {
+                                    _this.reconnectDelayHandle = setTimeout(resolve, nextRetryDelay);
+                                })];
+                        case 2:
+                            _a.sent();
+                            this.reconnectDelayHandle = undefined;
+                            if (this.connectionState !== HubConnectionState.Reconnecting) {
+                                this.logger.log(LogLevel.Debug, "Connection left the reconnecting state during reconnect delay. Done reconnecting.");
+                                return [2 /*return*/];
+                            }
+                            _a.label = 3;
+                        case 3:
+                            _a.trys.push([3, 5, , 6]);
+                            return [4 /*yield*/, this.startInternal()];
+                        case 4:
+                            _a.sent();
+                            this.connectionState = HubConnectionState.Connected;
+                            this.logger.log(LogLevel.Information, "HubConnection reconnected successfully.");
+                            if (this.onreconnected) {
+                                try {
+                                    this.reconnectedCallbacks.forEach(function (c) { return c.apply(_this, [_this.connection.connectionId]); });
+                                }
+                                catch (e) {
+                                    this.logger.log(LogLevel.Error, "An onreconnected callback called with connectionId '" + this.connection.connectionId + "; threw error '" + e + "'.");
+                                }
+                            }
+                            return [2 /*return*/];
+                        case 5:
+                            e_4 = _a.sent();
+                            this.logger.log(LogLevel.Information, "Reconnect attempt failed because of error '" + e_4 + "'.");
+                            if (this.connectionState !== HubConnectionState.Reconnecting) {
+                                this.logger.log(LogLevel.Debug, "Connection left the reconnecting state during reconnect attempt. Done reconnecting.");
+                                return [2 /*return*/];
+                            }
+                            retryError = e_4 instanceof Error ? e_4 : new Error(e_4.toString());
+                            nextRetryDelay = this.getNextRetryDelay(previousReconnectAttempts++, Date.now() - reconnectStartTime, retryError);
+                            return [3 /*break*/, 6];
+                        case 6: return [3 /*break*/, 1];
+                        case 7:
+                            this.logger.log(LogLevel.Information, "Reconnect retries have been exhausted after " + (Date.now() - reconnectStartTime) + " ms and " + previousReconnectAttempts + " failed attempts. Connection disconnecting.");
+                            this.completeClose();
+                            return [2 /*return*/];
+                    }
+                });
+            });
+        };
+        HubConnection.prototype.getNextRetryDelay = function (previousRetryCount, elapsedMilliseconds, retryReason) {
+            try {
+                return this.reconnectPolicy.nextRetryDelayInMilliseconds({
+                    elapsedMilliseconds: elapsedMilliseconds,
+                    previousRetryCount: previousRetryCount,
+                    retryReason: retryReason,
+                });
+            }
+            catch (e) {
+                this.logger.log(LogLevel.Error, "IRetryPolicy.nextRetryDelayInMilliseconds(" + previousRetryCount + ", " + elapsedMilliseconds + ") threw error '" + e + "'.");
+                return null;
+            }
+        };
+        HubConnection.prototype.cancelCallbacksWithError = function (error) {
+            var callbacks = this.callbacks;
+            this.callbacks = {};
+            Object.keys(callbacks)
+                .forEach(function (key) {
+                var callback = callbacks[key];
+                callback(null, error);
+            });
+        };
+        HubConnection.prototype.cleanupPingTimer = function () {
+            if (this.pingServerHandle) {
+                clearTimeout(this.pingServerHandle);
+            }
+        };
+        HubConnection.prototype.cleanupTimeout = function () {
+            if (this.timeoutHandle) {
+                clearTimeout(this.timeoutHandle);
+            }
+        };
+        HubConnection.prototype.createInvocation = function (methodName, args, nonblocking, streamIds) {
+            if (nonblocking) {
+                return {
+                    arguments: args,
+                    streamIds: streamIds,
+                    target: methodName,
+                    type: MessageType.Invocation,
+                };
+            }
+            else {
+                var invocationId = this.invocationId;
+                this.invocationId++;
+                return {
+                    arguments: args,
+                    invocationId: invocationId.toString(),
+                    streamIds: streamIds,
+                    target: methodName,
+                    type: MessageType.Invocation,
+                };
+            }
+        };
+        HubConnection.prototype.launchStreams = function (streams, promiseQueue) {
+            var _this = this;
+            if (streams.length === 0) {
+                return;
+            }
+            // Synchronize stream data so they arrive in-order on the server
+            if (!promiseQueue) {
+                promiseQueue = Promise.resolve();
+            }
+            var _loop_1 = function (streamId) {
+                streams[streamId].subscribe({
+                    complete: function () {
+                        promiseQueue = promiseQueue.then(function () { return _this.sendWithProtocol(_this.createCompletionMessage(streamId)); });
+                    },
+                    error: function (err) {
+                        var message;
+                        if (err instanceof Error) {
+                            message = err.message;
+                        }
+                        else if (err && err.toString) {
+                            message = err.toString();
+                        }
+                        else {
+                            message = "Unknown error";
+                        }
+                        promiseQueue = promiseQueue.then(function () { return _this.sendWithProtocol(_this.createCompletionMessage(streamId, message)); });
+                    },
+                    next: function (item) {
+                        promiseQueue = promiseQueue.then(function () { return _this.sendWithProtocol(_this.createStreamItemMessage(streamId, item)); });
+                    },
+                });
+            };
+            // We want to iterate over the keys, since the keys are the stream ids
+            // tslint:disable-next-line:forin
+            for (var streamId in streams) {
+                _loop_1(streamId);
+            }
+        };
+        HubConnection.prototype.replaceStreamingParams = function (args) {
+            var streams = [];
+            var streamIds = [];
+            for (var i = 0; i < args.length; i++) {
+                var argument = args[i];
+                if (this.isObservable(argument)) {
+                    var streamId = this.invocationId;
+                    this.invocationId++;
+                    // Store the stream for later use
+                    streams[streamId] = argument;
+                    streamIds.push(streamId.toString());
+                    // remove stream from args
+                    args.splice(i, 1);
+                }
+            }
+            return [streams, streamIds];
+        };
+        HubConnection.prototype.isObservable = function (arg) {
+            // This allows other stream implementations to just work (like rxjs)
+            return arg && arg.subscribe && typeof arg.subscribe === "function";
+        };
+        HubConnection.prototype.createStreamInvocation = function (methodName, args, streamIds) {
+            var invocationId = this.invocationId;
+            this.invocationId++;
+            return {
+                arguments: args,
+                invocationId: invocationId.toString(),
+                streamIds: streamIds,
+                target: methodName,
+                type: MessageType.StreamInvocation,
+            };
+        };
+        HubConnection.prototype.createCancelInvocation = function (id) {
+            return {
+                invocationId: id,
+                type: MessageType.CancelInvocation,
+            };
+        };
+        HubConnection.prototype.createStreamItemMessage = function (id, item) {
+            return {
+                invocationId: id,
+                item: item,
+                type: MessageType.StreamItem,
+            };
+        };
+        HubConnection.prototype.createCompletionMessage = function (id, error, result) {
+            if (error) {
+                return {
+                    error: error,
+                    invocationId: id,
+                    type: MessageType.Completion,
+                };
+            }
+            return {
+                invocationId: id,
+                result: result,
+                type: MessageType.Completion,
+            };
+        };
+        return HubConnection;
+    }());
+
+    // Copyright (c) .NET Foundation. All rights reserved.
+    // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+    // 0, 2, 10, 30 second delays before reconnect attempts.
+    var DEFAULT_RETRY_DELAYS_IN_MILLISECONDS = [0, 2000, 10000, 30000, null];
+    /** @private */
+    var DefaultReconnectPolicy = /** @class */ (function () {
+        function DefaultReconnectPolicy(retryDelays) {
+            this.retryDelays = retryDelays !== undefined ? retryDelays.concat([null]) : DEFAULT_RETRY_DELAYS_IN_MILLISECONDS;
+        }
+        DefaultReconnectPolicy.prototype.nextRetryDelayInMilliseconds = function (retryContext) {
+            return this.retryDelays[retryContext.previousRetryCount];
+        };
+        return DefaultReconnectPolicy;
+    }());
+
+    // Copyright (c) .NET Foundation. All rights reserved.
+    // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+    // This will be treated as a bit flag in the future, so we keep it using power-of-two values.
+    /** Specifies a specific HTTP transport type. */
+    var HttpTransportType;
+    (function (HttpTransportType) {
+        /** Specifies no transport preference. */
+        HttpTransportType[HttpTransportType["None"] = 0] = "None";
+        /** Specifies the WebSockets transport. */
+        HttpTransportType[HttpTransportType["WebSockets"] = 1] = "WebSockets";
+        /** Specifies the Server-Sent Events transport. */
+        HttpTransportType[HttpTransportType["ServerSentEvents"] = 2] = "ServerSentEvents";
+        /** Specifies the Long Polling transport. */
+        HttpTransportType[HttpTransportType["LongPolling"] = 4] = "LongPolling";
+    })(HttpTransportType || (HttpTransportType = {}));
+    /** Specifies the transfer format for a connection. */
+    var TransferFormat;
+    (function (TransferFormat) {
+        /** Specifies that only text data will be transmitted over the connection. */
+        TransferFormat[TransferFormat["Text"] = 1] = "Text";
+        /** Specifies that binary data will be transmitted over the connection. */
+        TransferFormat[TransferFormat["Binary"] = 2] = "Binary";
+    })(TransferFormat || (TransferFormat = {}));
+
+    // Copyright (c) .NET Foundation. All rights reserved.
+    // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+    // Rough polyfill of https://developer.mozilla.org/en-US/docs/Web/API/AbortController
+    // We don't actually ever use the API being polyfilled, we always use the polyfill because
+    // it's a very new API right now.
+    // Not exported from index.
+    /** @private */
+    var AbortController = /** @class */ (function () {
+        function AbortController() {
+            this.isAborted = false;
+            this.onabort = null;
+        }
+        AbortController.prototype.abort = function () {
+            if (!this.isAborted) {
+                this.isAborted = true;
+                if (this.onabort) {
+                    this.onabort();
+                }
+            }
+        };
+        Object.defineProperty(AbortController.prototype, "signal", {
+            get: function () {
+                return this;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(AbortController.prototype, "aborted", {
+            get: function () {
+                return this.isAborted;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        return AbortController;
+    }());
+
+    // Copyright (c) .NET Foundation. All rights reserved.
+    // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+    var __awaiter$2 = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+            function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
+    var __generator$2 = (undefined && undefined.__generator) || function (thisArg, body) {
+        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+        function verb(n) { return function (v) { return step([n, v]); }; }
+        function step(op) {
+            if (f) throw new TypeError("Generator is already executing.");
+            while (_) try {
+                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+                if (y = 0, t) op = [op[0] & 2, t.value];
+                switch (op[0]) {
+                    case 0: case 1: t = op; break;
+                    case 4: _.label++; return { value: op[1], done: false };
+                    case 5: _.label++; y = op[1]; op = [0]; continue;
+                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                    default:
+                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                        if (t[2]) _.ops.pop();
+                        _.trys.pop(); continue;
+                }
+                op = body.call(thisArg, _);
+            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+        }
+    };
+    // Not exported from 'index', this type is internal.
+    /** @private */
+    var LongPollingTransport = /** @class */ (function () {
+        function LongPollingTransport(httpClient, accessTokenFactory, logger, logMessageContent) {
+            this.httpClient = httpClient;
+            this.accessTokenFactory = accessTokenFactory;
+            this.logger = logger;
+            this.pollAbort = new AbortController();
+            this.logMessageContent = logMessageContent;
+            this.running = false;
+            this.onreceive = null;
+            this.onclose = null;
+        }
+        Object.defineProperty(LongPollingTransport.prototype, "pollAborted", {
+            // This is an internal type, not exported from 'index' so this is really just internal.
+            get: function () {
+                return this.pollAbort.aborted;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        LongPollingTransport.prototype.connect = function (url, transferFormat) {
+            return __awaiter$2(this, void 0, void 0, function () {
+                var pollOptions, token, pollUrl, response;
+                return __generator$2(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            Arg.isRequired(url, "url");
+                            Arg.isRequired(transferFormat, "transferFormat");
+                            Arg.isIn(transferFormat, TransferFormat, "transferFormat");
+                            this.url = url;
+                            this.logger.log(LogLevel.Trace, "(LongPolling transport) Connecting.");
+                            // Allow binary format on Node and Browsers that support binary content (indicated by the presence of responseType property)
+                            if (transferFormat === TransferFormat.Binary &&
+                                (typeof XMLHttpRequest !== "undefined" && typeof new XMLHttpRequest().responseType !== "string")) {
+                                throw new Error("Binary protocols over XmlHttpRequest not implementing advanced features are not supported.");
+                            }
+                            pollOptions = {
+                                abortSignal: this.pollAbort.signal,
+                                headers: {},
+                                timeout: 100000,
+                            };
+                            if (transferFormat === TransferFormat.Binary) {
+                                pollOptions.responseType = "arraybuffer";
+                            }
+                            return [4 /*yield*/, this.getAccessToken()];
+                        case 1:
+                            token = _a.sent();
+                            this.updateHeaderToken(pollOptions, token);
+                            pollUrl = url + "&_=" + Date.now();
+                            this.logger.log(LogLevel.Trace, "(LongPolling transport) polling: " + pollUrl + ".");
+                            return [4 /*yield*/, this.httpClient.get(pollUrl, pollOptions)];
+                        case 2:
+                            response = _a.sent();
+                            if (response.statusCode !== 200) {
+                                this.logger.log(LogLevel.Error, "(LongPolling transport) Unexpected response code: " + response.statusCode + ".");
+                                // Mark running as false so that the poll immediately ends and runs the close logic
+                                this.closeError = new HttpError(response.statusText || "", response.statusCode);
+                                this.running = false;
+                            }
+                            else {
+                                this.running = true;
+                            }
+                            this.receiving = this.poll(this.url, pollOptions);
+                            return [2 /*return*/];
+                    }
+                });
+            });
+        };
+        LongPollingTransport.prototype.getAccessToken = function () {
+            return __awaiter$2(this, void 0, void 0, function () {
+                return __generator$2(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            if (!this.accessTokenFactory) return [3 /*break*/, 2];
+                            return [4 /*yield*/, this.accessTokenFactory()];
+                        case 1: return [2 /*return*/, _a.sent()];
+                        case 2: return [2 /*return*/, null];
+                    }
+                });
+            });
+        };
+        LongPollingTransport.prototype.updateHeaderToken = function (request, token) {
+            if (!request.headers) {
+                request.headers = {};
+            }
+            if (token) {
+                // tslint:disable-next-line:no-string-literal
+                request.headers["Authorization"] = "Bearer " + token;
+                return;
+            }
+            // tslint:disable-next-line:no-string-literal
+            if (request.headers["Authorization"]) {
+                // tslint:disable-next-line:no-string-literal
+                delete request.headers["Authorization"];
+            }
+        };
+        LongPollingTransport.prototype.poll = function (url, pollOptions) {
+            return __awaiter$2(this, void 0, void 0, function () {
+                var token, pollUrl, response, e_1;
+                return __generator$2(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            _a.trys.push([0, , 8, 9]);
+                            _a.label = 1;
+                        case 1:
+                            if (!this.running) return [3 /*break*/, 7];
+                            return [4 /*yield*/, this.getAccessToken()];
+                        case 2:
+                            token = _a.sent();
+                            this.updateHeaderToken(pollOptions, token);
+                            _a.label = 3;
+                        case 3:
+                            _a.trys.push([3, 5, , 6]);
+                            pollUrl = url + "&_=" + Date.now();
+                            this.logger.log(LogLevel.Trace, "(LongPolling transport) polling: " + pollUrl + ".");
+                            return [4 /*yield*/, this.httpClient.get(pollUrl, pollOptions)];
+                        case 4:
+                            response = _a.sent();
+                            if (response.statusCode === 204) {
+                                this.logger.log(LogLevel.Information, "(LongPolling transport) Poll terminated by server.");
+                                this.running = false;
+                            }
+                            else if (response.statusCode !== 200) {
+                                this.logger.log(LogLevel.Error, "(LongPolling transport) Unexpected response code: " + response.statusCode + ".");
+                                // Unexpected status code
+                                this.closeError = new HttpError(response.statusText || "", response.statusCode);
+                                this.running = false;
+                            }
+                            else {
+                                // Process the response
+                                if (response.content) {
+                                    this.logger.log(LogLevel.Trace, "(LongPolling transport) data received. " + getDataDetail(response.content, this.logMessageContent) + ".");
+                                    if (this.onreceive) {
+                                        this.onreceive(response.content);
+                                    }
+                                }
+                                else {
+                                    // This is another way timeout manifest.
+                                    this.logger.log(LogLevel.Trace, "(LongPolling transport) Poll timed out, reissuing.");
+                                }
+                            }
+                            return [3 /*break*/, 6];
+                        case 5:
+                            e_1 = _a.sent();
+                            if (!this.running) {
+                                // Log but disregard errors that occur after stopping
+                                this.logger.log(LogLevel.Trace, "(LongPolling transport) Poll errored after shutdown: " + e_1.message);
+                            }
+                            else {
+                                if (e_1 instanceof TimeoutError) {
+                                    // Ignore timeouts and reissue the poll.
+                                    this.logger.log(LogLevel.Trace, "(LongPolling transport) Poll timed out, reissuing.");
+                                }
+                                else {
+                                    // Close the connection with the error as the result.
+                                    this.closeError = e_1;
+                                    this.running = false;
+                                }
+                            }
+                            return [3 /*break*/, 6];
+                        case 6: return [3 /*break*/, 1];
+                        case 7: return [3 /*break*/, 9];
+                        case 8:
+                            this.logger.log(LogLevel.Trace, "(LongPolling transport) Polling complete.");
+                            // We will reach here with pollAborted==false when the server returned a response causing the transport to stop.
+                            // If pollAborted==true then client initiated the stop and the stop method will raise the close event after DELETE is sent.
+                            if (!this.pollAborted) {
+                                this.raiseOnClose();
+                            }
+                            return [7 /*endfinally*/];
+                        case 9: return [2 /*return*/];
+                    }
+                });
+            });
+        };
+        LongPollingTransport.prototype.send = function (data) {
+            return __awaiter$2(this, void 0, void 0, function () {
+                return __generator$2(this, function (_a) {
+                    if (!this.running) {
+                        return [2 /*return*/, Promise.reject(new Error("Cannot send until the transport is connected"))];
+                    }
+                    return [2 /*return*/, sendMessage(this.logger, "LongPolling", this.httpClient, this.url, this.accessTokenFactory, data, this.logMessageContent)];
+                });
+            });
+        };
+        LongPollingTransport.prototype.stop = function () {
+            return __awaiter$2(this, void 0, void 0, function () {
+                var deleteOptions, token;
+                return __generator$2(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            this.logger.log(LogLevel.Trace, "(LongPolling transport) Stopping polling.");
+                            // Tell receiving loop to stop, abort any current request, and then wait for it to finish
+                            this.running = false;
+                            this.pollAbort.abort();
+                            _a.label = 1;
+                        case 1:
+                            _a.trys.push([1, , 5, 6]);
+                            return [4 /*yield*/, this.receiving];
+                        case 2:
+                            _a.sent();
+                            // Send DELETE to clean up long polling on the server
+                            this.logger.log(LogLevel.Trace, "(LongPolling transport) sending DELETE request to " + this.url + ".");
+                            deleteOptions = {
+                                headers: {},
+                            };
+                            return [4 /*yield*/, this.getAccessToken()];
+                        case 3:
+                            token = _a.sent();
+                            this.updateHeaderToken(deleteOptions, token);
+                            return [4 /*yield*/, this.httpClient.delete(this.url, deleteOptions)];
+                        case 4:
+                            _a.sent();
+                            this.logger.log(LogLevel.Trace, "(LongPolling transport) DELETE request sent.");
+                            return [3 /*break*/, 6];
+                        case 5:
+                            this.logger.log(LogLevel.Trace, "(LongPolling transport) Stop finished.");
+                            // Raise close event here instead of in polling
+                            // It needs to happen after the DELETE request is sent
+                            this.raiseOnClose();
+                            return [7 /*endfinally*/];
+                        case 6: return [2 /*return*/];
+                    }
+                });
+            });
+        };
+        LongPollingTransport.prototype.raiseOnClose = function () {
+            if (this.onclose) {
+                var logMessage = "(LongPolling transport) Firing onclose event.";
+                if (this.closeError) {
+                    logMessage += " Error: " + this.closeError;
+                }
+                this.logger.log(LogLevel.Trace, logMessage);
+                this.onclose(this.closeError);
+            }
+        };
+        return LongPollingTransport;
+    }());
+
+    // Copyright (c) .NET Foundation. All rights reserved.
+    // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+    var __awaiter$3 = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+            function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
+    var __generator$3 = (undefined && undefined.__generator) || function (thisArg, body) {
+        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+        function verb(n) { return function (v) { return step([n, v]); }; }
+        function step(op) {
+            if (f) throw new TypeError("Generator is already executing.");
+            while (_) try {
+                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+                if (y = 0, t) op = [op[0] & 2, t.value];
+                switch (op[0]) {
+                    case 0: case 1: t = op; break;
+                    case 4: _.label++; return { value: op[1], done: false };
+                    case 5: _.label++; y = op[1]; op = [0]; continue;
+                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                    default:
+                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                        if (t[2]) _.ops.pop();
+                        _.trys.pop(); continue;
+                }
+                op = body.call(thisArg, _);
+            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+        }
+    };
+    /** @private */
+    var ServerSentEventsTransport = /** @class */ (function () {
+        function ServerSentEventsTransport(httpClient, accessTokenFactory, logger, logMessageContent, eventSourceConstructor) {
+            this.httpClient = httpClient;
+            this.accessTokenFactory = accessTokenFactory;
+            this.logger = logger;
+            this.logMessageContent = logMessageContent;
+            this.eventSourceConstructor = eventSourceConstructor;
+            this.onreceive = null;
+            this.onclose = null;
+        }
+        ServerSentEventsTransport.prototype.connect = function (url, transferFormat) {
+            return __awaiter$3(this, void 0, void 0, function () {
+                var token;
+                var _this = this;
+                return __generator$3(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            Arg.isRequired(url, "url");
+                            Arg.isRequired(transferFormat, "transferFormat");
+                            Arg.isIn(transferFormat, TransferFormat, "transferFormat");
+                            this.logger.log(LogLevel.Trace, "(SSE transport) Connecting.");
+                            // set url before accessTokenFactory because this.url is only for send and we set the auth header instead of the query string for send
+                            this.url = url;
+                            if (!this.accessTokenFactory) return [3 /*break*/, 2];
+                            return [4 /*yield*/, this.accessTokenFactory()];
+                        case 1:
+                            token = _a.sent();
+                            if (token) {
+                                url += (url.indexOf("?") < 0 ? "?" : "&") + ("access_token=" + encodeURIComponent(token));
+                            }
+                            _a.label = 2;
+                        case 2: return [2 /*return*/, new Promise(function (resolve, reject) {
+                                var opened = false;
+                                if (transferFormat !== TransferFormat.Text) {
+                                    reject(new Error("The Server-Sent Events transport only supports the 'Text' transfer format"));
+                                    return;
+                                }
+                                var eventSource;
+                                if (Platform.isBrowser || Platform.isWebWorker) {
+                                    eventSource = new _this.eventSourceConstructor(url, { withCredentials: true });
+                                }
+                                else {
+                                    // Non-browser passes cookies via the dictionary
+                                    var cookies = _this.httpClient.getCookieString(url);
+                                    eventSource = new _this.eventSourceConstructor(url, { withCredentials: true, headers: { Cookie: cookies } });
+                                }
+                                try {
+                                    eventSource.onmessage = function (e) {
+                                        if (_this.onreceive) {
+                                            try {
+                                                _this.logger.log(LogLevel.Trace, "(SSE transport) data received. " + getDataDetail(e.data, _this.logMessageContent) + ".");
+                                                _this.onreceive(e.data);
+                                            }
+                                            catch (error) {
+                                                _this.close(error);
+                                                return;
+                                            }
+                                        }
+                                    };
+                                    eventSource.onerror = function (e) {
+                                        var error = new Error(e.data || "Error occurred");
+                                        if (opened) {
+                                            _this.close(error);
+                                        }
+                                        else {
+                                            reject(error);
+                                        }
+                                    };
+                                    eventSource.onopen = function () {
+                                        _this.logger.log(LogLevel.Information, "SSE connected to " + _this.url);
+                                        _this.eventSource = eventSource;
+                                        opened = true;
+                                        resolve();
+                                    };
+                                }
+                                catch (e) {
+                                    reject(e);
+                                    return;
+                                }
+                            })];
+                    }
+                });
+            });
+        };
+        ServerSentEventsTransport.prototype.send = function (data) {
+            return __awaiter$3(this, void 0, void 0, function () {
+                return __generator$3(this, function (_a) {
+                    if (!this.eventSource) {
+                        return [2 /*return*/, Promise.reject(new Error("Cannot send until the transport is connected"))];
+                    }
+                    return [2 /*return*/, sendMessage(this.logger, "SSE", this.httpClient, this.url, this.accessTokenFactory, data, this.logMessageContent)];
+                });
+            });
+        };
+        ServerSentEventsTransport.prototype.stop = function () {
+            this.close();
+            return Promise.resolve();
+        };
+        ServerSentEventsTransport.prototype.close = function (e) {
+            if (this.eventSource) {
+                this.eventSource.close();
+                this.eventSource = undefined;
+                if (this.onclose) {
+                    this.onclose(e);
+                }
+            }
+        };
+        return ServerSentEventsTransport;
+    }());
+
+    // Copyright (c) .NET Foundation. All rights reserved.
+    // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+    var __awaiter$4 = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+            function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
+    var __generator$4 = (undefined && undefined.__generator) || function (thisArg, body) {
+        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+        function verb(n) { return function (v) { return step([n, v]); }; }
+        function step(op) {
+            if (f) throw new TypeError("Generator is already executing.");
+            while (_) try {
+                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+                if (y = 0, t) op = [op[0] & 2, t.value];
+                switch (op[0]) {
+                    case 0: case 1: t = op; break;
+                    case 4: _.label++; return { value: op[1], done: false };
+                    case 5: _.label++; y = op[1]; op = [0]; continue;
+                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                    default:
+                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                        if (t[2]) _.ops.pop();
+                        _.trys.pop(); continue;
+                }
+                op = body.call(thisArg, _);
+            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+        }
+    };
+    /** @private */
+    var WebSocketTransport = /** @class */ (function () {
+        function WebSocketTransport(httpClient, accessTokenFactory, logger, logMessageContent, webSocketConstructor) {
+            this.logger = logger;
+            this.accessTokenFactory = accessTokenFactory;
+            this.logMessageContent = logMessageContent;
+            this.webSocketConstructor = webSocketConstructor;
+            this.httpClient = httpClient;
+            this.onreceive = null;
+            this.onclose = null;
+        }
+        WebSocketTransport.prototype.connect = function (url, transferFormat) {
+            return __awaiter$4(this, void 0, void 0, function () {
+                var token;
+                var _this = this;
+                return __generator$4(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            Arg.isRequired(url, "url");
+                            Arg.isRequired(transferFormat, "transferFormat");
+                            Arg.isIn(transferFormat, TransferFormat, "transferFormat");
+                            this.logger.log(LogLevel.Trace, "(WebSockets transport) Connecting.");
+                            if (!this.accessTokenFactory) return [3 /*break*/, 2];
+                            return [4 /*yield*/, this.accessTokenFactory()];
+                        case 1:
+                            token = _a.sent();
+                            if (token) {
+                                url += (url.indexOf("?") < 0 ? "?" : "&") + ("access_token=" + encodeURIComponent(token));
+                            }
+                            _a.label = 2;
+                        case 2: return [2 /*return*/, new Promise(function (resolve, reject) {
+                                url = url.replace(/^http/, "ws");
+                                var webSocket;
+                                var cookies = _this.httpClient.getCookieString(url);
+                                var opened = false;
+                                if (Platform.isNode && cookies) {
+                                    // Only pass cookies when in non-browser environments
+                                    webSocket = new _this.webSocketConstructor(url, undefined, {
+                                        headers: {
+                                            Cookie: "" + cookies,
+                                        },
+                                    });
+                                }
+                                if (!webSocket) {
+                                    // Chrome is not happy with passing 'undefined' as protocol
+                                    webSocket = new _this.webSocketConstructor(url);
+                                }
+                                if (transferFormat === TransferFormat.Binary) {
+                                    webSocket.binaryType = "arraybuffer";
+                                }
+                                // tslint:disable-next-line:variable-name
+                                webSocket.onopen = function (_event) {
+                                    _this.logger.log(LogLevel.Information, "WebSocket connected to " + url + ".");
+                                    _this.webSocket = webSocket;
+                                    opened = true;
+                                    resolve();
+                                };
+                                webSocket.onerror = function (event) {
+                                    var error = null;
+                                    // ErrorEvent is a browser only type we need to check if the type exists before using it
+                                    if (typeof ErrorEvent !== "undefined" && event instanceof ErrorEvent) {
+                                        error = event.error;
+                                    }
+                                    else {
+                                        error = new Error("There was an error with the transport.");
+                                    }
+                                    reject(error);
+                                };
+                                webSocket.onmessage = function (message) {
+                                    _this.logger.log(LogLevel.Trace, "(WebSockets transport) data received. " + getDataDetail(message.data, _this.logMessageContent) + ".");
+                                    if (_this.onreceive) {
+                                        _this.onreceive(message.data);
+                                    }
+                                };
+                                webSocket.onclose = function (event) {
+                                    // Don't call close handler if connection was never established
+                                    // We'll reject the connect call instead
+                                    if (opened) {
+                                        _this.close(event);
+                                    }
+                                    else {
+                                        var error = null;
+                                        // ErrorEvent is a browser only type we need to check if the type exists before using it
+                                        if (typeof ErrorEvent !== "undefined" && event instanceof ErrorEvent) {
+                                            error = event.error;
+                                        }
+                                        else {
+                                            error = new Error("There was an error with the transport.");
+                                        }
+                                        reject(error);
+                                    }
+                                };
+                            })];
+                    }
+                });
+            });
+        };
+        WebSocketTransport.prototype.send = function (data) {
+            if (this.webSocket && this.webSocket.readyState === this.webSocketConstructor.OPEN) {
+                this.logger.log(LogLevel.Trace, "(WebSockets transport) sending data. " + getDataDetail(data, this.logMessageContent) + ".");
+                this.webSocket.send(data);
+                return Promise.resolve();
+            }
+            return Promise.reject("WebSocket is not in the OPEN state");
+        };
+        WebSocketTransport.prototype.stop = function () {
+            if (this.webSocket) {
+                // Manually invoke onclose callback inline so we know the HttpConnection was closed properly before returning
+                // This also solves an issue where websocket.onclose could take 18+ seconds to trigger during network disconnects
+                this.close(undefined);
+            }
+            return Promise.resolve();
+        };
+        WebSocketTransport.prototype.close = function (event) {
+            // webSocket will be null if the transport did not start successfully
+            if (this.webSocket) {
+                // Clear websocket handlers because we are considering the socket closed now
+                this.webSocket.onclose = function () { };
+                this.webSocket.onmessage = function () { };
+                this.webSocket.onerror = function () { };
+                this.webSocket.close();
+                this.webSocket = undefined;
+            }
+            this.logger.log(LogLevel.Trace, "(WebSockets transport) socket closed.");
+            if (this.onclose) {
+                if (event && (event.wasClean === false || event.code !== 1000)) {
+                    this.onclose(new Error("WebSocket closed with status code: " + event.code + " (" + event.reason + ")."));
+                }
+                else {
+                    this.onclose();
+                }
+            }
+        };
+        return WebSocketTransport;
+    }());
+
+    // Copyright (c) .NET Foundation. All rights reserved.
+    // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+    var __awaiter$5 = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+            function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
+    var __generator$5 = (undefined && undefined.__generator) || function (thisArg, body) {
+        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+        function verb(n) { return function (v) { return step([n, v]); }; }
+        function step(op) {
+            if (f) throw new TypeError("Generator is already executing.");
+            while (_) try {
+                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+                if (y = 0, t) op = [op[0] & 2, t.value];
+                switch (op[0]) {
+                    case 0: case 1: t = op; break;
+                    case 4: _.label++; return { value: op[1], done: false };
+                    case 5: _.label++; y = op[1]; op = [0]; continue;
+                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                    default:
+                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                        if (t[2]) _.ops.pop();
+                        _.trys.pop(); continue;
+                }
+                op = body.call(thisArg, _);
+            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+        }
+    };
+    var MAX_REDIRECTS = 100;
+    var WebSocketModule = null;
+    var EventSourceModule = null;
+    if (Platform.isNode && typeof require !== "undefined") {
+        // In order to ignore the dynamic require in webpack builds we need to do this magic
+        // @ts-ignore: TS doesn't know about these names
+        var requireFunc$1 = typeof __webpack_require__ === "function" ? __non_webpack_require__ : require;
+        WebSocketModule = requireFunc$1("ws");
+        EventSourceModule = requireFunc$1("eventsource");
+    }
+    /** @private */
+    var HttpConnection = /** @class */ (function () {
+        function HttpConnection(url, options) {
+            if (options === void 0) { options = {}; }
+            this.features = {};
+            this.negotiateVersion = 1;
+            Arg.isRequired(url, "url");
+            this.logger = createLogger(options.logger);
+            this.baseUrl = this.resolveUrl(url);
+            options = options || {};
+            options.logMessageContent = options.logMessageContent || false;
+            if (!Platform.isNode && typeof WebSocket !== "undefined" && !options.WebSocket) {
+                options.WebSocket = WebSocket;
+            }
+            else if (Platform.isNode && !options.WebSocket) {
+                if (WebSocketModule) {
+                    options.WebSocket = WebSocketModule;
+                }
+            }
+            if (!Platform.isNode && typeof EventSource !== "undefined" && !options.EventSource) {
+                options.EventSource = EventSource;
+            }
+            else if (Platform.isNode && !options.EventSource) {
+                if (typeof EventSourceModule !== "undefined") {
+                    options.EventSource = EventSourceModule;
+                }
+            }
+            this.httpClient = options.httpClient || new DefaultHttpClient(this.logger);
+            this.connectionState = "Disconnected" /* Disconnected */;
+            this.connectionStarted = false;
+            this.options = options;
+            this.onreceive = null;
+            this.onclose = null;
+        }
+        HttpConnection.prototype.start = function (transferFormat) {
+            return __awaiter$5(this, void 0, void 0, function () {
+                var message, message;
+                return __generator$5(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            transferFormat = transferFormat || TransferFormat.Binary;
+                            Arg.isIn(transferFormat, TransferFormat, "transferFormat");
+                            this.logger.log(LogLevel.Debug, "Starting connection with transfer format '" + TransferFormat[transferFormat] + "'.");
+                            if (this.connectionState !== "Disconnected" /* Disconnected */) {
+                                return [2 /*return*/, Promise.reject(new Error("Cannot start an HttpConnection that is not in the 'Disconnected' state."))];
+                            }
+                            this.connectionState = "Connecting " /* Connecting */;
+                            this.startInternalPromise = this.startInternal(transferFormat);
+                            return [4 /*yield*/, this.startInternalPromise];
+                        case 1:
+                            _a.sent();
+                            if (!(this.connectionState === "Disconnecting" /* Disconnecting */)) return [3 /*break*/, 3];
+                            message = "Failed to start the HttpConnection before stop() was called.";
+                            this.logger.log(LogLevel.Error, message);
+                            // We cannot await stopPromise inside startInternal since stopInternal awaits the startInternalPromise.
+                            return [4 /*yield*/, this.stopPromise];
+                        case 2:
+                            // We cannot await stopPromise inside startInternal since stopInternal awaits the startInternalPromise.
+                            _a.sent();
+                            return [2 /*return*/, Promise.reject(new Error(message))];
+                        case 3:
+                            if (this.connectionState !== "Connected" /* Connected */) {
+                                message = "HttpConnection.startInternal completed gracefully but didn't enter the connection into the connected state!";
+                                this.logger.log(LogLevel.Error, message);
+                                return [2 /*return*/, Promise.reject(new Error(message))];
+                            }
+                            _a.label = 4;
+                        case 4:
+                            this.connectionStarted = true;
+                            return [2 /*return*/];
+                    }
+                });
+            });
+        };
+        HttpConnection.prototype.send = function (data) {
+            if (this.connectionState !== "Connected" /* Connected */) {
+                return Promise.reject(new Error("Cannot send data if the connection is not in the 'Connected' State."));
+            }
+            if (!this.sendQueue) {
+                this.sendQueue = new TransportSendQueue(this.transport);
+            }
+            // Transport will not be null if state is connected
+            return this.sendQueue.send(data);
+        };
+        HttpConnection.prototype.stop = function (error) {
+            return __awaiter$5(this, void 0, void 0, function () {
+                var _this = this;
+                return __generator$5(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            if (this.connectionState === "Disconnected" /* Disconnected */) {
+                                this.logger.log(LogLevel.Debug, "Call to HttpConnection.stop(" + error + ") ignored because the connection is already in the disconnected state.");
+                                return [2 /*return*/, Promise.resolve()];
+                            }
+                            if (this.connectionState === "Disconnecting" /* Disconnecting */) {
+                                this.logger.log(LogLevel.Debug, "Call to HttpConnection.stop(" + error + ") ignored because the connection is already in the disconnecting state.");
+                                return [2 /*return*/, this.stopPromise];
+                            }
+                            this.connectionState = "Disconnecting" /* Disconnecting */;
+                            this.stopPromise = new Promise(function (resolve) {
+                                // Don't complete stop() until stopConnection() completes.
+                                _this.stopPromiseResolver = resolve;
+                            });
+                            // stopInternal should never throw so just observe it.
+                            return [4 /*yield*/, this.stopInternal(error)];
+                        case 1:
+                            // stopInternal should never throw so just observe it.
+                            _a.sent();
+                            return [4 /*yield*/, this.stopPromise];
+                        case 2:
+                            _a.sent();
+                            return [2 /*return*/];
+                    }
+                });
+            });
+        };
+        HttpConnection.prototype.stopInternal = function (error) {
+            return __awaiter$5(this, void 0, void 0, function () {
+                var e_1, e_2;
+                return __generator$5(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            // Set error as soon as possible otherwise there is a race between
+                            // the transport closing and providing an error and the error from a close message
+                            // We would prefer the close message error.
+                            this.stopError = error;
+                            _a.label = 1;
+                        case 1:
+                            _a.trys.push([1, 3, , 4]);
+                            return [4 /*yield*/, this.startInternalPromise];
+                        case 2:
+                            _a.sent();
+                            return [3 /*break*/, 4];
+                        case 3:
+                            e_1 = _a.sent();
+                            return [3 /*break*/, 4];
+                        case 4:
+                            if (!this.transport) return [3 /*break*/, 9];
+                            _a.label = 5;
+                        case 5:
+                            _a.trys.push([5, 7, , 8]);
+                            return [4 /*yield*/, this.transport.stop()];
+                        case 6:
+                            _a.sent();
+                            return [3 /*break*/, 8];
+                        case 7:
+                            e_2 = _a.sent();
+                            this.logger.log(LogLevel.Error, "HttpConnection.transport.stop() threw error '" + e_2 + "'.");
+                            this.stopConnection();
+                            return [3 /*break*/, 8];
+                        case 8:
+                            this.transport = undefined;
+                            return [3 /*break*/, 10];
+                        case 9:
+                            this.logger.log(LogLevel.Debug, "HttpConnection.transport is undefined in HttpConnection.stop() because start() failed.");
+                            this.stopConnection();
+                            _a.label = 10;
+                        case 10: return [2 /*return*/];
+                    }
+                });
+            });
+        };
+        HttpConnection.prototype.startInternal = function (transferFormat) {
+            return __awaiter$5(this, void 0, void 0, function () {
+                var url, negotiateResponse, redirects, _loop_1, this_1, e_3;
+                return __generator$5(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            url = this.baseUrl;
+                            this.accessTokenFactory = this.options.accessTokenFactory;
+                            _a.label = 1;
+                        case 1:
+                            _a.trys.push([1, 12, , 13]);
+                            if (!this.options.skipNegotiation) return [3 /*break*/, 5];
+                            if (!(this.options.transport === HttpTransportType.WebSockets)) return [3 /*break*/, 3];
+                            // No need to add a connection ID in this case
+                            this.transport = this.constructTransport(HttpTransportType.WebSockets);
+                            // We should just call connect directly in this case.
+                            // No fallback or negotiate in this case.
+                            return [4 /*yield*/, this.startTransport(url, transferFormat)];
+                        case 2:
+                            // We should just call connect directly in this case.
+                            // No fallback or negotiate in this case.
+                            _a.sent();
+                            return [3 /*break*/, 4];
+                        case 3: throw new Error("Negotiation can only be skipped when using the WebSocket transport directly.");
+                        case 4: return [3 /*break*/, 11];
+                        case 5:
+                            negotiateResponse = null;
+                            redirects = 0;
+                            _loop_1 = function () {
+                                var accessToken_1;
+                                return __generator$5(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0: return [4 /*yield*/, this_1.getNegotiationResponse(url)];
+                                        case 1:
+                                            negotiateResponse = _a.sent();
+                                            // the user tries to stop the connection when it is being started
+                                            if (this_1.connectionState === "Disconnecting" /* Disconnecting */ || this_1.connectionState === "Disconnected" /* Disconnected */) {
+                                                throw new Error("The connection was stopped during negotiation.");
+                                            }
+                                            if (negotiateResponse.error) {
+                                                throw new Error(negotiateResponse.error);
+                                            }
+                                            if (negotiateResponse.ProtocolVersion) {
+                                                throw new Error("Detected a connection attempt to an ASP.NET SignalR Server. This client only supports connecting to an ASP.NET Core SignalR Server. See https://aka.ms/signalr-core-differences for details.");
+                                            }
+                                            if (negotiateResponse.url) {
+                                                url = negotiateResponse.url;
+                                            }
+                                            if (negotiateResponse.accessToken) {
+                                                accessToken_1 = negotiateResponse.accessToken;
+                                                this_1.accessTokenFactory = function () { return accessToken_1; };
+                                            }
+                                            redirects++;
+                                            return [2 /*return*/];
+                                    }
+                                });
+                            };
+                            this_1 = this;
+                            _a.label = 6;
+                        case 6: return [5 /*yield**/, _loop_1()];
+                        case 7:
+                            _a.sent();
+                            _a.label = 8;
+                        case 8:
+                            if (negotiateResponse.url && redirects < MAX_REDIRECTS) return [3 /*break*/, 6];
+                            _a.label = 9;
+                        case 9:
+                            if (redirects === MAX_REDIRECTS && negotiateResponse.url) {
+                                throw new Error("Negotiate redirection limit exceeded.");
+                            }
+                            return [4 /*yield*/, this.createTransport(url, this.options.transport, negotiateResponse, transferFormat)];
+                        case 10:
+                            _a.sent();
+                            _a.label = 11;
+                        case 11:
+                            if (this.transport instanceof LongPollingTransport) {
+                                this.features.inherentKeepAlive = true;
+                            }
+                            if (this.connectionState === "Connecting " /* Connecting */) {
+                                // Ensure the connection transitions to the connected state prior to completing this.startInternalPromise.
+                                // start() will handle the case when stop was called and startInternal exits still in the disconnecting state.
+                                this.logger.log(LogLevel.Debug, "The HttpConnection connected successfully.");
+                                this.connectionState = "Connected" /* Connected */;
+                            }
+                            return [3 /*break*/, 13];
+                        case 12:
+                            e_3 = _a.sent();
+                            this.logger.log(LogLevel.Error, "Failed to start the connection: " + e_3);
+                            this.connectionState = "Disconnected" /* Disconnected */;
+                            this.transport = undefined;
+                            return [2 /*return*/, Promise.reject(e_3)];
+                        case 13: return [2 /*return*/];
+                    }
+                });
+            });
+        };
+        HttpConnection.prototype.getNegotiationResponse = function (url) {
+            return __awaiter$5(this, void 0, void 0, function () {
+                var _a, headers, token, negotiateUrl, response, negotiateResponse, e_4;
+                return __generator$5(this, function (_b) {
+                    switch (_b.label) {
+                        case 0:
+                            if (!this.accessTokenFactory) return [3 /*break*/, 2];
+                            return [4 /*yield*/, this.accessTokenFactory()];
+                        case 1:
+                            token = _b.sent();
+                            if (token) {
+                                headers = (_a = {},
+                                    _a["Authorization"] = "Bearer " + token,
+                                    _a);
+                            }
+                            _b.label = 2;
+                        case 2:
+                            negotiateUrl = this.resolveNegotiateUrl(url);
+                            this.logger.log(LogLevel.Debug, "Sending negotiation request: " + negotiateUrl + ".");
+                            _b.label = 3;
+                        case 3:
+                            _b.trys.push([3, 5, , 6]);
+                            return [4 /*yield*/, this.httpClient.post(negotiateUrl, {
+                                    content: "",
+                                    headers: headers,
+                                })];
+                        case 4:
+                            response = _b.sent();
+                            if (response.statusCode !== 200) {
+                                return [2 /*return*/, Promise.reject(new Error("Unexpected status code returned from negotiate " + response.statusCode))];
+                            }
+                            negotiateResponse = JSON.parse(response.content);
+                            if (!negotiateResponse.negotiateVersion || negotiateResponse.negotiateVersion < 1) {
+                                // Negotiate version 0 doesn't use connectionToken
+                                // So we set it equal to connectionId so all our logic can use connectionToken without being aware of the negotiate version
+                                negotiateResponse.connectionToken = negotiateResponse.connectionId;
+                            }
+                            return [2 /*return*/, negotiateResponse];
+                        case 5:
+                            e_4 = _b.sent();
+                            this.logger.log(LogLevel.Error, "Failed to complete negotiation with the server: " + e_4);
+                            return [2 /*return*/, Promise.reject(e_4)];
+                        case 6: return [2 /*return*/];
+                    }
+                });
+            });
+        };
+        HttpConnection.prototype.createConnectUrl = function (url, connectionToken) {
+            if (!connectionToken) {
+                return url;
+            }
+            return url + (url.indexOf("?") === -1 ? "?" : "&") + ("id=" + connectionToken);
+        };
+        HttpConnection.prototype.createTransport = function (url, requestedTransport, negotiateResponse, requestedTransferFormat) {
+            return __awaiter$5(this, void 0, void 0, function () {
+                var connectUrl, transportExceptions, transports, negotiate, _i, transports_1, endpoint, transportOrError, ex_1, ex_2, message;
+                return __generator$5(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            connectUrl = this.createConnectUrl(url, negotiateResponse.connectionToken);
+                            if (!this.isITransport(requestedTransport)) return [3 /*break*/, 2];
+                            this.logger.log(LogLevel.Debug, "Connection was provided an instance of ITransport, using that directly.");
+                            this.transport = requestedTransport;
+                            return [4 /*yield*/, this.startTransport(connectUrl, requestedTransferFormat)];
+                        case 1:
+                            _a.sent();
+                            this.connectionId = negotiateResponse.connectionId;
+                            return [2 /*return*/];
+                        case 2:
+                            transportExceptions = [];
+                            transports = negotiateResponse.availableTransports || [];
+                            negotiate = negotiateResponse;
+                            _i = 0, transports_1 = transports;
+                            _a.label = 3;
+                        case 3:
+                            if (!(_i < transports_1.length)) return [3 /*break*/, 13];
+                            endpoint = transports_1[_i];
+                            transportOrError = this.resolveTransportOrError(endpoint, requestedTransport, requestedTransferFormat);
+                            if (!(transportOrError instanceof Error)) return [3 /*break*/, 4];
+                            // Store the error and continue, we don't want to cause a re-negotiate in these cases
+                            transportExceptions.push(endpoint.transport + " failed: " + transportOrError);
+                            return [3 /*break*/, 12];
+                        case 4:
+                            if (!this.isITransport(transportOrError)) return [3 /*break*/, 12];
+                            this.transport = transportOrError;
+                            if (!!negotiate) return [3 /*break*/, 9];
+                            _a.label = 5;
+                        case 5:
+                            _a.trys.push([5, 7, , 8]);
+                            return [4 /*yield*/, this.getNegotiationResponse(url)];
+                        case 6:
+                            negotiate = _a.sent();
+                            return [3 /*break*/, 8];
+                        case 7:
+                            ex_1 = _a.sent();
+                            return [2 /*return*/, Promise.reject(ex_1)];
+                        case 8:
+                            connectUrl = this.createConnectUrl(url, negotiate.connectionToken);
+                            _a.label = 9;
+                        case 9:
+                            _a.trys.push([9, 11, , 12]);
+                            return [4 /*yield*/, this.startTransport(connectUrl, requestedTransferFormat)];
+                        case 10:
+                            _a.sent();
+                            this.connectionId = negotiate.connectionId;
+                            return [2 /*return*/];
+                        case 11:
+                            ex_2 = _a.sent();
+                            this.logger.log(LogLevel.Error, "Failed to start the transport '" + endpoint.transport + "': " + ex_2);
+                            negotiate = undefined;
+                            transportExceptions.push(endpoint.transport + " failed: " + ex_2);
+                            if (this.connectionState !== "Connecting " /* Connecting */) {
+                                message = "Failed to select transport before stop() was called.";
+                                this.logger.log(LogLevel.Debug, message);
+                                return [2 /*return*/, Promise.reject(new Error(message))];
+                            }
+                            return [3 /*break*/, 12];
+                        case 12:
+                            _i++;
+                            return [3 /*break*/, 3];
+                        case 13:
+                            if (transportExceptions.length > 0) {
+                                return [2 /*return*/, Promise.reject(new Error("Unable to connect to the server with any of the available transports. " + transportExceptions.join(" ")))];
+                            }
+                            return [2 /*return*/, Promise.reject(new Error("None of the transports supported by the client are supported by the server."))];
+                    }
+                });
+            });
+        };
+        HttpConnection.prototype.constructTransport = function (transport) {
+            switch (transport) {
+                case HttpTransportType.WebSockets:
+                    if (!this.options.WebSocket) {
+                        throw new Error("'WebSocket' is not supported in your environment.");
+                    }
+                    return new WebSocketTransport(this.httpClient, this.accessTokenFactory, this.logger, this.options.logMessageContent || false, this.options.WebSocket);
+                case HttpTransportType.ServerSentEvents:
+                    if (!this.options.EventSource) {
+                        throw new Error("'EventSource' is not supported in your environment.");
+                    }
+                    return new ServerSentEventsTransport(this.httpClient, this.accessTokenFactory, this.logger, this.options.logMessageContent || false, this.options.EventSource);
+                case HttpTransportType.LongPolling:
+                    return new LongPollingTransport(this.httpClient, this.accessTokenFactory, this.logger, this.options.logMessageContent || false);
+                default:
+                    throw new Error("Unknown transport: " + transport + ".");
+            }
+        };
+        HttpConnection.prototype.startTransport = function (url, transferFormat) {
+            var _this = this;
+            this.transport.onreceive = this.onreceive;
+            this.transport.onclose = function (e) { return _this.stopConnection(e); };
+            return this.transport.connect(url, transferFormat);
+        };
+        HttpConnection.prototype.resolveTransportOrError = function (endpoint, requestedTransport, requestedTransferFormat) {
+            var transport = HttpTransportType[endpoint.transport];
+            if (transport === null || transport === undefined) {
+                this.logger.log(LogLevel.Debug, "Skipping transport '" + endpoint.transport + "' because it is not supported by this client.");
+                return new Error("Skipping transport '" + endpoint.transport + "' because it is not supported by this client.");
+            }
+            else {
+                if (transportMatches(requestedTransport, transport)) {
+                    var transferFormats = endpoint.transferFormats.map(function (s) { return TransferFormat[s]; });
+                    if (transferFormats.indexOf(requestedTransferFormat) >= 0) {
+                        if ((transport === HttpTransportType.WebSockets && !this.options.WebSocket) ||
+                            (transport === HttpTransportType.ServerSentEvents && !this.options.EventSource)) {
+                            this.logger.log(LogLevel.Debug, "Skipping transport '" + HttpTransportType[transport] + "' because it is not supported in your environment.'");
+                            return new Error("'" + HttpTransportType[transport] + "' is not supported in your environment.");
+                        }
+                        else {
+                            this.logger.log(LogLevel.Debug, "Selecting transport '" + HttpTransportType[transport] + "'.");
+                            try {
+                                return this.constructTransport(transport);
+                            }
+                            catch (ex) {
+                                return ex;
+                            }
+                        }
+                    }
+                    else {
+                        this.logger.log(LogLevel.Debug, "Skipping transport '" + HttpTransportType[transport] + "' because it does not support the requested transfer format '" + TransferFormat[requestedTransferFormat] + "'.");
+                        return new Error("'" + HttpTransportType[transport] + "' does not support " + TransferFormat[requestedTransferFormat] + ".");
+                    }
+                }
+                else {
+                    this.logger.log(LogLevel.Debug, "Skipping transport '" + HttpTransportType[transport] + "' because it was disabled by the client.");
+                    return new Error("'" + HttpTransportType[transport] + "' is disabled by the client.");
+                }
+            }
+        };
+        HttpConnection.prototype.isITransport = function (transport) {
+            return transport && typeof (transport) === "object" && "connect" in transport;
+        };
+        HttpConnection.prototype.stopConnection = function (error) {
+            var _this = this;
+            this.logger.log(LogLevel.Debug, "HttpConnection.stopConnection(" + error + ") called while in state " + this.connectionState + ".");
+            this.transport = undefined;
+            // If we have a stopError, it takes precedence over the error from the transport
+            error = this.stopError || error;
+            this.stopError = undefined;
+            if (this.connectionState === "Disconnected" /* Disconnected */) {
+                this.logger.log(LogLevel.Debug, "Call to HttpConnection.stopConnection(" + error + ") was ignored because the connection is already in the disconnected state.");
+                return;
+            }
+            if (this.connectionState === "Connecting " /* Connecting */) {
+                this.logger.log(LogLevel.Warning, "Call to HttpConnection.stopConnection(" + error + ") was ignored because the connection hasn't yet left the in the connecting state.");
+                return;
+            }
+            if (this.connectionState === "Disconnecting" /* Disconnecting */) {
+                // A call to stop() induced this call to stopConnection and needs to be completed.
+                // Any stop() awaiters will be scheduled to continue after the onclose callback fires.
+                this.stopPromiseResolver();
+            }
+            if (error) {
+                this.logger.log(LogLevel.Error, "Connection disconnected with error '" + error + "'.");
+            }
+            else {
+                this.logger.log(LogLevel.Information, "Connection disconnected.");
+            }
+            if (this.sendQueue) {
+                this.sendQueue.stop().catch(function (e) {
+                    _this.logger.log(LogLevel.Error, "TransportSendQueue.stop() threw error '" + e + "'.");
+                });
+                this.sendQueue = undefined;
+            }
+            this.connectionId = undefined;
+            this.connectionState = "Disconnected" /* Disconnected */;
+            if (this.connectionStarted) {
+                this.connectionStarted = false;
+                try {
+                    if (this.onclose) {
+                        this.onclose(error);
+                    }
+                }
+                catch (e) {
+                    this.logger.log(LogLevel.Error, "HttpConnection.onclose(" + error + ") threw error '" + e + "'.");
+                }
+            }
+        };
+        HttpConnection.prototype.resolveUrl = function (url) {
+            // startsWith is not supported in IE
+            if (url.lastIndexOf("https://", 0) === 0 || url.lastIndexOf("http://", 0) === 0) {
+                return url;
+            }
+            if (!Platform.isBrowser || !window.document) {
+                throw new Error("Cannot resolve '" + url + "'.");
+            }
+            // Setting the url to the href propery of an anchor tag handles normalization
+            // for us. There are 3 main cases.
+            // 1. Relative path normalization e.g "b" -> "http://localhost:5000/a/b"
+            // 2. Absolute path normalization e.g "/a/b" -> "http://localhost:5000/a/b"
+            // 3. Networkpath reference normalization e.g "//localhost:5000/a/b" -> "http://localhost:5000/a/b"
+            var aTag = window.document.createElement("a");
+            aTag.href = url;
+            this.logger.log(LogLevel.Information, "Normalizing '" + url + "' to '" + aTag.href + "'.");
+            return aTag.href;
+        };
+        HttpConnection.prototype.resolveNegotiateUrl = function (url) {
+            var index = url.indexOf("?");
+            var negotiateUrl = url.substring(0, index === -1 ? url.length : index);
+            if (negotiateUrl[negotiateUrl.length - 1] !== "/") {
+                negotiateUrl += "/";
+            }
+            negotiateUrl += "negotiate";
+            negotiateUrl += index === -1 ? "" : url.substring(index);
+            if (negotiateUrl.indexOf("negotiateVersion") === -1) {
+                negotiateUrl += index === -1 ? "?" : "&";
+                negotiateUrl += "negotiateVersion=" + this.negotiateVersion;
+            }
+            return negotiateUrl;
+        };
+        return HttpConnection;
+    }());
+    function transportMatches(requestedTransport, actualTransport) {
+        return !requestedTransport || ((actualTransport & requestedTransport) !== 0);
+    }
+    /** @private */
+    var TransportSendQueue = /** @class */ (function () {
+        function TransportSendQueue(transport) {
+            this.transport = transport;
+            this.buffer = [];
+            this.executing = true;
+            this.sendBufferedData = new PromiseSource();
+            this.transportResult = new PromiseSource();
+            this.sendLoopPromise = this.sendLoop();
+        }
+        TransportSendQueue.prototype.send = function (data) {
+            this.bufferData(data);
+            if (!this.transportResult) {
+                this.transportResult = new PromiseSource();
+            }
+            return this.transportResult.promise;
+        };
+        TransportSendQueue.prototype.stop = function () {
+            this.executing = false;
+            this.sendBufferedData.resolve();
+            return this.sendLoopPromise;
+        };
+        TransportSendQueue.prototype.bufferData = function (data) {
+            if (this.buffer.length && typeof (this.buffer[0]) !== typeof (data)) {
+                throw new Error("Expected data to be of type " + typeof (this.buffer) + " but was of type " + typeof (data));
+            }
+            this.buffer.push(data);
+            this.sendBufferedData.resolve();
+        };
+        TransportSendQueue.prototype.sendLoop = function () {
+            return __awaiter$5(this, void 0, void 0, function () {
+                var transportResult, data, error_1;
+                return __generator$5(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            return [4 /*yield*/, this.sendBufferedData.promise];
+                        case 1:
+                            _a.sent();
+                            if (!this.executing) {
+                                if (this.transportResult) {
+                                    this.transportResult.reject("Connection stopped.");
+                                }
+                                return [3 /*break*/, 6];
+                            }
+                            this.sendBufferedData = new PromiseSource();
+                            transportResult = this.transportResult;
+                            this.transportResult = undefined;
+                            data = typeof (this.buffer[0]) === "string" ?
+                                this.buffer.join("") :
+                                TransportSendQueue.concatBuffers(this.buffer);
+                            this.buffer.length = 0;
+                            _a.label = 2;
+                        case 2:
+                            _a.trys.push([2, 4, , 5]);
+                            return [4 /*yield*/, this.transport.send(data)];
+                        case 3:
+                            _a.sent();
+                            transportResult.resolve();
+                            return [3 /*break*/, 5];
+                        case 4:
+                            error_1 = _a.sent();
+                            transportResult.reject(error_1);
+                            return [3 /*break*/, 5];
+                        case 5: return [3 /*break*/, 0];
+                        case 6: return [2 /*return*/];
+                    }
+                });
+            });
+        };
+        TransportSendQueue.concatBuffers = function (arrayBuffers) {
+            var totalLength = arrayBuffers.map(function (b) { return b.byteLength; }).reduce(function (a, b) { return a + b; });
+            var result = new Uint8Array(totalLength);
+            var offset = 0;
+            for (var _i = 0, arrayBuffers_1 = arrayBuffers; _i < arrayBuffers_1.length; _i++) {
+                var item = arrayBuffers_1[_i];
+                result.set(new Uint8Array(item), offset);
+                offset += item.byteLength;
+            }
+            return result;
+        };
+        return TransportSendQueue;
+    }());
+    var PromiseSource = /** @class */ (function () {
+        function PromiseSource() {
+            var _this = this;
+            this.promise = new Promise(function (resolve, reject) {
+                var _a;
+                return _a = [resolve, reject], _this.resolver = _a[0], _this.rejecter = _a[1], _a;
+            });
+        }
+        PromiseSource.prototype.resolve = function () {
+            this.resolver();
+        };
+        PromiseSource.prototype.reject = function (reason) {
+            this.rejecter(reason);
+        };
+        return PromiseSource;
+    }());
+
+    // Copyright (c) .NET Foundation. All rights reserved.
+    var JSON_HUB_PROTOCOL_NAME = "json";
+    /** Implements the JSON Hub Protocol. */
+    var JsonHubProtocol = /** @class */ (function () {
+        function JsonHubProtocol() {
+            /** @inheritDoc */
+            this.name = JSON_HUB_PROTOCOL_NAME;
+            /** @inheritDoc */
+            this.version = 1;
+            /** @inheritDoc */
+            this.transferFormat = TransferFormat.Text;
+        }
+        /** Creates an array of {@link @microsoft/signalr.HubMessage} objects from the specified serialized representation.
+         *
+         * @param {string} input A string containing the serialized representation.
+         * @param {ILogger} logger A logger that will be used to log messages that occur during parsing.
+         */
+        JsonHubProtocol.prototype.parseMessages = function (input, logger) {
+            // The interface does allow "ArrayBuffer" to be passed in, but this implementation does not. So let's throw a useful error.
+            if (typeof input !== "string") {
+                throw new Error("Invalid input for JSON hub protocol. Expected a string.");
+            }
+            if (!input) {
+                return [];
+            }
+            if (logger === null) {
+                logger = NullLogger.instance;
+            }
+            // Parse the messages
+            var messages = TextMessageFormat.parse(input);
+            var hubMessages = [];
+            for (var _i = 0, messages_1 = messages; _i < messages_1.length; _i++) {
+                var message = messages_1[_i];
+                var parsedMessage = JSON.parse(message);
+                if (typeof parsedMessage.type !== "number") {
+                    throw new Error("Invalid payload.");
+                }
+                switch (parsedMessage.type) {
+                    case MessageType.Invocation:
+                        this.isInvocationMessage(parsedMessage);
+                        break;
+                    case MessageType.StreamItem:
+                        this.isStreamItemMessage(parsedMessage);
+                        break;
+                    case MessageType.Completion:
+                        this.isCompletionMessage(parsedMessage);
+                        break;
+                    case MessageType.Ping:
+                        // Single value, no need to validate
+                        break;
+                    case MessageType.Close:
+                        // All optional values, no need to validate
+                        break;
+                    default:
+                        // Future protocol changes can add message types, old clients can ignore them
+                        logger.log(LogLevel.Information, "Unknown message type '" + parsedMessage.type + "' ignored.");
+                        continue;
+                }
+                hubMessages.push(parsedMessage);
+            }
+            return hubMessages;
+        };
+        /** Writes the specified {@link @microsoft/signalr.HubMessage} to a string and returns it.
+         *
+         * @param {HubMessage} message The message to write.
+         * @returns {string} A string containing the serialized representation of the message.
+         */
+        JsonHubProtocol.prototype.writeMessage = function (message) {
+            return TextMessageFormat.write(JSON.stringify(message));
+        };
+        JsonHubProtocol.prototype.isInvocationMessage = function (message) {
+            this.assertNotEmptyString(message.target, "Invalid payload for Invocation message.");
+            if (message.invocationId !== undefined) {
+                this.assertNotEmptyString(message.invocationId, "Invalid payload for Invocation message.");
+            }
+        };
+        JsonHubProtocol.prototype.isStreamItemMessage = function (message) {
+            this.assertNotEmptyString(message.invocationId, "Invalid payload for StreamItem message.");
+            if (message.item === undefined) {
+                throw new Error("Invalid payload for StreamItem message.");
+            }
+        };
+        JsonHubProtocol.prototype.isCompletionMessage = function (message) {
+            if (message.result && message.error) {
+                throw new Error("Invalid payload for Completion message.");
+            }
+            if (!message.result && message.error) {
+                this.assertNotEmptyString(message.error, "Invalid payload for Completion message.");
+            }
+            this.assertNotEmptyString(message.invocationId, "Invalid payload for Completion message.");
+        };
+        JsonHubProtocol.prototype.assertNotEmptyString = function (value, errorMessage) {
+            if (typeof value !== "string" || value === "") {
+                throw new Error(errorMessage);
+            }
+        };
+        return JsonHubProtocol;
+    }());
+
+    // Copyright (c) .NET Foundation. All rights reserved.
+    // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+    var __assign$2 = (undefined && undefined.__assign) || Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    // tslint:disable:object-literal-sort-keys
+    var LogLevelNameMapping = {
+        trace: LogLevel.Trace,
+        debug: LogLevel.Debug,
+        info: LogLevel.Information,
+        information: LogLevel.Information,
+        warn: LogLevel.Warning,
+        warning: LogLevel.Warning,
+        error: LogLevel.Error,
+        critical: LogLevel.Critical,
+        none: LogLevel.None,
+    };
+    function parseLogLevel(name) {
+        // Case-insensitive matching via lower-casing
+        // Yes, I know case-folding is a complicated problem in Unicode, but we only support
+        // the ASCII strings defined in LogLevelNameMapping anyway, so it's fine -anurse.
+        var mapping = LogLevelNameMapping[name.toLowerCase()];
+        if (typeof mapping !== "undefined") {
+            return mapping;
+        }
+        else {
+            throw new Error("Unknown log level: " + name);
+        }
+    }
+    /** A builder for configuring {@link @microsoft/signalr.HubConnection} instances. */
+    var HubConnectionBuilder = /** @class */ (function () {
+        function HubConnectionBuilder() {
+        }
+        HubConnectionBuilder.prototype.configureLogging = function (logging) {
+            Arg.isRequired(logging, "logging");
+            if (isLogger(logging)) {
+                this.logger = logging;
+            }
+            else if (typeof logging === "string") {
+                var logLevel = parseLogLevel(logging);
+                this.logger = new ConsoleLogger(logLevel);
+            }
+            else {
+                this.logger = new ConsoleLogger(logging);
+            }
+            return this;
+        };
+        HubConnectionBuilder.prototype.withUrl = function (url, transportTypeOrOptions) {
+            Arg.isRequired(url, "url");
+            this.url = url;
+            // Flow-typing knows where it's at. Since HttpTransportType is a number and IHttpConnectionOptions is guaranteed
+            // to be an object, we know (as does TypeScript) this comparison is all we need to figure out which overload was called.
+            if (typeof transportTypeOrOptions === "object") {
+                this.httpConnectionOptions = __assign$2({}, this.httpConnectionOptions, transportTypeOrOptions);
+            }
+            else {
+                this.httpConnectionOptions = __assign$2({}, this.httpConnectionOptions, { transport: transportTypeOrOptions });
+            }
+            return this;
+        };
+        /** Configures the {@link @microsoft/signalr.HubConnection} to use the specified Hub Protocol.
+         *
+         * @param {IHubProtocol} protocol The {@link @microsoft/signalr.IHubProtocol} implementation to use.
+         */
+        HubConnectionBuilder.prototype.withHubProtocol = function (protocol) {
+            Arg.isRequired(protocol, "protocol");
+            this.protocol = protocol;
+            return this;
+        };
+        HubConnectionBuilder.prototype.withAutomaticReconnect = function (retryDelaysOrReconnectPolicy) {
+            if (this.reconnectPolicy) {
+                throw new Error("A reconnectPolicy has already been set.");
+            }
+            if (!retryDelaysOrReconnectPolicy) {
+                this.reconnectPolicy = new DefaultReconnectPolicy();
+            }
+            else if (Array.isArray(retryDelaysOrReconnectPolicy)) {
+                this.reconnectPolicy = new DefaultReconnectPolicy(retryDelaysOrReconnectPolicy);
+            }
+            else {
+                this.reconnectPolicy = retryDelaysOrReconnectPolicy;
+            }
+            return this;
+        };
+        /** Creates a {@link @microsoft/signalr.HubConnection} from the configuration options specified in this builder.
+         *
+         * @returns {HubConnection} The configured {@link @microsoft/signalr.HubConnection}.
+         */
+        HubConnectionBuilder.prototype.build = function () {
+            // If httpConnectionOptions has a logger, use it. Otherwise, override it with the one
+            // provided to configureLogger
+            var httpConnectionOptions = this.httpConnectionOptions || {};
+            // If it's 'null', the user **explicitly** asked for null, don't mess with it.
+            if (httpConnectionOptions.logger === undefined) {
+                // If our logger is undefined or null, that's OK, the HttpConnection constructor will handle it.
+                httpConnectionOptions.logger = this.logger;
+            }
+            // Now create the connection
+            if (!this.url) {
+                throw new Error("The 'HubConnectionBuilder.withUrl' method must be called before building the connection.");
+            }
+            var connection = new HttpConnection(this.url, httpConnectionOptions);
+            return HubConnection.create(connection, this.logger || NullLogger.instance, this.protocol || new JsonHubProtocol(), this.reconnectPolicy);
+        };
+        return HubConnectionBuilder;
+    }());
+    function isLogger(logger) {
+        return logger.log !== undefined;
+    }
+
+    const connection = new HubConnectionBuilder()
+        .withUrl("/updates")
+        .configureLogging(LogLevel.Information)
+        .withAutomaticReconnect()
+        .build();
+    const beginConnection = async () => {
+        try {
+            await connection.start();
+        }
+        catch (err) {
+            console.error(err);
+        }
+    };
+    connection.on("pong", planeId => console.log("pong: " + planeId));
+    connection.on("ReceiveMessage", (user, message) => console.log(`user: ${user} message: ${message}`));
+    connection.on("UpdatePlane", console.log);
+
+    /* src\chart\Plane.svelte generated by Svelte v3.24.0 */
+    const file = "src\\chart\\Plane.svelte";
+
+    // (32:2) {:else}
+    function create_else_block(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text(/*display*/ ctx[6]);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block.name,
+    		type: "else",
+    		source: "(32:2) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (30:25) 
+    function create_if_block_1(ctx) {
+    	let i;
+
+    	const block = {
+    		c: function create() {
+    			i = element("i");
+    			attr_dev(i, "class", "fa fa-lock");
+    			add_location(i, file, 30, 4, 747);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, i, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(i);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1.name,
+    		type: "if",
+    		source: "(30:25) ",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (28:2) {#if center}
+    function create_if_block(ctx) {
+    	let i;
+
+    	const block = {
+    		c: function create() {
+    			i = element("i");
+    			attr_dev(i, "class", "fa fa-home");
+    			add_location(i, file, 28, 4, 690);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, i, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(i);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block.name,
+    		type: "if",
+    		source: "(28:2) {#if center}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment(ctx) {
+    	let li;
+    	let mounted;
+    	let dispose;
+
+    	function select_block_type(ctx, dirty) {
+    		if (/*center*/ ctx[2]) return create_if_block;
+    		if (/*plane*/ ctx[0].locked) return create_if_block_1;
+    		return create_else_block;
+    	}
+
+    	let current_block_type = select_block_type(ctx);
+    	let if_block = current_block_type(ctx);
+
+    	const block = {
+    		c: function create() {
+    			li = element("li");
+    			if_block.c();
+    			attr_dev(li, "class", /*className*/ ctx[1]);
+    			add_location(li, file, 21, 0, 553);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, li, anchor);
+    			if_block.m(li, null);
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(li, "mouseover", /*handleHover*/ ctx[3], false, false, false),
+    					listen_dev(li, "mouseout", /*handleMouseout*/ ctx[5], false, false, false),
+    					listen_dev(li, "click", /*handleClick*/ ctx[4], false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (current_block_type === (current_block_type = select_block_type(ctx)) && if_block) {
+    				if_block.p(ctx, dirty);
+    			} else {
+    				if_block.d(1);
+    				if_block = current_block_type(ctx);
+
+    				if (if_block) {
+    					if_block.c();
+    					if_block.m(li, null);
+    				}
+    			}
+
+    			if (dirty & /*className*/ 2) {
+    				attr_dev(li, "class", /*className*/ ctx[1]);
+    			}
+    		},
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(li);
+    			if_block.d();
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance($$self, $$props, $$invalidate) {
+    	
+    	let { plane } = $$props;
+    	let { planeid = 0 } = $$props;
+    	let { className = `orbit-icon fa plane-${planeid}` } = $$props;
+    	let { center = false } = $$props;
+    	const dispatch = createEventDispatcher();
+
+    	const handleHover = () => {
+    		dispatch("message", { plane });
+    	};
+
+    	const handleClick = () => {
+    		dispatch("click", { plane });
+    	};
+
+    	const handleMouseout = () => {
+    		dispatch("message", {});
+    	};
+
+    	let display = plane.locked
+    	? "L"
+    	: plane.name.substring(0, 1).toUpperCase();
+
+    	const writable_props = ["plane", "planeid", "className", "center"];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Plane> was created with unknown prop '${key}'`);
+    	});
+
+    	let { $$slots = {}, $$scope } = $$props;
+    	validate_slots("Plane", $$slots, []);
+
+    	$$self.$set = $$props => {
+    		if ("plane" in $$props) $$invalidate(0, plane = $$props.plane);
+    		if ("planeid" in $$props) $$invalidate(7, planeid = $$props.planeid);
+    		if ("className" in $$props) $$invalidate(1, className = $$props.className);
+    		if ("center" in $$props) $$invalidate(2, center = $$props.center);
+    	};
+
+    	$$self.$capture_state = () => ({
+    		createEventDispatcher,
+    		plane,
+    		planeid,
+    		className,
+    		center,
+    		dispatch,
+    		handleHover,
+    		handleClick,
+    		handleMouseout,
+    		display
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ("plane" in $$props) $$invalidate(0, plane = $$props.plane);
+    		if ("planeid" in $$props) $$invalidate(7, planeid = $$props.planeid);
+    		if ("className" in $$props) $$invalidate(1, className = $$props.className);
+    		if ("center" in $$props) $$invalidate(2, center = $$props.center);
+    		if ("display" in $$props) $$invalidate(6, display = $$props.display);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [
+    		plane,
+    		className,
+    		center,
+    		handleHover,
+    		handleClick,
+    		handleMouseout,
+    		display,
+    		planeid
+    	];
+    }
+
+    class Plane extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+
+    		init(this, options, instance, create_fragment, safe_not_equal, {
+    			plane: 0,
+    			planeid: 7,
+    			className: 1,
+    			center: 2
+    		});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Plane",
+    			options,
+    			id: create_fragment.name
+    		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || {};
+
+    		if (/*plane*/ ctx[0] === undefined && !("plane" in props)) {
+    			console.warn("<Plane> was created without expected prop 'plane'");
+    		}
+    	}
+
+    	get plane() {
+    		throw new Error("<Plane>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set plane(value) {
+    		throw new Error("<Plane>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get planeid() {
+    		throw new Error("<Plane>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set planeid(value) {
+    		throw new Error("<Plane>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get className() {
+    		throw new Error("<Plane>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set className(value) {
+    		throw new Error("<Plane>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get center() {
+    		throw new Error("<Plane>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set center(value) {
+    		throw new Error("<Plane>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* src\chart\Orbit.svelte generated by Svelte v3.24.0 */
+    const file$1 = "src\\chart\\Orbit.svelte";
+
+    function get_each_context_1(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[8] = list[i];
+    	child_ctx[10] = i;
+    	return child_ctx;
+    }
+
+    function get_each_context(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[5] = list[i];
+    	child_ctx[7] = i;
+    	return child_ctx;
+    }
+
+    // (14:8) {#each ring.planes as plane, planeid (plane.id)}
+    function create_each_block_1(key_1, ctx) {
+    	let first;
+    	let plane;
+    	let current;
+
+    	plane = new Plane({
+    			props: {
+    				plane: /*plane*/ ctx[8],
+    				planeid: /*planeid*/ ctx[10]
+    			},
+    			$$inline: true
+    		});
+
+    	plane.$on("message", /*message_handler*/ ctx[3]);
+    	plane.$on("click", /*click_handler*/ ctx[4]);
+
+    	const block = {
+    		key: key_1,
+    		first: null,
+    		c: function create() {
+    			first = empty();
+    			create_component(plane.$$.fragment);
+    			this.first = first;
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, first, anchor);
+    			mount_component(plane, target, anchor);
+    			current = true;
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(plane.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(plane.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(first);
+    			destroy_component(plane, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_1.name,
+    		type: "each",
+    		source: "(14:8) {#each ring.planes as plane, planeid (plane.id)}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (11:2) {#each rest as ring, i}
+    function create_each_block(ctx) {
+    	let li;
+    	let ul;
+    	let each_blocks = [];
+    	let each_1_lookup = new Map();
+    	let ul_class_value;
+    	let t;
+    	let current;
+    	let each_value_1 = /*ring*/ ctx[5].planes;
+    	validate_each_argument(each_value_1);
+    	const get_key = ctx => /*plane*/ ctx[8].id;
+    	validate_each_keys(ctx, each_value_1, get_each_context_1, get_key);
+
+    	for (let i = 0; i < each_value_1.length; i += 1) {
+    		let child_ctx = get_each_context_1(ctx, each_value_1, i);
+    		let key = get_key(child_ctx);
+    		each_1_lookup.set(key, each_blocks[i] = create_each_block_1(key, child_ctx));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			li = element("li");
+    			ul = element("ul");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			t = space();
+    			attr_dev(ul, "class", ul_class_value = "ring-" + /*i*/ ctx[7]);
+    			add_location(ul, file$1, 12, 6, 263);
+    			add_location(li, file$1, 11, 4, 251);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, li, anchor);
+    			append_dev(li, ul);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(ul, null);
+    			}
+
+    			append_dev(li, t);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*rest*/ 2) {
+    				const each_value_1 = /*ring*/ ctx[5].planes;
+    				validate_each_argument(each_value_1);
+    				group_outros();
+    				validate_each_keys(ctx, each_value_1, get_each_context_1, get_key);
+    				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value_1, each_1_lookup, ul, outro_and_destroy_block, create_each_block_1, null, get_each_context_1);
+    				check_outros();
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+
+    			for (let i = 0; i < each_value_1.length; i += 1) {
+    				transition_in(each_blocks[i]);
+    			}
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				transition_out(each_blocks[i]);
+    			}
+
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(li);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].d();
+    			}
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block.name,
+    		type: "each",
+    		source: "(11:2) {#each rest as ring, i}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$1(ctx) {
+    	let ul;
+    	let plane;
+    	let t;
+    	let current;
+
+    	plane = new Plane({
+    			props: {
+    				plane: /*center*/ ctx[0],
+    				className: "orbit-center",
+    				center: true
+    			},
+    			$$inline: true
+    		});
+
+    	let each_value = /*rest*/ ctx[1];
+    	validate_each_argument(each_value);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+    	}
+
+    	const out = i => transition_out(each_blocks[i], 1, 1, () => {
+    		each_blocks[i] = null;
+    	});
+
+    	const block = {
+    		c: function create() {
+    			ul = element("ul");
+    			create_component(plane.$$.fragment);
+    			t = space();
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			attr_dev(ul, "class", "orbit-wrap");
+    			add_location(ul, file$1, 6, 0, 124);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, ul, anchor);
+    			mount_component(plane, ul, null);
+    			append_dev(ul, t);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(ul, null);
+    			}
+
+    			current = true;
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (dirty & /*rest*/ 2) {
+    				each_value = /*rest*/ ctx[1];
+    				validate_each_argument(each_value);
+    				let i;
+
+    				for (i = 0; i < each_value.length; i += 1) {
+    					const child_ctx = get_each_context(ctx, each_value, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    						transition_in(each_blocks[i], 1);
+    					} else {
+    						each_blocks[i] = create_each_block(child_ctx);
+    						each_blocks[i].c();
+    						transition_in(each_blocks[i], 1);
+    						each_blocks[i].m(ul, null);
+    					}
+    				}
+
+    				group_outros();
+
+    				for (i = each_value.length; i < each_blocks.length; i += 1) {
+    					out(i);
+    				}
+
+    				check_outros();
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(plane.$$.fragment, local);
+
+    			for (let i = 0; i < each_value.length; i += 1) {
+    				transition_in(each_blocks[i]);
+    			}
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(plane.$$.fragment, local);
+    			each_blocks = each_blocks.filter(Boolean);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				transition_out(each_blocks[i]);
+    			}
+
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(ul);
+    			destroy_component(plane);
+    			destroy_each(each_blocks, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$1.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$1($$self, $$props, $$invalidate) {
+    	
+    	let { rings } = $$props;
+    	const [center, ...rest] = rings;
+    	const writable_props = ["rings"];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Orbit> was created with unknown prop '${key}'`);
+    	});
+
+    	let { $$slots = {}, $$scope } = $$props;
+    	validate_slots("Orbit", $$slots, []);
+
+    	function message_handler(event) {
+    		bubble($$self, event);
+    	}
+
+    	function click_handler(event) {
+    		bubble($$self, event);
+    	}
+
+    	$$self.$set = $$props => {
+    		if ("rings" in $$props) $$invalidate(2, rings = $$props.rings);
+    	};
+
+    	$$self.$capture_state = () => ({ Plane, rings, center, rest });
+
+    	$$self.$inject_state = $$props => {
+    		if ("rings" in $$props) $$invalidate(2, rings = $$props.rings);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [center, rest, rings, message_handler, click_handler];
+    }
+
+    class Orbit extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$1, create_fragment$1, safe_not_equal, { rings: 2 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Orbit",
+    			options,
+    			id: create_fragment$1.name
+    		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || {};
+
+    		if (/*rings*/ ctx[2] === undefined && !("rings" in props)) {
+    			console.warn("<Orbit> was created without expected prop 'rings'");
+    		}
+    	}
+
+    	get rings() {
+    		throw new Error("<Orbit>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set rings(value) {
+    		throw new Error("<Orbit>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* src\chart\App.svelte generated by Svelte v3.24.0 */
+    const file$2 = "src\\chart\\App.svelte";
+
+    // (90:2) {:else}
+    function create_else_block$1(ctx) {
+    	let div1;
+    	let div0;
+    	let t0;
+    	let p;
+    	let button;
+    	let div0_transition;
+    	let current;
+    	let mounted;
+    	let dispose;
+
+    	function select_block_type_1(ctx, dirty) {
+    		if (/*currentPlane*/ ctx[2].locked) return create_if_block_2;
+    		return create_else_block_1;
+    	}
+
+    	let current_block_type = select_block_type_1(ctx);
+    	let if_block = current_block_type(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			div0 = element("div");
+    			if_block.c();
+    			t0 = space();
+    			p = element("p");
+    			button = element("button");
+    			button.textContent = "Close";
+    			add_location(button, file$2, 99, 10, 2683);
+    			add_location(p, file$2, 98, 8, 2668);
+    			attr_dev(div0, "class", "large-description svelte-9u0syj");
+    			add_location(div0, file$2, 91, 6, 2421);
+    			attr_dev(div1, "class", "large-description-container svelte-9u0syj");
+    			add_location(div1, file$2, 90, 4, 2372);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, div0);
+    			if_block.m(div0, null);
+    			append_dev(div0, t0);
+    			append_dev(div0, p);
+    			append_dev(p, button);
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", /*resetView*/ ctx[5], false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, dirty) {
+    			if (current_block_type === (current_block_type = select_block_type_1(ctx)) && if_block) {
+    				if_block.p(ctx, dirty);
+    			} else {
+    				if_block.d(1);
+    				if_block = current_block_type(ctx);
+
+    				if (if_block) {
+    					if_block.c();
+    					if_block.m(div0, t0);
+    				}
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+
+    			add_render_callback(() => {
+    				if (!div0_transition) div0_transition = create_bidirectional_transition(div0, fade, {}, true);
+    				div0_transition.run(1);
+    			});
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			if (!div0_transition) div0_transition = create_bidirectional_transition(div0, fade, {}, false);
+    			div0_transition.run(0);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+    			if_block.d();
+    			if (detaching && div0_transition) div0_transition.end();
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block$1.name,
+    		type: "else",
+    		source: "(90:2) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (80:2) {#if view === 'orbit'}
+    function create_if_block$1(ctx) {
+    	let span;
+    	let orbit;
+    	let t;
+    	let span_transition;
+    	let current;
+    	orbit = new Orbit({ props: { rings }, $$inline: true });
+    	orbit.$on("message", /*handleHover*/ ctx[3]);
+    	orbit.$on("click", /*changeView*/ ctx[4]);
+    	let if_block = /*descriptionText*/ ctx[0] && create_if_block_1$1(ctx);
+
+    	const block = {
+    		c: function create() {
+    			span = element("span");
+    			create_component(orbit.$$.fragment);
+    			t = space();
+    			if (if_block) if_block.c();
+    			add_location(span, file$2, 80, 4, 2101);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, span, anchor);
+    			mount_component(orbit, span, null);
+    			append_dev(span, t);
+    			if (if_block) if_block.m(span, null);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			if (/*descriptionText*/ ctx[0]) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+
+    					if (dirty & /*descriptionText*/ 1) {
+    						transition_in(if_block, 1);
+    					}
+    				} else {
+    					if_block = create_if_block_1$1(ctx);
+    					if_block.c();
+    					transition_in(if_block, 1);
+    					if_block.m(span, null);
+    				}
+    			} else if (if_block) {
+    				group_outros();
+
+    				transition_out(if_block, 1, 1, () => {
+    					if_block = null;
+    				});
+
+    				check_outros();
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(orbit.$$.fragment, local);
+    			transition_in(if_block);
+
+    			add_render_callback(() => {
+    				if (!span_transition) span_transition = create_bidirectional_transition(span, fade, {}, true);
+    				span_transition.run(1);
+    			});
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(orbit.$$.fragment, local);
+    			transition_out(if_block);
+    			if (!span_transition) span_transition = create_bidirectional_transition(span, fade, {}, false);
+    			span_transition.run(0);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(span);
+    			destroy_component(orbit);
+    			if (if_block) if_block.d();
+    			if (detaching && span_transition) span_transition.end();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$1.name,
+    		type: "if",
+    		source: "(80:2) {#if view === 'orbit'}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (95:8) {:else}
+    function create_else_block_1(ctx) {
+    	let h2;
+    	let t0_value = /*currentPlane*/ ctx[2].name + "";
+    	let t0;
+    	let t1;
+    	let p;
+    	let t2_value = /*currentPlane*/ ctx[2].description + "";
+    	let t2;
+
+    	const block = {
+    		c: function create() {
+    			h2 = element("h2");
+    			t0 = text(t0_value);
+    			t1 = space();
+    			p = element("p");
+    			t2 = text(t2_value);
+    			add_location(h2, file$2, 95, 10, 2570);
+    			add_location(p, file$2, 96, 10, 2610);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, h2, anchor);
+    			append_dev(h2, t0);
+    			insert_dev(target, t1, anchor);
+    			insert_dev(target, p, anchor);
+    			append_dev(p, t2);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*currentPlane*/ 4 && t0_value !== (t0_value = /*currentPlane*/ ctx[2].name + "")) set_data_dev(t0, t0_value);
+    			if (dirty & /*currentPlane*/ 4 && t2_value !== (t2_value = /*currentPlane*/ ctx[2].description + "")) set_data_dev(t2, t2_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(h2);
+    			if (detaching) detach_dev(t1);
+    			if (detaching) detach_dev(p);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block_1.name,
+    		type: "else",
+    		source: "(95:8) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (93:8) {#if currentPlane.locked}
+    function create_if_block_2(ctx) {
+    	let i;
+
+    	const block = {
+    		c: function create() {
+    			i = element("i");
+    			attr_dev(i, "class", "fa fa-lock");
+    			add_location(i, file$2, 93, 10, 2515);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, i, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(i);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_2.name,
+    		type: "if",
+    		source: "(93:8) {#if currentPlane.locked}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (84:6) {#if descriptionText}
+    function create_if_block_1$1(ctx) {
+    	let div;
+    	let t;
+    	let div_transition;
+    	let current;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			t = text(/*descriptionText*/ ctx[0]);
+    			attr_dev(div, "id", "description-container");
+    			attr_dev(div, "class", "svelte-9u0syj");
+    			add_location(div, file$2, 84, 8, 2236);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, t);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			if (!current || dirty & /*descriptionText*/ 1) set_data_dev(t, /*descriptionText*/ ctx[0]);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+
+    			add_render_callback(() => {
+    				if (!div_transition) div_transition = create_bidirectional_transition(div, fade, {}, true);
+    				div_transition.run(1);
+    			});
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			if (!div_transition) div_transition = create_bidirectional_transition(div, fade, {}, false);
+    			div_transition.run(0);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			if (detaching && div_transition) div_transition.end();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1$1.name,
+    		type: "if",
+    		source: "(84:6) {#if descriptionText}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$2(ctx) {
+    	let main;
+    	let current_block_type_index;
+    	let if_block;
+    	let current;
+    	const if_block_creators = [create_if_block$1, create_else_block$1];
+    	const if_blocks = [];
+
+    	function select_block_type(ctx, dirty) {
+    		if (/*view*/ ctx[1] === "orbit") return 0;
+    		return 1;
+    	}
+
+    	current_block_type_index = select_block_type(ctx);
+    	if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+
+    	const block = {
+    		c: function create() {
+    			main = element("main");
+    			if_block.c();
+    			attr_dev(main, "class", "orbit");
+    			add_location(main, file$2, 66, 0, 1735);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, main, anchor);
+    			if_blocks[current_block_type_index].m(main, null);
+    			current = true;
+    		},
+    		p: function update(ctx, [dirty]) {
+    			let previous_block_index = current_block_type_index;
+    			current_block_type_index = select_block_type(ctx);
+
+    			if (current_block_type_index === previous_block_index) {
+    				if_blocks[current_block_type_index].p(ctx, dirty);
+    			} else {
+    				group_outros();
+
+    				transition_out(if_blocks[previous_block_index], 1, 1, () => {
+    					if_blocks[previous_block_index] = null;
+    				});
+
+    				check_outros();
+    				if_block = if_blocks[current_block_type_index];
+
+    				if (!if_block) {
+    					if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+    					if_block.c();
+    				}
+
+    				transition_in(if_block, 1);
+    				if_block.m(main, null);
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(if_block);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(if_block);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(main);
+    			if_blocks[current_block_type_index].d();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$2.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$2($$self, $$props, $$invalidate) {
+    	
+    	beginConnection();
+    	let descriptionText;
+    	let view;
+    	let currentPlane;
+
+    	const handleHover = event => {
+    		if (!event.detail.plane) {
+    			$$invalidate(0, descriptionText = "");
+    		} else if (event.detail.plane && event.detail.plane.locked) {
+    			$$invalidate(0, descriptionText = "Locked");
+    		} else {
+    			$$invalidate(0, descriptionText = event.detail.plane.description);
+    		}
+    	};
+
+    	const changeView = event => {
+    		$$invalidate(2, currentPlane = event.detail.plane);
+    		$$invalidate(1, view = "description");
+    	};
+
+    	const resetView = () => {
+    		$$invalidate(1, view = "orbit");
+    		$$invalidate(2, currentPlane = {});
+    		$$invalidate(0, descriptionText = "");
+    	};
+
+    	const writable_props = [];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<App> was created with unknown prop '${key}'`);
+    	});
+
+    	let { $$slots = {}, $$scope } = $$props;
+    	validate_slots("App", $$slots, []);
+
+    	$$self.$capture_state = () => ({
+    		fade,
+    		rings,
+    		beginConnection,
+    		Orbit,
+    		descriptionText,
+    		view,
+    		currentPlane,
+    		handleHover,
+    		changeView,
+    		resetView
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ("descriptionText" in $$props) $$invalidate(0, descriptionText = $$props.descriptionText);
+    		if ("view" in $$props) $$invalidate(1, view = $$props.view);
+    		if ("currentPlane" in $$props) $$invalidate(2, currentPlane = $$props.currentPlane);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	 $$invalidate(0, descriptionText = "");
+    	 $$invalidate(1, view = "orbit");
+    	 $$invalidate(2, currentPlane = {});
+    	return [descriptionText, view, currentPlane, handleHover, changeView, resetView];
+    }
+
+    class App extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$2, create_fragment$2, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "App",
+    			options,
+    			id: create_fragment$2.name
+    		});
+    	}
+    }
+
+    const app = new App({
+        target: document.body,
+    });
+
+    return app;
+
+}());
 //# sourceMappingURL=chart.js.map

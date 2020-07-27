@@ -1,35 +1,40 @@
-<script>
-    export let plane;
-    export let planeid;
-    export let className = `orbit-icon fa plane-${planeid}`;
-    export let center = false;
+<script lang="ts">
+  import type { Plane } from "../types";
+  import { createEventDispatcher } from "svelte";
 
-    import { createEventDispatcher } from 'svelte';
+  export let plane: Partial<Plane>;
+  export let planeid: number = 0;
+  export let className: string = `orbit-icon fa plane-${planeid}`;
+  export let center: boolean = false;
 
-    const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher();
 
-    const handleHover = () => {
-        dispatch('message', {
-            plane
-        });
-    };
+  const handleHover = () => {
+    dispatch("message", {
+      plane,
+    });
+  };
 
-    let display = plane.locked
-        ? "L"
-        : plane.name.substring(0, 1).toUpperCase();
+  const handleClick = () => {
+    dispatch('click', { plane });
+  }
+
+  const handleMouseout = () => {
+    dispatch('message', {});
+  }
+
+  let display = plane.locked ? "L" : plane.name.substring(0, 1).toUpperCase();
 </script>
 
-<li 
-    class={className} 
-    on:mouseover={handleHover} 
-    on:mouseout={() => dispatch('message', { })}
-    on:click={() => dispatch('click', { plane })}
+<li
+  class={className}
+  on:mouseover={handleHover}
+  on:mouseout={handleMouseout}
+  on:click={handleClick}
 >
-    {#if center}
-        <i class="fa fa-home"></i>
-    {:else if plane.locked}
-        <i class="fa fa-lock"></i>
-    {:else}
-        {display}
-    {/if}
+  {#if center}
+    <i class="fa fa-home" />
+  {:else if plane.locked}
+    <i class="fa fa-lock" />
+  {:else}{display}{/if}
 </li>

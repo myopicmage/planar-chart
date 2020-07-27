@@ -1,7 +1,27 @@
 <script>
+  import { push } from 'svelte-spa-router';
+
   export let plane = {};
 
   $: disabled = false;
+  $: newBuff = '';
+
+  const addBuff = () => {
+    plane.buffs = [
+      ...plane.buffs,
+      {
+        name: newBuff,
+        locked: true,
+        revealed: false,
+      },
+    ];
+
+    newBuff = "";
+  };
+
+  const removeBuff = name => {
+    plane.buffs = plane.buffs.filter(x => x.name !== name);
+  }
 
   const handleSubmit = async () => {
     disabled = true;
@@ -16,7 +36,7 @@
       body: JSON.stringify(plane),
     }).then((resp) => {
       if (resp.ok) {
-        console.log("it worked");
+        push('/');
       }
     }).finally(() => (disabled = false));
   };
@@ -71,20 +91,30 @@
     </div>
     <div class="col">
       <label class="form-label">Buffs</label>
-      {#if plane.buffs && plane.buffs.length}
-        <ul>
-          {#each plane.buffs as buff}
-            <li>{buff.name}</li>
-          {/each}
-        </ul>
-      {:else}
-        <p>No buffs</p>
-      {/if}
-      {#if plane.id}
-        <a href={`#/buffs/${plane.id}`}>
-          <i class="fa fa-edit"></i> Modify
-        </a>
-      {/if}
+      {#each plane.buffs as buff}
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" bind:value={buff.name} />
+          </div>
+          <div class="col-1">
+            <button type="button" class="btn btn-link" on:click={removeBuff(buff.name)}>
+              <i class="fa fa-trash text-danger" />
+            </button>
+          </div>
+        </div>
+      {/each}
+      <hr />
+      <label class="form-label">Add new</label>
+      <div class="row">
+        <div class="col">
+          <input type="text" class="form-control" bind:value={newBuff} />
+        </div>
+        <div class="col-1">
+          <button type="button" class="btn btn-link" on:click={addBuff}>
+            <i class="fa fa-plus text-success" />
+          </button>
+        </div>
+      </div>
     </div>
   </div>
   <div class="row mt-3">

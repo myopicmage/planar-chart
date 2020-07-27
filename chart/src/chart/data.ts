@@ -1,7 +1,16 @@
-export const rings = [
+import { Plane } from "../types"
+
+export type Ring = {
+  locked: boolean;
+  name: string;
+  planes: Partial<Plane>[];
+}
+
+export const rings: Ring[] = [
   {
     locked: false,
     name: 'Prime material plane',
+    planes: []
   },
   {
     locked: true,

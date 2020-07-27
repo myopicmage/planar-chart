@@ -2,9 +2,16 @@
   import { fade } from 'svelte/transition';
 
   import { rings } from './data';
-  import { begin, ping } from './signalr';
+  import { beginConnection } from './signalr';
+  import type { Plane } from '../types';
 
   import Orbit from './Orbit.svelte';
+
+  beginConnection();
+
+  let descriptionText: string;
+  let view: 'orbit' | 'description';
+  let currentPlane: Partial<Plane>;
 
   $: descriptionText = '';
   $: view = 'orbit';
@@ -30,22 +37,20 @@
     currentPlane = {};
     descriptionText = '';
   };
-
-  let connection = begin();
 </script>
 
 <style type="text/scss">
-  #connected-box {
-    background-color:rgba(255, 255, 255, 0.7);
-    padding: 4px;
-    position: absolute;
-    right: 24px;
-    top: 24px;
+  // #connected-box {
+  //   background-color:rgba(255, 255, 255, 0.7);
+  //   padding: 4px;
+  //   position: absolute;
+  //   right: 24px;
+  //   top: 24px;
 
-    &.success {
-      color: green;
-    }
-  }
+  //   &.success {
+  //     color: green;
+  //   }
+  // }
 
   #description-container {
     background-color: #ececec;
@@ -98,7 +103,9 @@
       <Orbit {rings} on:message={handleHover} on:click={changeView} />
 
       {#if descriptionText}
-        <div id="description-container" transition:fade>{descriptionText}</div>
+        <div id="description-container" transition:fade>
+          {descriptionText}
+        </div>
       {/if}
     </span>
   {:else}

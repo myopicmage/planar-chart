@@ -32,7 +32,7 @@ namespace planar.server.Controllers {
 
     [HttpPost("{id}")]
     public async Task<ActionResult> UpdatePlane(int id, [FromBody] Plane p) {
-      var plane = await _db.planes.FirstOrDefaultAsync(x => x.id == id);
+      var plane = await _db.planes.Include(x => x.buffs).FirstOrDefaultAsync(x => x.id == id);
 
       if (plane is null) {
         return NotFound();
@@ -47,6 +47,9 @@ namespace planar.server.Controllers {
       plane.ring = p.ring;
       plane.revealed = p.revealed;
       plane.locked = p.locked;
+      plane.buffs = p.buffs;
+
+      _db.Entry(plane).State = EntityState.Modified;
 
       try {
         await _db.SaveChangesAsync();

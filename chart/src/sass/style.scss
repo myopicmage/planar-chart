@@ -103,10 +103,10 @@ ul[class^='ring'] {
     // decrease each ring in size
     width: $ringSize;
     height: $ringSize;
-    animation: clockwiseRotate 35s - ($i * 7.5) linear infinite;
+    animation: clockwiseRotate 50s - ($i * 7.5) linear infinite;
 
     i {
-      animation: counterClockwiseRotate 35s - ($i * 7.5) linear infinite;
+      animation: counterClockwiseRotate 50s - ($i * 7.5) linear infinite;
     }
   }
 
@@ -163,8 +163,8 @@ ul[class^='ring'] {
 //   }
 // }
 
-/* 
-animations 
+/*
+animations
 */
 @keyframes clockwiseRotate {
   from {
@@ -184,8 +184,8 @@ animations
   }
 }
 
-/* 
-icons 
+/*
+icons
 */
 $icons: (
   ('heart-o', #b71c1c, white),
