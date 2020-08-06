@@ -12,6 +12,11 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 14.x
-    - run: yarn --frozen-lockfile
-    - run: yarn build
+
+    - name: Build production javascript
+      run: |
+        pushd chart
+        yarn --frozen-lockfile
+        yarn build
+        popd
 

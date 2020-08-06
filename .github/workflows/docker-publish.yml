@@ -27,6 +27,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Set up node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      - name: Build production javascript
+        run: |
+          pushd chart
+          yarn --frozen-lockfile
+          yarn build
+          popd
+
       - name: Build image
         run: docker build . --file Dockerfile --tag $IMAGE_NAME
 
