@@ -1,5 +1,4 @@
 node_modules/
-**/public/build/**/*
 
 .DS_Store
 
@@ -7,3 +6,6 @@ obj/
 bin/
 
 *.db
+
+**/wwwroot/assets/*
+**/wwwroot/build/*

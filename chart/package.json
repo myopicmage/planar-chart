@@ -21,8 +21,8 @@
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "sass": "sass --watch src/sass/style.scss public/assets/style.css",
-    "build": "rollup -c",
+    "sass": "sass --watch src/sass/style.scss wwwroot/assets/style.css",
+    "build": "sass src/sass/style.scss wwwroot/assets/style.css && rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv wwwroot"
   },
