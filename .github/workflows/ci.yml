@@ -13,8 +13,8 @@ jobs:
       with:
         node-version: 14.x
 
-    - name: Build production javascript
-    - run: |
+      name: Build production javascript
+      run: |
         pushd chart
         yarn --frozen-lockfile
         yarn build
