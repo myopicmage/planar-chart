@@ -22,7 +22,7 @@
   },
   "scripts": {
     "sass": "sass --watch src/sass/style.scss public/assets/style.css",
-    "build": "rollup -c",
+    "build": "sass src/sass/style.scss public/assets/style.css && rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv wwwroot"
   },
