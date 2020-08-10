@@ -10,6 +10,7 @@
     "@rollup/plugin-node-resolve": "^8.1.0",
     "@rollup/plugin-typescript": "^5.0.2",
     "@tsconfig/svelte": "^1.0.2",
+    "npm-run-all": "^4.1.5",
     "rollup": "^2.21.0",
     "rollup-plugin-livereload": "^1.3.0",
     "rollup-plugin-svelte": "^5.2.3",
@@ -18,13 +19,15 @@
     "svelte": "^3.24.0",
     "svelte-check": "^0.1.55",
     "svelte-preprocess": "^4.0.8",
+    "tslib": "^2.0.1",
     "typescript": "^3.9.7"
   },
   "scripts": {
     "sass": "sass --watch src/sass/style.scss wwwroot/assets/style.css",
     "build": "sass src/sass/style.scss wwwroot/assets/style.css && rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv wwwroot"
+    "dotnet-watch": "dotnet watch run",
+    "start": "run-p sass dev dotnet-watch"
   },
   "dependencies": {
     "@microsoft/signalr": "^3.1.6",
