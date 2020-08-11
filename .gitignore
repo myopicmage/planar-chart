@@ -9,3 +9,5 @@ bin/
 
 **/wwwroot/assets/*
 **/wwwroot/build/*
+
+*.log
