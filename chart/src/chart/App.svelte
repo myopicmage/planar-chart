@@ -13,21 +13,27 @@
     "/": Orbit,
   };
 
-  beginConnection();
+  const connection = beginConnection();
 </script>
 
 <style type="text/scss">
-  // #connected-box {
-  //   background-color:rgba(255, 255, 255, 0.7);
-  //   padding: 4px;
-  //   position: absolute;
-  //   right: 24px;
-  //   top: 24px;
+  #connected-box {
+    background-color:rgba(255, 255, 255, 0.7);
+    height: 28px;
+    padding: 4px;
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    width: 28px;
 
-  //   &.success {
-  //     color: green;
-  //   }
-  // }
+    &.success {
+      color: green;
+    }
+
+    i {
+      margin: 0 auto;
+    }
+  }
 
   #description-container {
     background-color: #ececec;
@@ -49,18 +55,16 @@
 </style>
 
 <main class="orbit">
-  <!-- {#await connection}
+  {#await connection}
     <div id="connected-box">
-      <i class="fa fa-spinner"></i>
+      <i class="fa fa-spinner fa-pulse fa-fw"></i>
     </div>
   {:then _}
     <div id="connected-box" class="success">
-      <i class="fa fa-link"></i>
-      <button type="button" on:click={() => ping(2)}>
-        ping
-      </button>
+      <i class="fa fa-wifi fa-fw"></i>
     </div>
-  {/await} -->
+  {/await}
+
   <Router {routes} />
 
   {#if $planeStore}

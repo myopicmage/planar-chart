@@ -15,8 +15,6 @@
   if (params.id) {
     const ringId = parseInt(params.id, 10);
     currentPlane = $rings.flatMap(x => x.planes).find(x => x.id === ringId);
-
-    console.log('current plane?', currentPlane);
   }
 
   const resetView = () => push('/');
