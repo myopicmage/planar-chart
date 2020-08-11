@@ -53,3 +53,8 @@ export type Quest = Common & {
   giver?: Character;
   status: QuestStatus;
 }
+
+export const getProp = <T extends Common>(obj: T, prop: keyof T) =>
+  obj.locked
+    ? 'Locked'
+    : obj[prop];

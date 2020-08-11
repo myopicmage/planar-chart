@@ -1,3 +1,4 @@
+import { writable } from 'svelte/store';
 import { Plane } from "../types"
 
 export type Ring = {
@@ -6,7 +7,7 @@ export type Ring = {
   planes: Partial<Plane>[];
 }
 
-export const rings: Ring[] = [
+export const rings = writable<Ring[]>([
   {
     locked: false,
     name: 'Prime material plane',
@@ -102,4 +103,4 @@ export const rings: Ring[] = [
       }
     ]
   },
-]
+]);

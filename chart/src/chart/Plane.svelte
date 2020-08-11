@@ -1,26 +1,25 @@
 <script lang="ts">
   import type { Plane } from "../types";
-  import { createEventDispatcher } from "svelte";
+  import { push } from 'svelte-spa-router';
+
+  import { planeStore } from './planestore';
 
   export let plane: Partial<Plane>;
   export let planeid: number = 0;
   export let className: string = `orbit-icon fa plane-${planeid}`;
   export let center: boolean = false;
 
-  const dispatch = createEventDispatcher();
-
   const handleHover = () => {
-    dispatch("message", {
-      plane,
-    });
+    $planeStore = plane;
   };
 
   const handleClick = () => {
-    dispatch('click', { plane });
+    $planeStore = null;
+    push(`/${plane.id}`);
   }
 
   const handleMouseout = () => {
-    dispatch('message', {});
+    $planeStore = null;
   }
 
   let display = plane.locked ? "L" : plane.name.substring(0, 1).toUpperCase();

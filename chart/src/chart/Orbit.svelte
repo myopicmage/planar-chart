@@ -1,10 +1,8 @@
 <script lang="ts">
   import Plane from "./Plane.svelte";
-  import type { Ring } from "./data";
+  import { rings } from './data';
 
-  export let rings: Ring[];
-
-  const [center, ...rest] = rings;
+  const [center, ...rest] = $rings;
 </script>
 
 <ul class="orbit-wrap">
@@ -15,7 +13,7 @@
     <li>
       <ul class="ring-{i}">
         {#each ring.planes as plane, planeid (plane.id)}
-          <Plane on:message on:click {plane} {planeid} />
+          <Plane {plane} {planeid} />
         {/each}
       </ul>
     </li>
