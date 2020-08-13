@@ -11,11 +11,16 @@
   export let params: DescriptionParams = {};
 
   let currentPlane: Partial<Plane>;
+  let title: string = 'Planar Chart';
 
   if (params.id) {
     const ringId = parseInt(params.id, 10);
     currentPlane = $rings.flatMap(x => x.planes).find(x => x.id === ringId);
+
+    title = `Planar Chart - ${currentPlane.locked ? 'Locked' : currentPlane.name}`;
   }
+
+  $: document.title = title;
 
   const resetView = () => push('/');
 </script>

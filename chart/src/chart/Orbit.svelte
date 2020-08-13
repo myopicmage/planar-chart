@@ -2,6 +2,8 @@
   import Plane from "./Plane.svelte";
   import { rings } from './data';
 
+  document.title = 'Planar Chart';
+
   const [center, ...rest] = $rings;
 </script>
 
