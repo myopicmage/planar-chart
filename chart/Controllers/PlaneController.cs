@@ -47,11 +47,10 @@ namespace planar.server.Controllers {
       plane.ring = p.ring;
       plane.revealed = p.revealed;
       plane.locked = p.locked;
-      plane.buffs = p.buffs;
-
-      _db.Entry(plane).State = EntityState.Modified;
 
       try {
+        plane.buffs = plane.buffs.ToList().Concat(await SaveBuffs(p.buffs.Where(x => x.id == 0).ToList()));
+
         await _db.SaveChangesAsync();
 
         await _hubCtx.Clients.All.SendAsync("UpdatePlane", plane);
@@ -73,6 +72,18 @@ namespace planar.server.Controllers {
       } else {
         return BadRequest();
       }
+    }
+
+    private async Task<IEnumerable<Buff>> SaveBuffs(IEnumerable<Buff> buffs) {
+      foreach (var buff in buffs) {
+        if (buff.id == 0) {
+          _db.buffs.Add(buff);
+        }
+      }
+
+      await _db.SaveChangesAsync();
+
+      return buffs;
     }
   }
 }

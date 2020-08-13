@@ -1,7 +1,8 @@
-<script>
+<script lang="ts">
   import { push } from 'svelte-spa-router';
+  import type { Plane } from '../types';
 
-  export let plane = {};
+  export let plane: Partial<Plane> = {};
 
   $: disabled = false;
   $: newBuff = '';
@@ -10,6 +11,7 @@
     plane.buffs = [
       ...plane.buffs,
       {
+        id: 0,
         name: newBuff,
         locked: true,
         revealed: false,
@@ -19,7 +21,7 @@
     newBuff = "";
   };
 
-  const removeBuff = name => {
+  const removeBuff = (name: string) => {
     plane.buffs = plane.buffs.filter(x => x.name !== name);
   }
 
@@ -97,7 +99,7 @@
             <input type="text" class="form-control" bind:value={buff.name} />
           </div>
           <div class="col-1">
-            <button type="button" class="btn btn-link" on:click={removeBuff(buff.name)}>
+            <button type="button" class="btn btn-link" on:click={() => removeBuff(buff.name)}>
               <i class="fa fa-trash text-danger" />
             </button>
           </div>
