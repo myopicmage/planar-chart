@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { Plane } from "../types"
+import type { Plane } from "../types"
 
 export type Ring = {
   locked: boolean;
