@@ -1,5 +1,5 @@
 # https://hub.docker.com/_/microsoft-dotnet-core
-FROM mcr.microsoft.com/dotnet/nightly/sdk:5.0 AS build
+FROM mcr.microsoft.com/dotnet/nightly/sdk:latest AS build
 WORKDIR /source
 
 # copy csproj and restore as distinct layers
@@ -12,8 +12,7 @@ WORKDIR /source
 RUN dotnet publish -c release -o /app --no-restore
 
 # final stage/image
-FROM mcr.microsoft.com/dotnet/aspnet:5.0
+FROM mcr.microsoft.com/dotnet/nightly/aspnet:latest
 WORKDIR /app
 COPY --from=build /app ./
-# COPY ./chart/planes.db ./
 ENTRYPOINT ["dotnet", "planar.server.dll"]
