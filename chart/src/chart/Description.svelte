@@ -1,7 +1,7 @@
 <script lang="ts">
   import { fade } from "svelte/transition";
   import { push } from 'svelte-spa-router';
-  import { rings } from './data';
+  import { apiPlanes } from './data';
   import type { Plane } from "../types";
 
   type DescriptionParams = {
@@ -14,8 +14,8 @@
   let title: string = 'Planar Chart';
 
   if (params.id) {
-    const ringId = parseInt(params.id, 10);
-    currentPlane = $rings.flatMap(x => x.planes).find(x => x.id === ringId);
+    const planeId = parseInt(params.id, 10);
+    currentPlane = $apiPlanes.flatMap(x => x).find(x => x.id === planeId);
 
     title = `Planar Chart - ${currentPlane.locked ? 'Locked' : currentPlane.name}`;
   }

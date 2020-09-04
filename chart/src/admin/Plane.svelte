@@ -19,7 +19,9 @@
   $: if (params.id) {
     loadPlane(params.id).then(p => plane = p);
   } else {
-    plane = {};
+    plane = {
+      buffs: []
+    };
   }
 </script>
 

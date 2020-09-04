@@ -23,8 +23,18 @@ namespace planar.server.Controllers {
       _hubCtx = hubCtx;
     }
 
+    [HttpGet("")]
     public async Task<IEnumerable<Plane>> GetPlanes() =>
       await _db.planes.Include(x => x.buffs).ToArrayAsync();
+
+    [HttpGet("all")]
+    public IActionResult GetPlanesGrouped() =>
+      Ok(_db.planes
+        .Include(x => x.buffs)
+        .ToList()
+        .GroupBy(x => x.ring)
+        .Reverse()
+        .ToArray());
 
     [HttpGet("{id}")]
     public async Task<Plane> GetPlane(int id) =>

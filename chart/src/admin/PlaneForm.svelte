@@ -53,8 +53,8 @@
 <form on:submit|preventDefault={handleSubmit}>
   <div class="row">
     <div class="col-2">
-      <label class="form-label">Ring</label>
-      <select class="form-select" bind:value={plane.ring}>
+      <label class="form-label" for="ring">Ring</label>
+      <select class="form-select" bind:value={plane.ring} name="ring">
         <option value={0}>Center</option>
         <option value={1}>Echoes</option>
         <option value={2}>Chaos</option>
@@ -62,37 +62,40 @@
       </select>
     </div>
     <div class="col-4">
-      <label class="form-label">Name</label>
-      <input bind:value={plane.name} class="form-control" />
+      <label class="form-label" for="plane-name">Name</label>
+      <input bind:value={plane.name} class="form-control" name="plane-name" />
     </div>
     <div class="col-6">
-      <label class="form-label">Status</label>
+      <label class="form-label" for="status">Status</label>
       <br />
       <div class="form-check form-check-inline form-switch">
         <input
           type="checkbox"
+          name="revealed"
           class="form-check-input"
           bind:checked={plane.revealed} />
-        <label class="form-check-label">Revealed</label>
+        <label class="form-check-label" for="revealed">Revealed</label>
       </div>
       <div class="form-check form-check-inline form-switch">
         <input
           type="checkbox"
+          name="locked"
           class="form-check-input"
           bind:checked={plane.locked} />
-        <label class="form-check-label">Locked</label>
+        <label class="form-check-label" for="locked">Locked</label>
       </div>
     </div>
   </div>
   <div class="row mt-3">
     <div class="col-6">
-      <label class="form-label">Description</label>
+      <label class="form-label" for="description">Description</label>
       <textarea
+        name="description"
         class="form-control description"
         bind:value={plane.description} />
     </div>
     <div class="col">
-      <label class="form-label">Buffs</label>
+      <label class="form-label" for="buffs">Buffs</label>
       {#each plane.buffs as buff}
         <div class="row">
           <div class="col">
@@ -106,10 +109,10 @@
         </div>
       {/each}
       <hr />
-      <label class="form-label">Add new</label>
+      <label class="form-label" for="new-buff">Add new</label>
       <div class="row">
         <div class="col">
-          <input type="text" class="form-control" bind:value={newBuff} />
+          <input type="text" class="form-control" bind:value={newBuff} name="new-buff" />
         </div>
         <div class="col-1">
           <button type="button" class="btn btn-link" on:click={addBuff}>

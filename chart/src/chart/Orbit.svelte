@@ -1,20 +1,25 @@
 <script lang="ts">
   import Plane from "./Plane.svelte";
-  import { rings } from './data';
+  import { apiPlanes, loadPlanes } from './data';
 
   document.title = 'Planar Chart';
 
-  const [center, ...rest] = $rings;
+  loadPlanes().then(x => $apiPlanes = x);
+
+  const center = {
+    locked: false,
+    name: 'Prime Material Plane'
+  };
 </script>
 
 <ul class="orbit-wrap">
 
   <Plane plane={center} className="orbit-center" center={true} />
 
-  {#each rest as ring, i}
+  {#each $apiPlanes as ring, i}
     <li>
       <ul class="ring-{i}">
-        {#each ring.planes as plane, planeid (plane.id)}
+        {#each ring as plane, planeid (plane.id)}
           <Plane {plane} {planeid} />
         {/each}
       </ul>

@@ -34,11 +34,11 @@ const makeConfig = ({ path, name }) => ({
 			// we'll extract any component CSS out into
 			// a separate file - better for performance
 			css: css => {
-				css.write(`wwwroot/build/${name}.css`);
+				css.write(`${name}.css`);
 			},
 			preprocess: preprocess()
 		}),
-		typescript({ sourceMap: !production }),
+    typescript({ sourceMap: !production }),
 
 		// If you have external dependencies installed from
 		// npm, you'll most likely need these plugins. In
@@ -49,7 +49,7 @@ const makeConfig = ({ path, name }) => ({
 			browser: true,
 			dedupe: ['svelte']
 		}),
-		commonjs(),
+    commonjs(),
 
 		// Watch the `public` directory and refresh the
 		// browser on changes when not in production
